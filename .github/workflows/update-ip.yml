@@ -1,4 +1,4 @@
-name: 每5分钟更新IP文本
+name: 每5分钟更新Cloudflare优选单IP
 on:
   schedule:
     - cron: '*/5 * * * *'
@@ -13,10 +13,10 @@ jobs:
       - name: 检出仓库代码
         uses: actions/checkout@v5
 
-      - name: 抓取Cloudflare官方IPv4列表
+      - name: 抓取国内优选Cloudflare单IP
         run: |
-          # 从Cloudflare官方地址下载最新IP段
-          curl -s https://www.cloudflare.com/ips-v4 > cloudflare.txt
+          # 优选IP接口，返回纯IPv4单IP列表
+          curl -s https://cf.ipdb.xyz/bestcf > cloudflare.txt
 
       - name: 提交更新
         run: |
@@ -24,8 +24,8 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add cloudflare.txt
           if git diff --cached --quiet; then
-            echo "IP列表无变更，跳过提交"
+            echo "优选IP无变更，跳过提交"
           else
-            git commit -m "自动更新Cloudflare官方IPv4列表"
+            git commit -m "自动更新国内优选Cloudflare单IP列表"
             git push
           fi
