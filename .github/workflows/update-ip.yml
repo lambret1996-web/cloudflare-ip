@@ -13,16 +13,19 @@ jobs:
       - name: 检出仓库代码
         uses: actions/checkout@v5
 
-      - name: 抓取网页并提取IP（完全容错）
+      - name: 抓取Cloudflare官方IPv4列表
         run: |
-          set +eo pipefail
-          curl -s -A "Mozilla/5.0" --retry 2 https://api.uouin.com/cloudflare.html > cloudflare_raw.html || true
-          grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' cloudflare_raw.html | sort -u > cloudflare.txt || true
-          set -eo pipefail
+          # 从Cloudflare官方地址下载最新IP段
+          curl -s https://www.cloudflare.com/ips-v4 > cloudflare.txt
 
       - name: 提交更新
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add cloudflare.txt
-          git diff --quiet && echo "无内容变更，跳过提交" || git commit -m "自动更新IP列表" && git push
+          if git diff --cached --quiet; then
+            echo "IP列表无变更，跳过提交"
+          else
+            git commit -m "自动更新Cloudflare官方IPv4列表"
+            git push
+          fi
