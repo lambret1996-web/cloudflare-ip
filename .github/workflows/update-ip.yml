@@ -1,0 +1,26 @@
+name: 每5分钟更新IP文本
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库代码
+        uses: actions/checkout@v4
+
+      - name: 安装解析依赖
+        run: sudo apt update && sudo apt install -y pup
+
+      - name: 抓取网页并提取所有IPv4地址
+        run: |
+          curl -s -A "Mozilla/5.0" --retry 3 https://api.uouin.com/cloudflare.html | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | sort -u > cloudflare.txt
+
+      - name: 提交更新到GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cloudflare.txt
+          git diff --quiet && echo "无内容变更，跳过提交" || git commit -m "自动更新IP列表" && git push
