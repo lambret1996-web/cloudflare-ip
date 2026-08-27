@@ -11,14 +11,25 @@ jobs:
       - name: 检出仓库代码
         uses: actions/checkout@v4
 
-      - name: 安装解析依赖
+      - name: 安装依赖
         run: sudo apt update && sudo apt install -y pup
 
-      - name: 抓取网页并提取所有IPv4地址（容错版）
+      - name: 调试：打印请求结果，排查接口访问问题
         run: |
           set +e
-          curl -s -A "Mozilla/5.0" --retry 3 https://api.uouin.com/cloudflare.html | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | sort -u > cloudflare.txt
+          echo "===== 开始请求接口 ====="
+          curl -v -A "Mozilla/5.0" --retry 3 https://api.uouin.com/cloudflare.html > response.html
+          cat response.html
+          echo "===== 接口请求结束 ====="
           set -e
+
+      - name: 提取IP（强制容错，匹配不到也不报错）
+        run: |
+          set +e
+          grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' response.html | sort -u > cloudflare.txt
+          set -e
+          echo "IP提取完成，文件内容："
+          cat cloudflare.txt
 
       - name: 提交更新到GitHub
         run: |
