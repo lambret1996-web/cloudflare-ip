@@ -11,9 +11,6 @@ jobs:
       - name: 检出仓库代码
         uses: actions/checkout@v4
 
-      - name: 安装依赖
-        run: sudo apt update && sudo apt install -y pup
-
       - name: 调试：打印请求结果，排查接口访问问题
         run: |
           set +e
