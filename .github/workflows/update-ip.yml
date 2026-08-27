@@ -11,26 +11,21 @@ jobs:
       - name: 检出仓库代码
         uses: actions/checkout@v4
 
-      - name: 调试：打印请求结果，排查接口访问问题
+      - name: 抓取网页并提取IP（完全容错，任何情况不中断）
         run: |
-          set +e
-          echo "===== 开始请求接口 ====="
-          curl -v -A "Mozilla/5.0" --retry 3 https://api.uouin.com/cloudflare.html > response.html
-          cat response.html
-          echo "===== 接口请求结束 ====="
-          set -e
-
-      - name: 提取IP（强制容错，匹配不到也不报错）
-        run: |
-          set +e
-          grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' response.html | sort -u > cloudflare.txt
-          set -e
-          echo "IP提取完成，文件内容："
-          cat cloudflare.txt
+          # 关闭所有严格错误检测，保证脚本永远不会因为grep/curl失败退出
+          set +eo pipefail
+          # 抓取页面，保存到本地，忽略curl报错
+          curl -s -A "Mozilla/5.0" --retry 2 https://api.uouin.com/cloudflare.html > cloudflare_raw.html || true
+          # 提取IPv4，匹配不到也继续执行
+          grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' cloudflare_raw.html | sort -u > cloudflare.txt || true
+          # 恢复默认错误检测
+          set -eo pipefail
 
       - name: 提交更新到GitHub
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add cloudflare.txt
+          # 无变更就跳过提交，有变更就推送
           git diff --quiet && echo "无内容变更，跳过提交" || git commit -m "自动更新IP列表" && git push
