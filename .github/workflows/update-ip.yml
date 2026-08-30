@@ -1,31 +1,43 @@
-name: 每5分钟更新Cloudflare优选单IP
+name: CF优选IP
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    - cron: "0 */6 * * *" #每6小时跑一次
+  workflow_dispatch: #支持手动点按钮立即运行
+
+permissions:
+  contents: write
 
 jobs:
-  update:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: 检出仓库代码
-        uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - name: 抓取国内优选Cloudflare单IP
+      - name: 安装依赖
         run: |
-          # 优选IP接口，返回纯IPv4单IP列表
-          curl -s https://cf.ipdb.xyz/bestcf > cloudflare.txt
+          sudo apt update
+          sudo apt install -y iputils-ping curl
 
-      - name: 提交更新
+      - name: 获取CF IPv4网段并测速
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cloudflare.txt
-          if git diff --cached --quiet; then
-            echo "优选IP无变更，跳过提交"
-          else
-            git commit -m "自动更新国内优选Cloudflare单IP列表"
-            git push
-          fi
+          curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
+          #简单提取前20段，每段取第一个IP测试ping
+          > ip.txt
+          count=0
+          while read range; do
+              firstip=$(echo $range|cut -d'/' -f1)
+              ping -c 1 -W 2 $firstip >/dev/null 2>&1
+              if [ $? -eq 0 ];then
+                echo "$firstip" >> ip.txt
+                count=$((count+1))
+              fi
+              if [ $count -ge 10 ];then break;fi
+          done < iprange.txt
+
+      - name: 提交更新文件
+        run: |
+          git config user.name "github‑action"
+          git config user.email "action@github.com"
+          git add ip.txt
+          git commit -m "update best ip" || echo "无更新"
+          git push
