@@ -1,8 +1,8 @@
 name: CF优选IP
 on:
   schedule:
-    - cron: "0 */6 * * *" #每6小时自动执行
-  workflow_dispatch: #支持手动运行
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -20,25 +20,24 @@ jobs:
 
       - name: TCP测速443端口，按延迟排序
         run: |
+          set +e
           curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
           >tmp_result.txt
           count=0
-          while read range; do
-              ip=$(echo $range|cut -d'/' -f1)
-              # 测试443端口TCP连接，计时
+          while read -r range; do
+              ip=$(echo "$range"|cut -d'/' -f1)
               start=$(date +%s.%N)
-              nc -z -w 2 $ip 443 >/dev/null 2>&1
+              nc -z -w 2 "$ip" 443 >/dev/null 2>&1
               ret=$?
               end=$(date +%s.%N)
               if [ $ret -eq 0 ];then
-                delay=$(echo "$end - $start" | bc -l)
+                delay=$(echo "scale=4; $end - $start" | bc -l)
                 echo "$delay $ip" >> tmp_result.txt
                 count=$((count+1))
               fi
               if [ $count -ge 20 ];then break;fi
           done < iprange.txt
-
-          # 按延迟升序，取出延迟最低前10个IP，只保留IP输出到ip.txt
+          # 排序取延迟最低10个IP
           sort -n tmp_result.txt | head -n10 | awk '{print $2}' > ip.txt
 
       - name: 提交结果回仓库
