@@ -1,8 +1,8 @@
 name: CF优选IP
 on:
   schedule:
-    - cron: "0 */6 * * *" #每6小时跑一次
-  workflow_dispatch: #支持手动点按钮立即运行
+    - cron: "0 */6 * * *" #每6小时自动执行
+  workflow_dispatch: #支持手动运行
 
 permissions:
   contents: write
@@ -16,25 +16,32 @@ jobs:
       - name: 安装依赖
         run: |
           sudo apt update
-          sudo apt install -y iputils-ping curl
+          sudo apt install -y curl netcat-openbsd bc
 
-      - name: 获取CF IPv4网段并测速
+      - name: TCP测速443端口，按延迟排序
         run: |
           curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
-          #简单提取前20段，每段取第一个IP测试ping
-          > ip.txt
+          >tmp_result.txt
           count=0
           while read range; do
-              firstip=$(echo $range|cut -d'/' -f1)
-              ping -c 1 -W 2 $firstip >/dev/null 2>&1
-              if [ $? -eq 0 ];then
-                echo "$firstip" >> ip.txt
+              ip=$(echo $range|cut -d'/' -f1)
+              # 测试443端口TCP连接，计时
+              start=$(date +%s.%N)
+              nc -z -w 2 $ip 443 >/dev/null 2>&1
+              ret=$?
+              end=$(date +%s.%N)
+              if [ $ret -eq 0 ];then
+                delay=$(echo "$end - $start" | bc -l)
+                echo "$delay $ip" >> tmp_result.txt
                 count=$((count+1))
               fi
-              if [ $count -ge 10 ];then break;fi
+              if [ $count -ge 20 ];then break;fi
           done < iprange.txt
 
-      - name: 提交更新文件
+          # 按延迟升序，取出延迟最低前10个IP，只保留IP输出到ip.txt
+          sort -n tmp_result.txt | head -n10 | awk '{print $2}' > ip.txt
+
+      - name: 提交结果回仓库
         run: |
           git config user.name "github‑action"
           git config user.email "action@github.com"
