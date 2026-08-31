@@ -1,8 +1,10 @@
-# 工作流名称：IP 延迟检测（每 6 小时运行，可手动触发）
-name: IP 延迟测试
+# IP 延迟检测（每 6 小时运行，可手动触发）
+name: IP Latency Check
+
 # 允许 workflow 使用 GITHUB_TOKEN 写入仓库内容
 permissions:
   contents: write
+
 on:
   schedule:
     - cron: "0 */6 * * *" # 每 6 小时运行一次
@@ -26,7 +28,7 @@ jobs:
           sudo apt-get install -y curl iputils-ping netcat-openbsd bc ipcalc coreutils
 
       - name: Run IP latency checks
-        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 做 10 次 ping、生成 IPtest.txt 和 IP.txt
+        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 做 ping（若 ICMP 不通则尝试 TCP 回退），生成 IPtest.txt 和 IP.txt
         run: |
           # 开启严格模式：打印命令、失败则退出（注意在可能失败的命令后使用 "|| true" 以避免中断）
           set -xeo pipefail
@@ -39,6 +41,12 @@ jobs:
           IPS="ips.txt"           # 解析并去重后的 IP 列表
           IPTEST="IPtest.txt"     # 每行: "IP 平均延迟"
           IPOUT="IP.txt"          # 延迟最低的 10 个 IP（每行一个 IP）
+          DEBUG="debug.log"       # 调试日志，便于排查 ICMP/TCP 问题
+
+          # 初始化输出文件（清空或创建）
+          : > "$IPTEST"
+          : > "$IPOUT" || true
+          : > "$DEBUG"
 
           # -------------------------
           # 1) 下载远端 raw 文件
@@ -53,38 +61,69 @@ jobs:
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
           # -------------------------
-          # 3) 初始化输出文件（清空或创建）
+          # 调试：确认 runner 是否能 ping 出网（例如 8.8.8.8）
           # -------------------------
-          : > "$IPTEST"
+          echo "=== Debug: ping 8.8.8.8 ===" | tee -a "$DEBUG"
+          timeout 1s ping -4 -c 1 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
+          echo "=== End debug ===" | tee -a "$DEBUG"
 
           # -------------------------
-          # 4) 遍历每个 IP，执行 10 次 ping，并记录平均延迟
+          # helper: ms 时间戳（用于 TCP 探测耗时测量）
+          # -------------------------
+          now_ms() { date +%s%3N; }
+
+          # -------------------------
+          # 4) 遍历每个 IP，执行 ping（优先 ICMP），若 ICMP 无响应则尝试 TCP 回退（443 -> 80）
           #    - 使用 timeout 防止单 IP 阻塞
           #    - 在命令替换后使用 "|| true" 避免 ping 返回非 0 导致 set -e 中断整个脚本
-          #    - 若 avg 为空（不可达或超时），使用一个很大的值 999999 作为惩罚，便于排序
+          #    - 若所有探测都失败，使用一个很大的值 999999 作为惩罚，便于排序
           # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
             # 跳过空行
             [ -z "$ip" ] && continue
 
-            echo "Testing $ip ..."
+            echo "Testing $ip ..." | tee -a "$DEBUG"
 
-            # 执行 ping 并提取 avg（rtt 的第二项），失败时不退出脚本（通过 || true）
-            # ping 参数说明：
-            #   -4    : 强制使用 IPv4
-            #   -c 10 : 发送 10 个 ICMP 包
-            #   -W 3  : 每个包等待响应的最大秒数
-            #   -q    : 安静模式，只输出统计信息
-            # awk -F'/' 'END{print $2}' : 从 "rtt min/avg/max/mdev" 提取 avg
-            avg=$(timeout 2s ping -4 -c 1 -W 1 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}' || true)
+            # 尝试 ICMP ping（3 次），并捕获输出以便解析与调试
+            ping_out=$(timeout 10s ping -4 -c 3 -W 2 -q "$ip" 2>&1 || true)
+            echo "PING OUTPUT for $ip:" >> "$DEBUG"
+            echo "$ping_out" >> "$DEBUG"
 
-            # 如果 avg 为空（例如无 rtt 行），将其设为大值 999999
-            if [ -z "$avg" ]; then
-              avg=999999
+            # 从 ping 统计行提取 avg（ms）
+            # 兼容不同 ping 版本的输出格式
+            avg_ms=$(echo "$ping_out" | awk -F'/' '/rtt|round-trip/ {print $5; exit}')
+            if [ -z "$avg_ms" ]; then
+              avg_ms=$(echo "$ping_out" | awk -F'/' 'END{print $2}')
             fi
 
-            # 写入结果文件，格式：IP 平均延迟
-            printf "%s %s\n" "$ip" "$avg" >> "$IPTEST"
+            # 如果 avg 为空（例如无 rtt 行），尝试 TCP 连接回退（先 443，再 80）
+            if [ -z "$avg_ms" ]; then
+              echo "ICMP failed for $ip, trying TCP connect fallback" | tee -a "$DEBUG"
+              tcp_success=0
+              for port in 443 80; do
+                start=$(now_ms)
+                # 使用 bash 的 /dev/tcp 做快速连接测试（配合 timeout）
+                if timeout 5s bash -c "cat < /dev/null > /dev/tcp/${ip}/${port}" >/dev/null 2>&1; then
+                  end=$(now_ms)
+                  elapsed_ms=$((end - start))
+                  avg_ms="$elapsed_ms"
+                  tcp_success=1
+                  echo "TCP connect to ${ip}:${port} succeeded in ${avg_ms} ms" | tee -a "$DEBUG"
+                  break
+                else
+                  echo "TCP ${ip}:${port} failed or timed out" | tee -a "$DEBUG"
+                fi
+              done
+
+              if [ "$tcp_success" -eq 0 ]; then
+                # 全部探测失败 -> 标记为不可达（大值）
+                avg_ms="999999"
+                echo "All probes failed for $ip, marking as 999999" | tee -a "$DEBUG"
+              fi
+            fi
+
+            # 写入结果文件，格式：IP 平均延迟(ms)
+            printf "%s %s\n" "$ip" "$avg_ms" >> "$IPTEST"
           done < "$IPS"
 
           # -------------------------
@@ -94,6 +133,8 @@ jobs:
           sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
 
           echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+          echo "Saved debug log to $DEBUG"
+          ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
 
       - name: Commit results back to repo (if changed)
         # 使用 GITHUB_TOKEN 自动提交并推送结果（仅在文件有变化时）
@@ -106,12 +147,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           # 添加结果文件到暂存区（若文件不存在则不会报错）
-          git add IPtest.txt IP.txt || true
+          git add IPtest.txt IP.txt debug.log || true
 
           # 若无更改则跳过提交
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Update IP latency results"
-            git push
+            # 推送到触发 workflow 的分支
+            git push origin "HEAD:${{ github.ref_name }}"
           fi
