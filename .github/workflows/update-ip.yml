@@ -1,40 +1,115 @@
-# （略：文件头和触发器与原来相同）
-      - name: Run IP latency checks
+# 工作流名称：IP 延迟检测（每 6 小时运行，可手动触发）
+name: IP Latency Check
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # 每 6 小时运行一次
+  workflow_dispatch:     # 支持在 Actions 页面手动触发
+
+jobs:
+  ip-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        # 把仓库检出到 runner，保留凭证以便后续推送
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Ensure dependencies
+        # 安装必要工具：curl（下载）、iputils-ping（ping）、netcat-openbsd（可选的 TCP 探测）、bc/ipcalc（可选）
         run: |
+          sudo apt-get update
+          sudo apt-get install -y curl iputils-ping netcat-openbsd bc ipcalc coreutils
+
+      - name: Run IP latency checks
+        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 做 10 次 ping、生成 IPtest.txt 和 IP.txt
+        run: |
+          # 开启严格模式：打印命令、失败则退出（注意在可能失败的命令后使用 "|| true" 以避免中断）
           set -xeo pipefail
 
+          # 目标 raw 文件地址（包含 IPv4 列表）
           URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
-          RAWLIST="iplist.raw"
-          IPS="ips.txt"
-          IPTEST="IPtest.txt"
-          IPOUT="IP.txt"
 
-          # 下载原始文件
+          # 本地临时与输出文件名
+          RAWLIST="iplist.raw"    # 下载的原始文件
+          IPS="ips.txt"           # 解析并去重后的 IP 列表
+          IPTEST="IPtest.txt"     # 每行: "IP 平均延迟"
+          IPOUT="IP.txt"          # 延迟最低的 10 个 IP（每行一个 IP）
+
+          # -------------------------
+          # 1) 下载远端 raw 文件
+          # -------------------------
           curl -fsS "$URL" -o "$RAWLIST"
 
-          # 提取合法 IPv4（严格匹配 0-255 范围），并去重后写入 $IPS
-          # grep -Po 使用 Perl 正则来限制每个段为 0-255
+          # -------------------------
+          # 2) 提取合法 IPv4 并去重
+          #    使用严格正则确保每段在 0-255 范围，避免非 IP 字符干扰
+          #    grep -Po 使用 Perl 风格正则（在 ubuntu runner 上可用）
+          # -------------------------
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
-          # 初始化输出文件
+          # -------------------------
+          # 3) 初始化输出文件（清空或创建）
+          # -------------------------
           : > "$IPTEST"
 
-          # 遍历每个 IP，ping 10 次并取平均延迟
+          # -------------------------
+          # 4) 遍历每个 IP，执行 10 次 ping，并记录平均延迟
+          #    - 使用 timeout 防止单 IP 阻塞
+          #    - 在命令替换后使用 "|| true" 避免 ping 返回非 0 导致 set -e 中断整个脚本
+          #    - 若 avg 为空（不可达或超时），使用一个很大的值 999999 作为惩罚，便于排序
+          # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
+            # 跳过空行
             [ -z "$ip" ] && continue
+
             echo "Testing $ip ..."
 
-            # 关键改动：在命令替换的管道后加上 "|| true"，以防 ping/timeout 返回非0 导致 set -e 中断脚本
-            # 该语句会在失败时返回空字符串给 avg（后面会检测并设为 999999）
+            # 执行 ping 并提取 avg（rtt 的第二项），失败时不退出脚本（通过 || true）
+            # ping 参数说明：
+            #   -4    : 强制使用 IPv4
+            #   -c 10 : 发送 10 个 ICMP 包
+            #   -W 3  : 每个包等待响应的最大秒数
+            #   -q    : 安静模式，只输出统计信息
+            # awk -F'/' 'END{print $2}' : 从 "rtt min/avg/max/mdev" 提取 avg
             avg=$(timeout 30s ping -4 -c 10 -W 3 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}' || true)
 
-            # 如果 avg 为空（ping 全丢包或没有 rtt 行），设置为很大值，方便排序时排到后面
+            # 如果 avg 为空（例如无 rtt 行），将其设为大值 999999
             if [ -z "$avg" ]; then
               avg=999999
             fi
 
+            # 写入结果文件，格式：IP 平均延迟
             printf "%s %s\n" "$ip" "$avg" >> "$IPTEST"
           done < "$IPS"
 
-          # 排序并输出延迟最低的 10 个 IP
+          # -------------------------
+          # 5) 排序并输出延迟最低的 10 个 IP 到 IPOUT
+          #    - sort -k2 -n : 按第 2 列（延迟）数值升序排序
+          # -------------------------
           sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
+
+          echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+
+      - name: Commit results back to repo (if changed)
+        # 使用 GITHUB_TOKEN 自动提交并推送结果（仅在文件有变化时）
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -xeo pipefail
+          # 配置提交者信息（Actions 推荐设置）
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # 添加结果文件到暂存区（若文件不存在则不会报错）
+          git add IPtest.txt IP.txt || true
+
+          # 若无更改则跳过提交
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update IP latency results"
+            git push
+          fi
