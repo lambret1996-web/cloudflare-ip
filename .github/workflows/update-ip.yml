@@ -1,100 +1,85 @@
-# 【工作流名称】在GitHub Actions页面展示的任务名
-name: CF优选IP
+name: IP Latency Check
 
-# ========== 触发规则 ==========
 on:
-  # 定时触发
   schedule:
-    # cron表达式：分 时 日 月 星期
-    # 0 */6 * * * → 每间隔6小时的0分自动运行一次
-    - cron: "0 */6 * * *"
-  # 允许【手动点击按钮】立即执行任务，不用等待定时
+    - cron: "0 */6 * * *"  # 每 6 小时一次
   workflow_dispatch:
 
-# ========== 权限配置 ==========
-permissions:
-  # 赋予工作流写入仓库文件的权限，测速结果ip.txt才能提交保存回仓库
-  contents: write
-
-# ========== 任务组开始 ==========
 jobs:
-  # 当前任务的ID标识，可以自定义改名
-  test:
-    # 指定运行环境：使用最新版 Ubuntu Linux 虚拟机
+  ip-test:
     runs-on: ubuntu-latest
-
-    # 当前任务下需要依次执行的步骤
     steps:
-      # 步骤1：把你这个仓库文件下载到临时虚拟机中
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      # 步骤2：安装测速需要用到的软件工具
-      - name: 安装依赖
+      - name: Ensure dependencies
         run: |
-          # 更新Ubuntu软件源索引
-          sudo apt update
-          # curl：用于下载网页；netcat-openbsd(nc)：TCP端口连通测试；bc：用于浮点数计算延迟
-          sudo apt install -y curl netcat-openbsd bc
+          sudo apt-get update
+          sudo apt-get install -y iputils-ping timeout
 
-      # 步骤3：核心测速逻辑，遍历全部网段，每个IP测速3次取平均值
-      - name: TCP测速443端口，每个IP测3次取平均延迟
+      - name: Add script
         run: |
-          # set +e：关闭「遇到命令出错就直接终止脚本」
-          # 大量Cloudflare IP的443端口连不上属于正常现象，不要因为个别IP探测失败直接整段任务报错
-          set +e
+          mkdir -p .github/scripts
+          cat > .github/scripts/ip_test.sh <<'EOF'
+#!/usr/bin/env bash
+set -eu
 
-          # curl下载Cloudflare官方IPv4网段列表，保存到iprange.txt文件
-          curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
+URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
+WORKDIR="${GITHUB_WORKSPACE:-.}"
+cd "$WORKDIR"
 
-          # 清空临时结果文件，准备写入本次测速数据
-          >tmp_result.txt
+# Files
+RAWLIST="iplist.raw"
+IPS="ips.txt"
+IPTEST="IPtest.txt"
+IPOUT="IP.txt"
 
-          # 循环读取iprange.txt里面【全部】网段，不再提前break退出
-          # -r 参数：禁止反斜杠转义字符，避免网段解析出错
-          while read -r range; do
-              # 例如网段 104.16.0.0/12，截取斜杠前面的IP：104.16.0.0
-              ip=$(echo "$range"|cut -d'/' -f1)
+# Fetch list
+curl -fsS "$URL" -o "$RAWLIST" || { echo "Failed to fetch $URL"; exit 1; }
 
-              total=0
-              success_cnt=0
-              # 循环测速3次
-              for ((i=0;i<3;i++)); do
-                  # 获取测速开始时间
-                  start=$(date +%s.%N)
-                  # nc测试443端口，超时2秒
-                  nc -z -w 2 "$ip" 443 >/dev/null 2>&1
-                  ret=$?
-                  end=$(date +%s.%N)
-                  # 连接成功才统计延迟
-                  if [ $ret -eq 0 ];then
-                      delay=$(echo "scale=4; $end - $start" | bc -l)
-                      total=$(echo "scale=4; $total + $delay" | bc -l)
-                      success_cnt=$((success_cnt+1))
-                  fi
-              done
+# Extract IPv4 addresses (simple robust regex) and dedupe
+grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
-              # 只要至少成功1次，就计算平均延迟，写入临时文件
-              if [ $success_cnt -ge 1 ];then
-                  avg=$(echo "scale=4; $total / $success_cnt" | bc -l)
-                  echo "$avg $ip" >> tmp_result.txt
-              fi
+# Prepare output
+: > "$IPTEST"
 
-          done < iprange.txt
+# For each IP do 10 pings and record average (ms)
+while IFS= read -r ip; do
+  [ -z "$ip" ] && continue
+  echo "Testing $ip ..."
+  # Run ping with timeout to avoid hang. Use -4 to force IPv4.
+  # timeout ensures the whole ping call does not exceed ~30s.
+  avg=$(timeout 30 ping -4 -c 10 -W 3 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}')
+  if [ -z "$avg" ]; then
+    # unreachable or timeout -> treat as very large latency
+    avg=999999
+  fi
+  # Save IP and avg (as number)
+  printf "%s %s\n" "$ip" "$avg" >> "$IPTEST"
+done < "$IPS"
 
-          # sort -n：按数字从小到大排序（平均延迟由低到高）
-          # head -n10：取出前10条延迟最低的记录
-          # awk '{print $2}'：只截取第二列也就是IP地址，输出保存到ip.txt
-          sort -n tmp_result.txt | head -n10 | awk '{print $2}' > ip.txt
+# Sort by latency numeric and pick top 10 lowest
+sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
 
-      # 步骤4：把测速结果ip.txt提交推送回你的GitHub仓库
-      - name: 提交结果回仓库
+echo "Done. Results written to $IPTEST and $IPOUT"
+EOF
+          chmod +x .github/scripts/ip_test.sh
+
+      - name: Run latency tests
+        run: .github/scripts/ip_test.sh
+
+      - name: Commit results back to repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 设置git提交者用户名
-          git config user.name "github‑action"
-          # 设置git提交者邮箱
-          git config user.email "action@github.com"
-          # 将ip.txt标记为待提交文件
-          git add ip.txt
-          # 提交记录，备注信息；|| echo "无更新"：如果本次测速IP和上次一模一样没有变化，commit会报错，直接输出提示跳过报错
-          git commit -m "update best ip" || echo "无更新"
-          git push
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add IPtest.txt IP.txt || true
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update IP latency results"
+            git push
+          fi
