@@ -44,7 +44,7 @@ jobs:
           set +e
 
           # curl下载Cloudflare官方IPv4网段列表，保存到iprange.txt文件
-          curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
+          curl -s https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt > iprange.txt
 
           # 清空临时结果文件，准备写入本次测速数据
           >tmp_result.txt
