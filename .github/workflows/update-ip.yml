@@ -1,6 +1,8 @@
 # 工作流名称：IP 延迟检测（每 6 小时运行，可手动触发）
-name: IP Latency Check
-
+name: IP 延迟测试
+# 允许 workflow 使用 GITHUB_TOKEN 写入仓库内容
+permissions:
+  contents: write
 on:
   schedule:
     - cron: "0 */6 * * *" # 每 6 小时运行一次
