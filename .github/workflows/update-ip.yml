@@ -63,7 +63,7 @@ jobs:
           # 调试：确认 runner 是否能 ping 出网（例如 8.8.8.8）
           # -------------------------
           echo "=== Debug: ping 8.8.8.8 ===" | tee -a "$DEBUG"
-          timeout 1s ping -4 -c 1 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
+          timeout 5s ping -4 -c 10 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
           echo "=== End debug ===" | tee -a "$DEBUG"
 
           # -------------------------
@@ -80,7 +80,7 @@ jobs:
             echo "Testing $ip ..." | tee -a "$DEBUG"
 
             # 尝试 ICMP ping（3 次），并捕获输出以便解析与调试
-            ping_out=$(timeout 1s ping -4 -c 1 -W 1 -q "$ip" 2>&1 || true)
+            ping_out=$(timeout 5s ping -4 -c 10 -W 1 -q "$ip" 2>&1 || true)
             echo "PING OUTPUT for $ip:" >> "$DEBUG"
             echo "$ping_out" >> "$DEBUG"
 
@@ -123,7 +123,7 @@ jobs:
           # -------------------------
           # 5) 排序并输出延迟最低的 10 个 IP 到 IPOUT
           # -------------------------
-          sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
+          sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
           
           echo "Wrote results to $IPTEST and top-10 to $IPOUT"
           echo "Saved debug log to $DEBUG"
