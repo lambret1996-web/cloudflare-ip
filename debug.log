@@ -6,124 +6,78 @@ PING OUTPUT for 2.27.109.144:
 ICMP failed for 2.27.109.144, trying TCP connect fallback
 TCP 2.27.109.144:443 failed or timed out
 All probes failed for 2.27.109.144, marking as 9999
-Testing 3.164.110.38 ...
-PING OUTPUT for 3.164.110.38:
+Testing 3.165.19.25 ...
+PING OUTPUT for 3.165.19.25:
 
-ICMP failed for 3.164.110.38, trying TCP connect fallback
-TCP connect to 3.164.110.38:443 succeeded in 111 ms
-Testing 3.171.203.101 ...
-PING OUTPUT for 3.171.203.101:
+ICMP failed for 3.165.19.25, trying TCP connect fallback
+TCP connect to 3.165.19.25:443 succeeded in 104 ms
+Testing 3.165.19.222 ...
+PING OUTPUT for 3.165.19.222:
 
-ICMP failed for 3.171.203.101, trying TCP connect fallback
-TCP connect to 3.171.203.101:443 succeeded in 173 ms
-Testing 3.173.249.23 ...
-PING OUTPUT for 3.173.249.23:
+ICMP failed for 3.165.19.222, trying TCP connect fallback
+TCP connect to 3.165.19.222:443 succeeded in 104 ms
+Testing 3.173.201.103 ...
+PING OUTPUT for 3.173.201.103:
 
-ICMP failed for 3.173.249.23, trying TCP connect fallback
-TCP connect to 3.173.249.23:443 succeeded in 111 ms
+ICMP failed for 3.173.201.103, trying TCP connect fallback
+TCP connect to 3.173.201.103:443 succeeded in 104 ms
 Testing 8.218.36.133 ...
 PING OUTPUT for 8.218.36.133:
 
 ICMP failed for 8.218.36.133, trying TCP connect fallback
 TCP 8.218.36.133:443 failed or timed out
 All probes failed for 8.218.36.133, marking as 9999
-Testing 13.225.164.110 ...
-PING OUTPUT for 13.225.164.110:
+Testing 13.225.180.39 ...
+PING OUTPUT for 13.225.180.39:
 
-ICMP failed for 13.225.164.110, trying TCP connect fallback
-TCP connect to 13.225.164.110:443 succeeded in 111 ms
-Testing 13.225.166.46 ...
-PING OUTPUT for 13.225.166.46:
+ICMP failed for 13.225.180.39, trying TCP connect fallback
+TCP connect to 13.225.180.39:443 succeeded in 104 ms
+Testing 18.155.169.130 ...
+PING OUTPUT for 18.155.169.130:
 
-ICMP failed for 13.225.166.46, trying TCP connect fallback
-TCP connect to 13.225.166.46:443 succeeded in 111 ms
-Testing 13.225.166.89 ...
-PING OUTPUT for 13.225.166.89:
+ICMP failed for 18.155.169.130, trying TCP connect fallback
+TCP connect to 18.155.169.130:443 succeeded in 42 ms
+Testing 18.172.38.25 ...
+PING OUTPUT for 18.172.38.25:
 
-ICMP failed for 13.225.166.89, trying TCP connect fallback
-TCP connect to 13.225.166.89:443 succeeded in 110 ms
-Testing 13.225.181.109 ...
-PING OUTPUT for 13.225.181.109:
+ICMP failed for 18.172.38.25, trying TCP connect fallback
+TCP connect to 18.172.38.25:443 succeeded in 104 ms
+Testing 18.172.38.169 ...
+PING OUTPUT for 18.172.38.169:
 
-ICMP failed for 13.225.181.109, trying TCP connect fallback
-TCP connect to 13.225.181.109:443 succeeded in 111 ms
-Testing 13.225.181.151 ...
-PING OUTPUT for 13.225.181.151:
+ICMP failed for 18.172.38.169, trying TCP connect fallback
+TCP connect to 18.172.38.169:443 succeeded in 104 ms
+Testing 18.238.110.66 ...
+PING OUTPUT for 18.238.110.66:
 
-ICMP failed for 13.225.181.151, trying TCP connect fallback
-TCP connect to 13.225.181.151:443 succeeded in 111 ms
-Testing 18.65.217.9 ...
-PING OUTPUT for 18.65.217.9:
-
-ICMP failed for 18.65.217.9, trying TCP connect fallback
-TCP connect to 18.65.217.9:443 succeeded in 110 ms
-Testing 18.66.94.36 ...
-PING OUTPUT for 18.66.94.36:
-
-ICMP failed for 18.66.94.36, trying TCP connect fallback
-TCP connect to 18.66.94.36:443 succeeded in 152 ms
-Testing 18.160.229.88 ...
-PING OUTPUT for 18.160.229.88:
-
-ICMP failed for 18.160.229.88, trying TCP connect fallback
-TCP connect to 18.160.229.88:443 succeeded in 56 ms
-Testing 18.161.239.25 ...
-PING OUTPUT for 18.161.239.25:
-
-ICMP failed for 18.161.239.25, trying TCP connect fallback
-TCP connect to 18.161.239.25:443 succeeded in 204 ms
-Testing 18.161.239.108 ...
-PING OUTPUT for 18.161.239.108:
-
-ICMP failed for 18.161.239.108, trying TCP connect fallback
-TCP connect to 18.161.239.108:443 succeeded in 204 ms
-Testing 18.161.242.88 ...
-PING OUTPUT for 18.161.242.88:
-
-ICMP failed for 18.161.242.88, trying TCP connect fallback
-TCP connect to 18.161.242.88:443 succeeded in 205 ms
-Testing 18.245.34.195 ...
-PING OUTPUT for 18.245.34.195:
-
-ICMP failed for 18.245.34.195, trying TCP connect fallback
-TCP connect to 18.245.34.195:443 succeeded in 152 ms
-Testing 20.6.12.145 ...
-PING OUTPUT for 20.6.12.145:
-
-ICMP failed for 20.6.12.145, trying TCP connect fallback
-TCP connect to 20.6.12.145:443 succeeded in 173 ms
+ICMP failed for 18.238.110.66, trying TCP connect fallback
+TCP connect to 18.238.110.66:443 succeeded in 42 ms
 Testing 23.27.52.166 ...
 PING OUTPUT for 23.27.52.166:
 
 ICMP failed for 23.27.52.166, trying TCP connect fallback
 TCP 23.27.52.166:443 failed or timed out
 All probes failed for 23.27.52.166, marking as 9999
-Testing 23.133.52.10 ...
-PING OUTPUT for 23.133.52.10:
-
-ICMP failed for 23.133.52.10, trying TCP connect fallback
-TCP 23.133.52.10:443 failed or timed out
-All probes failed for 23.133.52.10, marking as 9999
 Testing 23.175.201.2 ...
 PING OUTPUT for 23.175.201.2:
 
 ICMP failed for 23.175.201.2, trying TCP connect fallback
-TCP connect to 23.175.201.2:443 succeeded in 151 ms
+TCP connect to 23.175.201.2:443 succeeded in 143 ms
 Testing 27.50.48.50 ...
 PING OUTPUT for 27.50.48.50:
 
 ICMP failed for 27.50.48.50, trying TCP connect fallback
-TCP connect to 27.50.48.50:443 succeeded in 6 ms
+TCP connect to 27.50.48.50:443 succeeded in 10 ms
 Testing 27.50.48.59 ...
 PING OUTPUT for 27.50.48.59:
 
 ICMP failed for 27.50.48.59, trying TCP connect fallback
-TCP connect to 27.50.48.59:443 succeeded in 6 ms
+TCP connect to 27.50.48.59:443 succeeded in 10 ms
 Testing 27.50.48.255 ...
 PING OUTPUT for 27.50.48.255:
 
 ICMP failed for 27.50.48.255, trying TCP connect fallback
-TCP connect to 27.50.48.255:443 succeeded in 7 ms
+TCP connect to 27.50.48.255:443 succeeded in 11 ms
 Testing 31.58.226.196 ...
 PING OUTPUT for 31.58.226.196:
 
@@ -136,17 +90,11 @@ PING OUTPUT for 34.212.240.129:
 ICMP failed for 34.212.240.129, trying TCP connect fallback
 TCP 34.212.240.129:443 failed or timed out
 All probes failed for 34.212.240.129, marking as 9999
-Testing 38.207.164.187 ...
-PING OUTPUT for 38.207.164.187:
+Testing 38.207.176.130 ...
+PING OUTPUT for 38.207.176.130:
 
-ICMP failed for 38.207.164.187, trying TCP connect fallback
-TCP 38.207.164.187:443 failed or timed out
-All probes failed for 38.207.164.187, marking as 9999
-Testing 43.128.130.43 ...
-PING OUTPUT for 43.128.130.43:
-
-ICMP failed for 43.128.130.43, trying TCP connect fallback
-TCP connect to 43.128.130.43:443 succeeded in 133 ms
+ICMP failed for 38.207.176.130, trying TCP connect fallback
+TCP connect to 38.207.176.130:443 succeeded in 144 ms
 Testing 43.129.217.38 ...
 PING OUTPUT for 43.129.217.38:
 
@@ -157,32 +105,32 @@ Testing 43.131.225.115 ...
 PING OUTPUT for 43.131.225.115:
 
 ICMP failed for 43.131.225.115, trying TCP connect fallback
-TCP connect to 43.131.225.115:443 succeeded in 136 ms
+TCP connect to 43.131.225.115:443 succeeded in 127 ms
 Testing 43.131.247.123 ...
 PING OUTPUT for 43.131.247.123:
 
 ICMP failed for 43.131.247.123, trying TCP connect fallback
-TCP connect to 43.131.247.123:443 succeeded in 134 ms
+TCP connect to 43.131.247.123:443 succeeded in 125 ms
 Testing 43.132.231.159 ...
 PING OUTPUT for 43.132.231.159:
 
 ICMP failed for 43.132.231.159, trying TCP connect fallback
-TCP connect to 43.132.231.159:443 succeeded in 153 ms
+TCP connect to 43.132.231.159:443 succeeded in 146 ms
 Testing 43.161.236.173 ...
 PING OUTPUT for 43.161.236.173:
 
 ICMP failed for 43.161.236.173, trying TCP connect fallback
-TCP connect to 43.161.236.173:443 succeeded in 151 ms
+TCP connect to 43.161.236.173:443 succeeded in 144 ms
 Testing 43.168.16.112 ...
 PING OUTPUT for 43.168.16.112:
 
 ICMP failed for 43.168.16.112, trying TCP connect fallback
-TCP connect to 43.168.16.112:443 succeeded in 157 ms
+TCP connect to 43.168.16.112:443 succeeded in 166 ms
 Testing 43.170.8.95 ...
 PING OUTPUT for 43.170.8.95:
 
 ICMP failed for 43.170.8.95, trying TCP connect fallback
-TCP connect to 43.170.8.95:443 succeeded in 111 ms
+TCP connect to 43.170.8.95:443 succeeded in 104 ms
 Testing 43.200.87.5 ...
 PING OUTPUT for 43.200.87.5:
 
@@ -193,17 +141,17 @@ Testing 45.32.34.220 ...
 PING OUTPUT for 45.32.34.220:
 
 ICMP failed for 45.32.34.220, trying TCP connect fallback
-TCP connect to 45.32.34.220:443 succeeded in 110 ms
+TCP connect to 45.32.34.220:443 succeeded in 103 ms
 Testing 45.32.35.100 ...
 PING OUTPUT for 45.32.35.100:
 
 ICMP failed for 45.32.35.100, trying TCP connect fallback
-TCP connect to 45.32.35.100:443 succeeded in 111 ms
+TCP connect to 45.32.35.100:443 succeeded in 104 ms
 Testing 45.32.251.225 ...
 PING OUTPUT for 45.32.251.225:
 
 ICMP failed for 45.32.251.225, trying TCP connect fallback
-TCP connect to 45.32.251.225:443 succeeded in 111 ms
+TCP connect to 45.32.251.225:443 succeeded in 104 ms
 Testing 45.38.42.198 ...
 PING OUTPUT for 45.38.42.198:
 
@@ -214,7 +162,7 @@ Testing 45.77.21.148 ...
 PING OUTPUT for 45.77.21.148:
 
 ICMP failed for 45.77.21.148, trying TCP connect fallback
-TCP connect to 45.77.21.148:443 succeeded in 112 ms
+TCP connect to 45.77.21.148:443 succeeded in 103 ms
 Testing 45.77.134.44 ...
 PING OUTPUT for 45.77.134.44:
 
@@ -225,17 +173,12 @@ Testing 45.127.32.15 ...
 PING OUTPUT for 45.127.32.15:
 
 ICMP failed for 45.127.32.15, trying TCP connect fallback
-TCP connect to 45.127.32.15:443 succeeded in 172 ms
+TCP connect to 45.127.32.15:443 succeeded in 165 ms
 Testing 45.154.14.48 ...
 PING OUTPUT for 45.154.14.48:
 
 ICMP failed for 45.154.14.48, trying TCP connect fallback
-TCP connect to 45.154.14.48:443 succeeded in 134 ms
-Testing 45.202.247.198 ...
-PING OUTPUT for 45.202.247.198:
-
-ICMP failed for 45.202.247.198, trying TCP connect fallback
-TCP connect to 45.202.247.198:443 succeeded in 152 ms
+TCP connect to 45.154.14.48:443 succeeded in 127 ms
 Testing 45.221.115.92 ...
 PING OUTPUT for 45.221.115.92:
 
@@ -246,17 +189,12 @@ Testing 47.57.181.17 ...
 PING OUTPUT for 47.57.181.17:
 
 ICMP failed for 47.57.181.17, trying TCP connect fallback
-TCP connect to 47.57.181.17:443 succeeded in 153 ms
-Testing 47.80.57.116 ...
-PING OUTPUT for 47.80.57.116:
-
-ICMP failed for 47.80.57.116, trying TCP connect fallback
-TCP connect to 47.80.57.116:443 succeeded in 136 ms
+TCP connect to 47.57.181.17:443 succeeded in 145 ms
 Testing 47.84.54.115 ...
 PING OUTPUT for 47.84.54.115:
 
 ICMP failed for 47.84.54.115, trying TCP connect fallback
-TCP connect to 47.84.54.115:443 succeeded in 174 ms
+TCP connect to 47.84.54.115:443 succeeded in 167 ms
 Testing 47.130.35.116 ...
 PING OUTPUT for 47.130.35.116:
 
@@ -269,6 +207,21 @@ PING OUTPUT for 47.243.54.45:
 ICMP failed for 47.243.54.45, trying TCP connect fallback
 TCP 47.243.54.45:443 failed or timed out
 All probes failed for 47.243.54.45, marking as 9999
+Testing 54.230.174.34 ...
+PING OUTPUT for 54.230.174.34:
+
+ICMP failed for 54.230.174.34, trying TCP connect fallback
+TCP connect to 54.230.174.34:443 succeeded in 103 ms
+Testing 54.230.174.63 ...
+PING OUTPUT for 54.230.174.63:
+
+ICMP failed for 54.230.174.63, trying TCP connect fallback
+TCP connect to 54.230.174.63:443 succeeded in 103 ms
+Testing 54.230.174.65 ...
+PING OUTPUT for 54.230.174.65:
+
+ICMP failed for 54.230.174.65, trying TCP connect fallback
+TCP connect to 54.230.174.65:443 succeeded in 104 ms
 Testing 61.85.1.77 ...
 PING OUTPUT for 61.85.1.77:
 
@@ -279,57 +232,56 @@ Testing 64.176.42.143 ...
 PING OUTPUT for 64.176.42.143:
 
 ICMP failed for 64.176.42.143, trying TCP connect fallback
-TCP connect to 64.176.42.143:443 succeeded in 118 ms
+TCP connect to 64.176.42.143:443 succeeded in 111 ms
 Testing 64.176.44.23 ...
 PING OUTPUT for 64.176.44.23:
 
 ICMP failed for 64.176.44.23, trying TCP connect fallback
-TCP connect to 64.176.44.23:443 succeeded in 118 ms
+TCP connect to 64.176.44.23:443 succeeded in 111 ms
+Testing 65.9.164.159 ...
+PING OUTPUT for 65.9.164.159:
+
+ICMP failed for 65.9.164.159, trying TCP connect fallback
+TCP connect to 65.9.164.159:443 succeeded in 166 ms
+Testing 65.20.85.14 ...
+PING OUTPUT for 65.20.85.14:
+
+ICMP failed for 65.20.85.14, trying TCP connect fallback
+TCP connect to 65.20.85.14:443 succeeded in 219 ms
 Testing 66.42.51.60 ...
 PING OUTPUT for 66.42.51.60:
 
 ICMP failed for 66.42.51.60, trying TCP connect fallback
-TCP connect to 66.42.51.60:443 succeeded in 174 ms
-Testing 82.158.230.241 ...
-PING OUTPUT for 82.158.230.241:
-
-ICMP failed for 82.158.230.241, trying TCP connect fallback
-TCP connect to 82.158.230.241:443 succeeded in 160 ms
+TCP connect to 66.42.51.60:443 succeeded in 166 ms
 Testing 85.121.51.114 ...
 PING OUTPUT for 85.121.51.114:
 
 ICMP failed for 85.121.51.114, trying TCP connect fallback
-TCP connect to 85.121.51.114:443 succeeded in 166 ms
+TCP connect to 85.121.51.114:443 succeeded in 157 ms
 Testing 91.110.174.173 ...
 PING OUTPUT for 91.110.174.173:
 
 ICMP failed for 91.110.174.173, trying TCP connect fallback
 TCP 91.110.174.173:443 failed or timed out
 All probes failed for 91.110.174.173, marking as 9999
-Testing 91.110.174.202 ...
-PING OUTPUT for 91.110.174.202:
-
-ICMP failed for 91.110.174.202, trying TCP connect fallback
-TCP 91.110.174.202:443 failed or timed out
-All probes failed for 91.110.174.202, marking as 9999
 Testing 91.110.174.204 ...
 PING OUTPUT for 91.110.174.204:
 
 ICMP failed for 91.110.174.204, trying TCP connect fallback
 TCP 91.110.174.204:443 failed or timed out
 All probes failed for 91.110.174.204, marking as 9999
-Testing 91.110.174.205 ...
-PING OUTPUT for 91.110.174.205:
-
-ICMP failed for 91.110.174.205, trying TCP connect fallback
-TCP 91.110.174.205:443 failed or timed out
-All probes failed for 91.110.174.205, marking as 9999
 Testing 91.110.174.210 ...
 PING OUTPUT for 91.110.174.210:
 
 ICMP failed for 91.110.174.210, trying TCP connect fallback
 TCP 91.110.174.210:443 failed or timed out
 All probes failed for 91.110.174.210, marking as 9999
+Testing 91.110.174.222 ...
+PING OUTPUT for 91.110.174.222:
+
+ICMP failed for 91.110.174.222, trying TCP connect fallback
+TCP 91.110.174.222:443 failed or timed out
+All probes failed for 91.110.174.222, marking as 9999
 Testing 91.110.182.10 ...
 PING OUTPUT for 91.110.182.10:
 
@@ -366,11 +318,11 @@ PING OUTPUT for 91.110.209.106:
 ICMP failed for 91.110.209.106, trying TCP connect fallback
 TCP 91.110.209.106:443 failed or timed out
 All probes failed for 91.110.209.106, marking as 9999
-Testing 101.33.55.147 ...
-PING OUTPUT for 101.33.55.147:
+Testing 99.84.139.7 ...
+PING OUTPUT for 99.84.139.7:
 
-ICMP failed for 101.33.55.147, trying TCP connect fallback
-TCP connect to 101.33.55.147:443 succeeded in 112 ms
+ICMP failed for 99.84.139.7, trying TCP connect fallback
+TCP connect to 99.84.139.7:443 succeeded in 103 ms
 Testing 103.31.4.1 ...
 PING OUTPUT for 103.31.4.1:
 
@@ -380,7 +332,7 @@ Testing 103.31.4.4 ...
 PING OUTPUT for 103.31.4.4:
 
 ICMP failed for 103.31.4.4, trying TCP connect fallback
-TCP connect to 103.31.4.4:443 succeeded in 56 ms
+TCP connect to 103.31.4.4:443 succeeded in 55 ms
 Testing 103.31.4.5 ...
 PING OUTPUT for 103.31.4.5:
 
@@ -390,7 +342,7 @@ Testing 103.96.74.18 ...
 PING OUTPUT for 103.96.74.18:
 
 ICMP failed for 103.96.74.18, trying TCP connect fallback
-TCP connect to 103.96.74.18:443 succeeded in 414 ms
+TCP connect to 103.96.74.18:443 succeeded in 230 ms
 Testing 103.106.228.126 ...
 PING OUTPUT for 103.106.228.126:
 
@@ -401,422 +353,422 @@ Testing 103.118.42.136 ...
 PING OUTPUT for 103.118.42.136:
 
 ICMP failed for 103.118.42.136, trying TCP connect fallback
-TCP connect to 103.118.42.136:443 succeeded in 153 ms
+TCP connect to 103.118.42.136:443 succeeded in 145 ms
 Testing 103.193.172.164 ...
 PING OUTPUT for 103.193.172.164:
 
 ICMP failed for 103.193.172.164, trying TCP connect fallback
-TCP connect to 103.193.172.164:443 succeeded in 151 ms
+TCP connect to 103.193.172.164:443 succeeded in 144 ms
 Testing 103.195.191.70 ...
 PING OUTPUT for 103.195.191.70:
 
 ICMP failed for 103.195.191.70, trying TCP connect fallback
-TCP connect to 103.195.191.70:443 succeeded in 173 ms
+TCP connect to 103.195.191.70:443 succeeded in 166 ms
 Testing 103.253.42.37 ...
 PING OUTPUT for 103.253.42.37:
 
 ICMP failed for 103.253.42.37, trying TCP connect fallback
-TCP connect to 103.253.42.37:443 succeeded in 228 ms
+TCP connect to 103.253.42.37:443 succeeded in 233 ms
 Testing 104.16.0.1 ...
 PING OUTPUT for 104.16.0.1:
 
 ICMP failed for 104.16.0.1, trying TCP connect fallback
-TCP connect to 104.16.0.1:443 succeeded in 7 ms
+TCP connect to 104.16.0.1:443 succeeded in 11 ms
 Testing 104.16.0.2 ...
 PING OUTPUT for 104.16.0.2:
 
 ICMP failed for 104.16.0.2, trying TCP connect fallback
-TCP connect to 104.16.0.2:443 succeeded in 6 ms
+TCP connect to 104.16.0.2:443 succeeded in 11 ms
 Testing 104.16.0.5 ...
 PING OUTPUT for 104.16.0.5:
 
 ICMP failed for 104.16.0.5, trying TCP connect fallback
-TCP connect to 104.16.0.5:443 succeeded in 6 ms
+TCP connect to 104.16.0.5:443 succeeded in 11 ms
 Testing 104.16.0.6 ...
 PING OUTPUT for 104.16.0.6:
 
 ICMP failed for 104.16.0.6, trying TCP connect fallback
-TCP connect to 104.16.0.6:443 succeeded in 6 ms
+TCP connect to 104.16.0.6:443 succeeded in 10 ms
 Testing 104.16.0.7 ...
 PING OUTPUT for 104.16.0.7:
 
 ICMP failed for 104.16.0.7, trying TCP connect fallback
-TCP connect to 104.16.0.7:443 succeeded in 7 ms
+TCP connect to 104.16.0.7:443 succeeded in 10 ms
 Testing 104.16.0.9 ...
 PING OUTPUT for 104.16.0.9:
 
 ICMP failed for 104.16.0.9, trying TCP connect fallback
-TCP connect to 104.16.0.9:443 succeeded in 7 ms
+TCP connect to 104.16.0.9:443 succeeded in 12 ms
 Testing 104.16.10.10 ...
 PING OUTPUT for 104.16.10.10:
 
 ICMP failed for 104.16.10.10, trying TCP connect fallback
-TCP connect to 104.16.10.10:443 succeeded in 6 ms
+TCP connect to 104.16.10.10:443 succeeded in 10 ms
+Testing 104.16.36.106 ...
+PING OUTPUT for 104.16.36.106:
+
+ICMP failed for 104.16.36.106, trying TCP connect fallback
+TCP connect to 104.16.36.106:443 succeeded in 10 ms
 Testing 104.16.53.0 ...
 PING OUTPUT for 104.16.53.0:
 
 ICMP failed for 104.16.53.0, trying TCP connect fallback
-TCP connect to 104.16.53.0:443 succeeded in 7 ms
+TCP connect to 104.16.53.0:443 succeeded in 11 ms
 Testing 104.16.65.1 ...
 PING OUTPUT for 104.16.65.1:
 
 ICMP failed for 104.16.65.1, trying TCP connect fallback
-TCP connect to 104.16.65.1:443 succeeded in 6 ms
+TCP connect to 104.16.65.1:443 succeeded in 11 ms
 Testing 104.16.93.121 ...
 PING OUTPUT for 104.16.93.121:
 
 ICMP failed for 104.16.93.121, trying TCP connect fallback
-TCP connect to 104.16.93.121:443 succeeded in 7 ms
+TCP connect to 104.16.93.121:443 succeeded in 11 ms
 Testing 104.16.100.139 ...
 PING OUTPUT for 104.16.100.139:
 
 ICMP failed for 104.16.100.139, trying TCP connect fallback
-TCP connect to 104.16.100.139:443 succeeded in 7 ms
+TCP connect to 104.16.100.139:443 succeeded in 10 ms
 Testing 104.16.105.166 ...
 PING OUTPUT for 104.16.105.166:
 
 ICMP failed for 104.16.105.166, trying TCP connect fallback
-TCP connect to 104.16.105.166:443 succeeded in 8 ms
+TCP connect to 104.16.105.166:443 succeeded in 11 ms
 Testing 104.16.111.90 ...
 PING OUTPUT for 104.16.111.90:
 
 ICMP failed for 104.16.111.90, trying TCP connect fallback
-TCP connect to 104.16.111.90:443 succeeded in 7 ms
+TCP connect to 104.16.111.90:443 succeeded in 11 ms
 Testing 104.16.111.220 ...
 PING OUTPUT for 104.16.111.220:
 
 ICMP failed for 104.16.111.220, trying TCP connect fallback
-TCP connect to 104.16.111.220:443 succeeded in 7 ms
+TCP connect to 104.16.111.220:443 succeeded in 10 ms
 Testing 104.16.120.53 ...
 PING OUTPUT for 104.16.120.53:
 
 ICMP failed for 104.16.120.53, trying TCP connect fallback
-TCP connect to 104.16.120.53:443 succeeded in 7 ms
-Testing 104.16.146.171 ...
-PING OUTPUT for 104.16.146.171:
+TCP connect to 104.16.120.53:443 succeeded in 11 ms
+Testing 104.16.144.249 ...
+PING OUTPUT for 104.16.144.249:
 
-ICMP failed for 104.16.146.171, trying TCP connect fallback
-TCP connect to 104.16.146.171:443 succeeded in 6 ms
-Testing 104.16.149.237 ...
-PING OUTPUT for 104.16.149.237:
+ICMP failed for 104.16.144.249, trying TCP connect fallback
+TCP connect to 104.16.144.249:443 succeeded in 11 ms
+Testing 104.16.145.49 ...
+PING OUTPUT for 104.16.145.49:
 
-ICMP failed for 104.16.149.237, trying TCP connect fallback
-TCP connect to 104.16.149.237:443 succeeded in 7 ms
-Testing 104.16.151.9 ...
-PING OUTPUT for 104.16.151.9:
+ICMP failed for 104.16.145.49, trying TCP connect fallback
+TCP connect to 104.16.145.49:443 succeeded in 10 ms
+Testing 104.16.165.54 ...
+PING OUTPUT for 104.16.165.54:
 
-ICMP failed for 104.16.151.9, trying TCP connect fallback
-TCP connect to 104.16.151.9:443 succeeded in 6 ms
-Testing 104.16.153.73 ...
-PING OUTPUT for 104.16.153.73:
+ICMP failed for 104.16.165.54, trying TCP connect fallback
+TCP connect to 104.16.165.54:443 succeeded in 10 ms
+Testing 104.16.173.69 ...
+PING OUTPUT for 104.16.173.69:
 
-ICMP failed for 104.16.153.73, trying TCP connect fallback
-TCP connect to 104.16.153.73:443 succeeded in 6 ms
-Testing 104.16.208.227 ...
-PING OUTPUT for 104.16.208.227:
+ICMP failed for 104.16.173.69, trying TCP connect fallback
+TCP connect to 104.16.173.69:443 succeeded in 11 ms
+Testing 104.16.229.156 ...
+PING OUTPUT for 104.16.229.156:
 
-ICMP failed for 104.16.208.227, trying TCP connect fallback
-TCP connect to 104.16.208.227:443 succeeded in 6 ms
-Testing 104.16.240.59 ...
-PING OUTPUT for 104.16.240.59:
+ICMP failed for 104.16.229.156, trying TCP connect fallback
+TCP connect to 104.16.229.156:443 succeeded in 11 ms
+Testing 104.16.239.125 ...
+PING OUTPUT for 104.16.239.125:
 
-ICMP failed for 104.16.240.59, trying TCP connect fallback
-TCP connect to 104.16.240.59:443 succeeded in 7 ms
-Testing 104.16.241.75 ...
-PING OUTPUT for 104.16.241.75:
+ICMP failed for 104.16.239.125, trying TCP connect fallback
+TCP connect to 104.16.239.125:443 succeeded in 10 ms
+Testing 104.16.244.54 ...
+PING OUTPUT for 104.16.244.54:
 
-ICMP failed for 104.16.241.75, trying TCP connect fallback
-TCP connect to 104.16.241.75:443 succeeded in 7 ms
-Testing 104.16.244.151 ...
-PING OUTPUT for 104.16.244.151:
+ICMP failed for 104.16.244.54, trying TCP connect fallback
+TCP connect to 104.16.244.54:443 succeeded in 10 ms
+Testing 104.16.244.166 ...
+PING OUTPUT for 104.16.244.166:
 
-ICMP failed for 104.16.244.151, trying TCP connect fallback
-TCP connect to 104.16.244.151:443 succeeded in 7 ms
+ICMP failed for 104.16.244.166, trying TCP connect fallback
+TCP connect to 104.16.244.166:443 succeeded in 11 ms
+Testing 104.16.248.178 ...
+PING OUTPUT for 104.16.248.178:
+
+ICMP failed for 104.16.248.178, trying TCP connect fallback
+TCP connect to 104.16.248.178:443 succeeded in 10 ms
+Testing 104.16.250.185 ...
+PING OUTPUT for 104.16.250.185:
+
+ICMP failed for 104.16.250.185, trying TCP connect fallback
+TCP connect to 104.16.250.185:443 succeeded in 11 ms
+Testing 104.16.252.197 ...
+PING OUTPUT for 104.16.252.197:
+
+ICMP failed for 104.16.252.197, trying TCP connect fallback
+TCP connect to 104.16.252.197:443 succeeded in 10 ms
+Testing 104.16.253.8 ...
+PING OUTPUT for 104.16.253.8:
+
+ICMP failed for 104.16.253.8, trying TCP connect fallback
+TCP connect to 104.16.253.8:443 succeeded in 11 ms
 Testing 104.17.0.1 ...
 PING OUTPUT for 104.17.0.1:
 
 ICMP failed for 104.17.0.1, trying TCP connect fallback
-TCP connect to 104.17.0.1:443 succeeded in 7 ms
+TCP connect to 104.17.0.1:443 succeeded in 10 ms
 Testing 104.17.0.2 ...
 PING OUTPUT for 104.17.0.2:
 
 ICMP failed for 104.17.0.2, trying TCP connect fallback
-TCP connect to 104.17.0.2:443 succeeded in 7 ms
+TCP connect to 104.17.0.2:443 succeeded in 11 ms
 Testing 104.17.0.4 ...
 PING OUTPUT for 104.17.0.4:
 
 ICMP failed for 104.17.0.4, trying TCP connect fallback
-TCP connect to 104.17.0.4:443 succeeded in 6 ms
+TCP connect to 104.17.0.4:443 succeeded in 10 ms
 Testing 104.17.0.6 ...
 PING OUTPUT for 104.17.0.6:
 
 ICMP failed for 104.17.0.6, trying TCP connect fallback
-TCP connect to 104.17.0.6:443 succeeded in 7 ms
+TCP connect to 104.17.0.6:443 succeeded in 10 ms
 Testing 104.17.0.7 ...
 PING OUTPUT for 104.17.0.7:
 
 ICMP failed for 104.17.0.7, trying TCP connect fallback
-TCP connect to 104.17.0.7:443 succeeded in 7 ms
+TCP connect to 104.17.0.7:443 succeeded in 11 ms
 Testing 104.17.0.8 ...
 PING OUTPUT for 104.17.0.8:
 
 ICMP failed for 104.17.0.8, trying TCP connect fallback
-TCP connect to 104.17.0.8:443 succeeded in 7 ms
-Testing 104.17.51.141 ...
-PING OUTPUT for 104.17.51.141:
+TCP connect to 104.17.0.8:443 succeeded in 11 ms
+Testing 104.17.16.99 ...
+PING OUTPUT for 104.17.16.99:
 
-ICMP failed for 104.17.51.141, trying TCP connect fallback
-TCP connect to 104.17.51.141:443 succeeded in 7 ms
+ICMP failed for 104.17.16.99, trying TCP connect fallback
+TCP connect to 104.17.16.99:443 succeeded in 10 ms
+Testing 104.17.21.106 ...
+PING OUTPUT for 104.17.21.106:
+
+ICMP failed for 104.17.21.106, trying TCP connect fallback
+TCP connect to 104.17.21.106:443 succeeded in 11 ms
+Testing 104.17.53.140 ...
+PING OUTPUT for 104.17.53.140:
+
+ICMP failed for 104.17.53.140, trying TCP connect fallback
+TCP connect to 104.17.53.140:443 succeeded in 11 ms
+Testing 104.17.58.192 ...
+PING OUTPUT for 104.17.58.192:
+
+ICMP failed for 104.17.58.192, trying TCP connect fallback
+TCP connect to 104.17.58.192:443 succeeded in 10 ms
 Testing 104.17.59.88 ...
 PING OUTPUT for 104.17.59.88:
 
 ICMP failed for 104.17.59.88, trying TCP connect fallback
-TCP connect to 104.17.59.88:443 succeeded in 6 ms
+TCP connect to 104.17.59.88:443 succeeded in 11 ms
 Testing 104.17.69.244 ...
 PING OUTPUT for 104.17.69.244:
 
 ICMP failed for 104.17.69.244, trying TCP connect fallback
-TCP connect to 104.17.69.244:443 succeeded in 7 ms
-Testing 104.17.116.233 ...
-PING OUTPUT for 104.17.116.233:
+TCP connect to 104.17.69.244:443 succeeded in 11 ms
+Testing 104.17.101.91 ...
+PING OUTPUT for 104.17.101.91:
 
-ICMP failed for 104.17.116.233, trying TCP connect fallback
-TCP connect to 104.17.116.233:443 succeeded in 6 ms
-Testing 104.17.121.229 ...
-PING OUTPUT for 104.17.121.229:
-
-ICMP failed for 104.17.121.229, trying TCP connect fallback
-TCP connect to 104.17.121.229:443 succeeded in 6 ms
+ICMP failed for 104.17.101.91, trying TCP connect fallback
+TCP connect to 104.17.101.91:443 succeeded in 11 ms
 Testing 104.17.125.56 ...
 PING OUTPUT for 104.17.125.56:
 
 ICMP failed for 104.17.125.56, trying TCP connect fallback
-TCP connect to 104.17.125.56:443 succeeded in 7 ms
-Testing 104.17.125.245 ...
-PING OUTPUT for 104.17.125.245:
+TCP connect to 104.17.125.56:443 succeeded in 11 ms
+Testing 104.17.126.94 ...
+PING OUTPUT for 104.17.126.94:
 
-ICMP failed for 104.17.125.245, trying TCP connect fallback
-TCP connect to 104.17.125.245:443 succeeded in 6 ms
+ICMP failed for 104.17.126.94, trying TCP connect fallback
+TCP connect to 104.17.126.94:443 succeeded in 11 ms
 Testing 104.17.139.37 ...
 PING OUTPUT for 104.17.139.37:
 
 ICMP failed for 104.17.139.37, trying TCP connect fallback
-TCP connect to 104.17.139.37:443 succeeded in 6 ms
+TCP connect to 104.17.139.37:443 succeeded in 10 ms
 Testing 104.17.142.212 ...
 PING OUTPUT for 104.17.142.212:
 
 ICMP failed for 104.17.142.212, trying TCP connect fallback
-TCP connect to 104.17.142.212:443 succeeded in 7 ms
-Testing 104.17.159.59 ...
-PING OUTPUT for 104.17.159.59:
-
-ICMP failed for 104.17.159.59, trying TCP connect fallback
-TCP connect to 104.17.159.59:443 succeeded in 7 ms
+TCP connect to 104.17.142.212:443 succeeded in 11 ms
 Testing 104.17.162.3 ...
 PING OUTPUT for 104.17.162.3:
 
 ICMP failed for 104.17.162.3, trying TCP connect fallback
-TCP connect to 104.17.162.3:443 succeeded in 6 ms
+TCP connect to 104.17.162.3:443 succeeded in 11 ms
+Testing 104.17.164.125 ...
+PING OUTPUT for 104.17.164.125:
+
+ICMP failed for 104.17.164.125, trying TCP connect fallback
+TCP connect to 104.17.164.125:443 succeeded in 11 ms
 Testing 104.17.167.134 ...
 PING OUTPUT for 104.17.167.134:
 
 ICMP failed for 104.17.167.134, trying TCP connect fallback
-TCP connect to 104.17.167.134:443 succeeded in 7 ms
-Testing 104.17.225.162 ...
-PING OUTPUT for 104.17.225.162:
+TCP connect to 104.17.167.134:443 succeeded in 10 ms
+Testing 104.17.186.200 ...
+PING OUTPUT for 104.17.186.200:
 
-ICMP failed for 104.17.225.162, trying TCP connect fallback
-TCP connect to 104.17.225.162:443 succeeded in 7 ms
+ICMP failed for 104.17.186.200, trying TCP connect fallback
+TCP connect to 104.17.186.200:443 succeeded in 11 ms
+Testing 104.17.246.205 ...
+PING OUTPUT for 104.17.246.205:
+
+ICMP failed for 104.17.246.205, trying TCP connect fallback
+TCP connect to 104.17.246.205:443 succeeded in 11 ms
 Testing 104.18.0.1 ...
 PING OUTPUT for 104.18.0.1:
 
 ICMP failed for 104.18.0.1, trying TCP connect fallback
-TCP connect to 104.18.0.1:443 succeeded in 7 ms
+TCP connect to 104.18.0.1:443 succeeded in 10 ms
 Testing 104.18.0.3 ...
 PING OUTPUT for 104.18.0.3:
 
 ICMP failed for 104.18.0.3, trying TCP connect fallback
-TCP connect to 104.18.0.3:443 succeeded in 7 ms
+TCP connect to 104.18.0.3:443 succeeded in 11 ms
 Testing 104.18.0.4 ...
 PING OUTPUT for 104.18.0.4:
 
 ICMP failed for 104.18.0.4, trying TCP connect fallback
-TCP connect to 104.18.0.4:443 succeeded in 6 ms
+TCP connect to 104.18.0.4:443 succeeded in 10 ms
 Testing 104.18.0.7 ...
 PING OUTPUT for 104.18.0.7:
 
 ICMP failed for 104.18.0.7, trying TCP connect fallback
-TCP connect to 104.18.0.7:443 succeeded in 6 ms
+TCP connect to 104.18.0.7:443 succeeded in 10 ms
 Testing 104.18.81.19 ...
 PING OUTPUT for 104.18.81.19:
 
 ICMP failed for 104.18.81.19, trying TCP connect fallback
-TCP connect to 104.18.81.19:443 succeeded in 7 ms
+TCP connect to 104.18.81.19:443 succeeded in 11 ms
 Testing 104.18.89.52 ...
 PING OUTPUT for 104.18.89.52:
 
 ICMP failed for 104.18.89.52, trying TCP connect fallback
-TCP connect to 104.18.89.52:443 succeeded in 6 ms
+TCP connect to 104.18.89.52:443 succeeded in 10 ms
+Testing 104.18.143.180 ...
+PING OUTPUT for 104.18.143.180:
+
+ICMP failed for 104.18.143.180, trying TCP connect fallback
+TCP connect to 104.18.143.180:443 succeeded in 11 ms
 Testing 104.18.151.172 ...
 PING OUTPUT for 104.18.151.172:
 
 ICMP failed for 104.18.151.172, trying TCP connect fallback
-TCP connect to 104.18.151.172:443 succeeded in 7 ms
+TCP connect to 104.18.151.172:443 succeeded in 11 ms
 Testing 104.18.166.129 ...
 PING OUTPUT for 104.18.166.129:
 
 ICMP failed for 104.18.166.129, trying TCP connect fallback
-TCP connect to 104.18.166.129:443 succeeded in 6 ms
+TCP connect to 104.18.166.129:443 succeeded in 11 ms
 Testing 104.18.189.153 ...
 PING OUTPUT for 104.18.189.153:
 
 ICMP failed for 104.18.189.153, trying TCP connect fallback
-TCP connect to 104.18.189.153:443 succeeded in 7 ms
+TCP connect to 104.18.189.153:443 succeeded in 11 ms
 Testing 104.18.223.253 ...
 PING OUTPUT for 104.18.223.253:
 
 ICMP failed for 104.18.223.253, trying TCP connect fallback
-TCP connect to 104.18.223.253:443 succeeded in 7 ms
+TCP connect to 104.18.223.253:443 succeeded in 10 ms
 Testing 104.18.255.167 ...
 PING OUTPUT for 104.18.255.167:
 
 ICMP failed for 104.18.255.167, trying TCP connect fallback
-TCP connect to 104.18.255.167:443 succeeded in 6 ms
+TCP connect to 104.18.255.167:443 succeeded in 11 ms
 Testing 104.19.0.4 ...
 PING OUTPUT for 104.19.0.4:
 
 ICMP failed for 104.19.0.4, trying TCP connect fallback
-TCP connect to 104.19.0.4:443 succeeded in 7 ms
+TCP connect to 104.19.0.4:443 succeeded in 10 ms
+Testing 104.19.145.125 ...
+PING OUTPUT for 104.19.145.125:
+
+ICMP failed for 104.19.145.125, trying TCP connect fallback
+TCP connect to 104.19.145.125:443 succeeded in 10 ms
 Testing 104.19.148.121 ...
 PING OUTPUT for 104.19.148.121:
 
 ICMP failed for 104.19.148.121, trying TCP connect fallback
-TCP connect to 104.19.148.121:443 succeeded in 7 ms
+TCP connect to 104.19.148.121:443 succeeded in 11 ms
+Testing 104.19.149.219 ...
+PING OUTPUT for 104.19.149.219:
+
+ICMP failed for 104.19.149.219, trying TCP connect fallback
+TCP connect to 104.19.149.219:443 succeeded in 10 ms
 Testing 104.19.154.200 ...
 PING OUTPUT for 104.19.154.200:
 
 ICMP failed for 104.19.154.200, trying TCP connect fallback
-TCP connect to 104.19.154.200:443 succeeded in 8 ms
-Testing 104.19.158.73 ...
-PING OUTPUT for 104.19.158.73:
+TCP connect to 104.19.154.200:443 succeeded in 11 ms
+Testing 104.19.167.131 ...
+PING OUTPUT for 104.19.167.131:
 
-ICMP failed for 104.19.158.73, trying TCP connect fallback
-TCP connect to 104.19.158.73:443 succeeded in 6 ms
+ICMP failed for 104.19.167.131, trying TCP connect fallback
+TCP connect to 104.19.167.131:443 succeeded in 10 ms
 Testing 104.19.212.207 ...
 PING OUTPUT for 104.19.212.207:
 
 ICMP failed for 104.19.212.207, trying TCP connect fallback
-TCP connect to 104.19.212.207:443 succeeded in 7 ms
+TCP connect to 104.19.212.207:443 succeeded in 11 ms
 Testing 104.19.220.22 ...
 PING OUTPUT for 104.19.220.22:
 
 ICMP failed for 104.19.220.22, trying TCP connect fallback
-TCP connect to 104.19.220.22:443 succeeded in 7 ms
+TCP connect to 104.19.220.22:443 succeeded in 11 ms
 Testing 104.19.233.99 ...
 PING OUTPUT for 104.19.233.99:
 
 ICMP failed for 104.19.233.99, trying TCP connect fallback
-TCP connect to 104.19.233.99:443 succeeded in 6 ms
-Testing 104.19.239.21 ...
-PING OUTPUT for 104.19.239.21:
+TCP connect to 104.19.233.99:443 succeeded in 10 ms
+Testing 104.20.30.236 ...
+PING OUTPUT for 104.20.30.236:
 
-ICMP failed for 104.19.239.21, trying TCP connect fallback
-TCP connect to 104.19.239.21:443 succeeded in 7 ms
-Testing 104.19.249.242 ...
-PING OUTPUT for 104.19.249.242:
+ICMP failed for 104.20.30.236, trying TCP connect fallback
+TCP connect to 104.20.30.236:443 succeeded in 11 ms
+Testing 104.21.200.145 ...
+PING OUTPUT for 104.21.200.145:
 
-ICMP failed for 104.19.249.242, trying TCP connect fallback
-TCP connect to 104.19.249.242:443 succeeded in 6 ms
-Testing 104.20.10.24 ...
-PING OUTPUT for 104.20.10.24:
+ICMP failed for 104.21.200.145, trying TCP connect fallback
+TCP connect to 104.21.200.145:443 succeeded in 11 ms
+Testing 104.25.240.205 ...
+PING OUTPUT for 104.25.240.205:
 
-ICMP failed for 104.20.10.24, trying TCP connect fallback
-TCP connect to 104.20.10.24:443 succeeded in 7 ms
-Testing 104.20.10.180 ...
-PING OUTPUT for 104.20.10.180:
+ICMP failed for 104.25.240.205, trying TCP connect fallback
+TCP connect to 104.25.240.205:443 succeeded in 11 ms
+Testing 104.25.247.208 ...
+PING OUTPUT for 104.25.247.208:
 
-ICMP failed for 104.20.10.180, trying TCP connect fallback
-TCP connect to 104.20.10.180:443 succeeded in 6 ms
-Testing 104.20.23.167 ...
-PING OUTPUT for 104.20.23.167:
-
-ICMP failed for 104.20.23.167, trying TCP connect fallback
-TCP connect to 104.20.23.167:443 succeeded in 7 ms
-Testing 104.21.82.55 ...
-PING OUTPUT for 104.21.82.55:
-
-ICMP failed for 104.21.82.55, trying TCP connect fallback
-TCP connect to 104.21.82.55:443 succeeded in 7 ms
-Testing 104.21.84.66 ...
-PING OUTPUT for 104.21.84.66:
-
-ICMP failed for 104.21.84.66, trying TCP connect fallback
-TCP connect to 104.21.84.66:443 succeeded in 6 ms
-Testing 104.21.84.148 ...
-PING OUTPUT for 104.21.84.148:
-
-ICMP failed for 104.21.84.148, trying TCP connect fallback
-TCP connect to 104.21.84.148:443 succeeded in 6 ms
-Testing 104.21.84.226 ...
-PING OUTPUT for 104.21.84.226:
-
-ICMP failed for 104.21.84.226, trying TCP connect fallback
-TCP connect to 104.21.84.226:443 succeeded in 6 ms
-Testing 104.21.93.202 ...
-PING OUTPUT for 104.21.93.202:
-
-ICMP failed for 104.21.93.202, trying TCP connect fallback
-TCP connect to 104.21.93.202:443 succeeded in 7 ms
-Testing 104.25.240.139 ...
-PING OUTPUT for 104.25.240.139:
-
-ICMP failed for 104.25.240.139, trying TCP connect fallback
-TCP connect to 104.25.240.139:443 succeeded in 7 ms
-Testing 104.25.243.66 ...
-PING OUTPUT for 104.25.243.66:
-
-ICMP failed for 104.25.243.66, trying TCP connect fallback
-TCP connect to 104.25.243.66:443 succeeded in 6 ms
-Testing 104.25.246.171 ...
-PING OUTPUT for 104.25.246.171:
-
-ICMP failed for 104.25.246.171, trying TCP connect fallback
-TCP connect to 104.25.246.171:443 succeeded in 7 ms
-Testing 104.25.252.249 ...
-PING OUTPUT for 104.25.252.249:
-
-ICMP failed for 104.25.252.249, trying TCP connect fallback
-TCP connect to 104.25.252.249:443 succeeded in 6 ms
-Testing 104.25.254.87 ...
-PING OUTPUT for 104.25.254.87:
-
-ICMP failed for 104.25.254.87, trying TCP connect fallback
-TCP connect to 104.25.254.87:443 succeeded in 7 ms
+ICMP failed for 104.25.247.208, trying TCP connect fallback
+TCP connect to 104.25.247.208:443 succeeded in 11 ms
 Testing 104.26.3.162 ...
 PING OUTPUT for 104.26.3.162:
 
 ICMP failed for 104.26.3.162, trying TCP connect fallback
-TCP connect to 104.26.3.162:443 succeeded in 7 ms
+TCP connect to 104.26.3.162:443 succeeded in 10 ms
 Testing 104.26.4.90 ...
 PING OUTPUT for 104.26.4.90:
 
 ICMP failed for 104.26.4.90, trying TCP connect fallback
-TCP connect to 104.26.4.90:443 succeeded in 6 ms
+TCP connect to 104.26.4.90:443 succeeded in 10 ms
 Testing 104.26.5.134 ...
 PING OUTPUT for 104.26.5.134:
 
 ICMP failed for 104.26.5.134, trying TCP connect fallback
-TCP connect to 104.26.5.134:443 succeeded in 6 ms
+TCP connect to 104.26.5.134:443 succeeded in 11 ms
 Testing 104.26.8.117 ...
 PING OUTPUT for 104.26.8.117:
 
 ICMP failed for 104.26.8.117, trying TCP connect fallback
-TCP connect to 104.26.8.117:443 succeeded in 7 ms
+TCP connect to 104.26.8.117:443 succeeded in 10 ms
 Testing 104.31.16.158 ...
 PING OUTPUT for 104.31.16.158:
 
 ICMP failed for 104.31.16.158, trying TCP connect fallback
-TCP connect to 104.31.16.158:443 succeeded in 6 ms
+TCP connect to 104.31.16.158:443 succeeded in 10 ms
 Testing 104.168.87.41 ...
 PING OUTPUT for 104.168.87.41:
 
@@ -829,74 +781,76 @@ PING OUTPUT for 107.148.239.178:
 ICMP failed for 107.148.239.178, trying TCP connect fallback
 TCP 107.148.239.178:443 failed or timed out
 All probes failed for 107.148.239.178, marking as 9999
+Testing 108.158.254.21 ...
+PING OUTPUT for 108.158.254.21:
+
+ICMP failed for 108.158.254.21, trying TCP connect fallback
+TCP connect to 108.158.254.21:443 succeeded in 197 ms
+Testing 108.158.254.207 ...
+PING OUTPUT for 108.158.254.207:
+
+ICMP failed for 108.158.254.207, trying TCP connect fallback
+TCP connect to 108.158.254.207:443 succeeded in 198 ms
 Testing 108.162.192.1 ...
 PING OUTPUT for 108.162.192.1:
 
 ICMP failed for 108.162.192.1, trying TCP connect fallback
-TCP connect to 108.162.192.1:443 succeeded in 7 ms
+TCP connect to 108.162.192.1:443 succeeded in 11 ms
 Testing 108.162.192.2 ...
 PING OUTPUT for 108.162.192.2:
 
 ICMP failed for 108.162.192.2, trying TCP connect fallback
-TCP connect to 108.162.192.2:443 succeeded in 6 ms
-Testing 108.162.192.3 ...
-PING OUTPUT for 108.162.192.3:
-
-ICMP failed for 108.162.192.3, trying TCP connect fallback
-TCP connect to 108.162.192.3:443 succeeded in 7 ms
+TCP connect to 108.162.192.2:443 succeeded in 11 ms
 Testing 108.162.192.4 ...
 PING OUTPUT for 108.162.192.4:
 
 ICMP failed for 108.162.192.4, trying TCP connect fallback
-TCP connect to 108.162.192.4:443 succeeded in 7 ms
+TCP connect to 108.162.192.4:443 succeeded in 11 ms
 Testing 108.162.192.5 ...
 PING OUTPUT for 108.162.192.5:
 
 ICMP failed for 108.162.192.5, trying TCP connect fallback
-TCP connect to 108.162.192.5:443 succeeded in 7 ms
+TCP connect to 108.162.192.5:443 succeeded in 10 ms
 Testing 108.162.192.6 ...
 PING OUTPUT for 108.162.192.6:
 
 ICMP failed for 108.162.192.6, trying TCP connect fallback
-TCP connect to 108.162.192.6:443 succeeded in 6 ms
-Testing 114.32.9.249 ...
-PING OUTPUT for 114.32.9.249:
+TCP connect to 108.162.192.6:443 succeeded in 11 ms
+Testing 108.162.192.8 ...
+PING OUTPUT for 108.162.192.8:
 
-ICMP failed for 114.32.9.249, trying TCP connect fallback
-TCP connect to 114.32.9.249:443 succeeded in 145 ms
-Testing 119.28.162.39 ...
-PING OUTPUT for 119.28.162.39:
+ICMP failed for 108.162.192.8, trying TCP connect fallback
+TCP connect to 108.162.192.8:443 succeeded in 10 ms
+Testing 108.162.192.9 ...
+PING OUTPUT for 108.162.192.9:
 
-ICMP failed for 119.28.162.39, trying TCP connect fallback
-TCP 119.28.162.39:443 failed or timed out
-All probes failed for 119.28.162.39, marking as 9999
+ICMP failed for 108.162.192.9, trying TCP connect fallback
+TCP connect to 108.162.192.9:443 succeeded in 10 ms
 Testing 121.166.39.76 ...
 PING OUTPUT for 121.166.39.76:
 
 ICMP failed for 121.166.39.76, trying TCP connect fallback
-TCP 121.166.39.76:443 failed or timed out
-All probes failed for 121.166.39.76, marking as 9999
+TCP connect to 121.166.39.76:443 succeeded in 242 ms
 Testing 121.173.93.124 ...
 PING OUTPUT for 121.173.93.124:
 
 ICMP failed for 121.173.93.124, trying TCP connect fallback
-TCP connect to 121.173.93.124:443 succeeded in 422 ms
+TCP connect to 121.173.93.124:443 succeeded in 389 ms
 Testing 123.111.169.70 ...
 PING OUTPUT for 123.111.169.70:
 
 ICMP failed for 123.111.169.70, trying TCP connect fallback
-TCP connect to 123.111.169.70:443 succeeded in 154 ms
+TCP connect to 123.111.169.70:443 succeeded in 138 ms
 Testing 125.139.184.199 ...
 PING OUTPUT for 125.139.184.199:
 
 ICMP failed for 125.139.184.199, trying TCP connect fallback
-TCP 125.139.184.199:443 failed or timed out
-All probes failed for 125.139.184.199, marking as 9999
+TCP connect to 125.139.184.199:443 succeeded in 177 ms
 Testing 129.154.50.72 ...
 PING OUTPUT for 129.154.50.72:
 
 ICMP failed for 129.154.50.72, trying TCP connect fallback
-TCP connect to 129.154.50.72:443 succeeded in 139 ms
+TCP connect to 129.154.50.72:443 succeeded in 138 ms
 Testing 138.3.212.160 ...
 PING OUTPUT for 138.3.212.160:
 
@@ -907,7 +861,7 @@ Testing 141.11.43.124 ...
 PING OUTPUT for 141.11.43.124:
 
 ICMP failed for 141.11.43.124, trying TCP connect fallback
-TCP connect to 141.11.43.124:443 succeeded in 176 ms
+TCP connect to 141.11.43.124:443 succeeded in 163 ms
 Testing 141.11.91.67 ...
 PING OUTPUT for 141.11.91.67:
 
@@ -918,28 +872,23 @@ Testing 141.147.174.243 ...
 PING OUTPUT for 141.147.174.243:
 
 ICMP failed for 141.147.174.243, trying TCP connect fallback
-TCP connect to 141.147.174.243:443 succeeded in 111 ms
+TCP connect to 141.147.174.243:443 succeeded in 104 ms
 Testing 141.147.185.63 ...
 PING OUTPUT for 141.147.185.63:
 
 ICMP failed for 141.147.185.63, trying TCP connect fallback
-TCP connect to 141.147.185.63:443 succeeded in 111 ms
+TCP connect to 141.147.185.63:443 succeeded in 104 ms
 Testing 144.202.126.54 ...
 PING OUTPUT for 144.202.126.54:
 
 ICMP failed for 144.202.126.54, trying TCP connect fallback
-TCP connect to 144.202.126.54:443 succeeded in 14 ms
+TCP connect to 144.202.126.54:443 succeeded in 35 ms
 Testing 149.28.18.65 ...
 PING OUTPUT for 149.28.18.65:
 
 ICMP failed for 149.28.18.65, trying TCP connect fallback
 TCP 149.28.18.65:443 failed or timed out
 All probes failed for 149.28.18.65, marking as 9999
-Testing 151.242.189.184 ...
-PING OUTPUT for 151.242.189.184:
-
-ICMP failed for 151.242.189.184, trying TCP connect fallback
-TCP connect to 151.242.189.184:443 succeeded in 141 ms
 Testing 154.3.32.164 ...
 PING OUTPUT for 154.3.32.164:
 
@@ -950,7 +899,7 @@ Testing 154.16.183.190 ...
 PING OUTPUT for 154.16.183.190:
 
 ICMP failed for 154.16.183.190, trying TCP connect fallback
-TCP connect to 154.16.183.190:443 succeeded in 151 ms
+TCP connect to 154.16.183.190:443 succeeded in 144 ms
 Testing 154.17.22.207 ...
 PING OUTPUT for 154.17.22.207:
 
@@ -967,7 +916,7 @@ Testing 155.248.181.189 ...
 PING OUTPUT for 155.248.181.189:
 
 ICMP failed for 155.248.181.189, trying TCP connect fallback
-TCP connect to 155.248.181.189:443 succeeded in 111 ms
+TCP connect to 155.248.181.189:443 succeeded in 104 ms
 Testing 158.101.131.94 ...
 PING OUTPUT for 158.101.131.94:
 
@@ -978,197 +927,197 @@ Testing 158.101.132.216 ...
 PING OUTPUT for 158.101.132.216:
 
 ICMP failed for 158.101.132.216, trying TCP connect fallback
-TCP connect to 158.101.132.216:443 succeeded in 111 ms
+TCP connect to 158.101.132.216:443 succeeded in 104 ms
+Testing 161.117.181.127 ...
+PING OUTPUT for 161.117.181.127:
+
+ICMP failed for 161.117.181.127, trying TCP connect fallback
+TCP connect to 161.117.181.127:443 succeeded in 167 ms
 Testing 162.159.0.1 ...
 PING OUTPUT for 162.159.0.1:
 
 ICMP failed for 162.159.0.1, trying TCP connect fallback
-TCP connect to 162.159.0.1:443 succeeded in 6 ms
+TCP connect to 162.159.0.1:443 succeeded in 10 ms
 Testing 162.159.0.2 ...
 PING OUTPUT for 162.159.0.2:
 
 ICMP failed for 162.159.0.2, trying TCP connect fallback
-TCP connect to 162.159.0.2:443 succeeded in 7 ms
+TCP connect to 162.159.0.2:443 succeeded in 10 ms
 Testing 162.159.0.3 ...
 PING OUTPUT for 162.159.0.3:
 
 ICMP failed for 162.159.0.3, trying TCP connect fallback
-TCP connect to 162.159.0.3:443 succeeded in 7 ms
+TCP connect to 162.159.0.3:443 succeeded in 11 ms
 Testing 162.159.0.4 ...
 PING OUTPUT for 162.159.0.4:
 
 ICMP failed for 162.159.0.4, trying TCP connect fallback
-TCP connect to 162.159.0.4:443 succeeded in 7 ms
+TCP connect to 162.159.0.4:443 succeeded in 11 ms
 Testing 162.159.0.5 ...
 PING OUTPUT for 162.159.0.5:
 
 ICMP failed for 162.159.0.5, trying TCP connect fallback
-TCP connect to 162.159.0.5:443 succeeded in 7 ms
+TCP connect to 162.159.0.5:443 succeeded in 11 ms
 Testing 162.159.0.6 ...
 PING OUTPUT for 162.159.0.6:
 
 ICMP failed for 162.159.0.6, trying TCP connect fallback
-TCP connect to 162.159.0.6:443 succeeded in 7 ms
-Testing 162.159.0.7 ...
-PING OUTPUT for 162.159.0.7:
-
-ICMP failed for 162.159.0.7, trying TCP connect fallback
-TCP connect to 162.159.0.7:443 succeeded in 6 ms
+TCP connect to 162.159.0.6:443 succeeded in 11 ms
 Testing 162.159.0.8 ...
 PING OUTPUT for 162.159.0.8:
 
 ICMP failed for 162.159.0.8, trying TCP connect fallback
-TCP connect to 162.159.0.8:443 succeeded in 6 ms
+TCP connect to 162.159.0.8:443 succeeded in 10 ms
 Testing 162.159.0.9 ...
 PING OUTPUT for 162.159.0.9:
 
 ICMP failed for 162.159.0.9, trying TCP connect fallback
-TCP connect to 162.159.0.9:443 succeeded in 7 ms
+TCP connect to 162.159.0.9:443 succeeded in 11 ms
 Testing 162.159.24.131 ...
 PING OUTPUT for 162.159.24.131:
 
 ICMP failed for 162.159.24.131, trying TCP connect fallback
-TCP connect to 162.159.24.131:443 succeeded in 6 ms
+TCP connect to 162.159.24.131:443 succeeded in 10 ms
 Testing 162.159.58.65 ...
 PING OUTPUT for 162.159.58.65:
 
 ICMP failed for 162.159.58.65, trying TCP connect fallback
-TCP connect to 162.159.58.65:443 succeeded in 7 ms
+TCP connect to 162.159.58.65:443 succeeded in 11 ms
 Testing 162.159.61.183 ...
 PING OUTPUT for 162.159.61.183:
 
 ICMP failed for 162.159.61.183, trying TCP connect fallback
-TCP connect to 162.159.61.183:443 succeeded in 7 ms
+TCP connect to 162.159.61.183:443 succeeded in 10 ms
 Testing 162.159.128.253 ...
 PING OUTPUT for 162.159.128.253:
 
 ICMP failed for 162.159.128.253, trying TCP connect fallback
-TCP connect to 162.159.128.253:443 succeeded in 6 ms
+TCP connect to 162.159.128.253:443 succeeded in 10 ms
 Testing 162.159.136.89 ...
 PING OUTPUT for 162.159.136.89:
 
 ICMP failed for 162.159.136.89, trying TCP connect fallback
-TCP connect to 162.159.136.89:443 succeeded in 7 ms
+TCP connect to 162.159.136.89:443 succeeded in 11 ms
 Testing 162.159.137.204 ...
 PING OUTPUT for 162.159.137.204:
 
 ICMP failed for 162.159.137.204, trying TCP connect fallback
-TCP connect to 162.159.137.204:443 succeeded in 7 ms
+TCP connect to 162.159.137.204:443 succeeded in 11 ms
 Testing 162.159.140.85 ...
 PING OUTPUT for 162.159.140.85:
 
 ICMP failed for 162.159.140.85, trying TCP connect fallback
-TCP connect to 162.159.140.85:443 succeeded in 7 ms
+TCP connect to 162.159.140.85:443 succeeded in 16 ms
 Testing 162.159.140.116 ...
 PING OUTPUT for 162.159.140.116:
 
 ICMP failed for 162.159.140.116, trying TCP connect fallback
-TCP connect to 162.159.140.116:443 succeeded in 7 ms
+TCP connect to 162.159.140.116:443 succeeded in 11 ms
 Testing 162.159.197.1 ...
 PING OUTPUT for 162.159.197.1:
 
 ICMP failed for 162.159.197.1, trying TCP connect fallback
-TCP connect to 162.159.197.1:443 succeeded in 6 ms
+TCP connect to 162.159.197.1:443 succeeded in 10 ms
 Testing 162.159.198.1 ...
 PING OUTPUT for 162.159.198.1:
 
 ICMP failed for 162.159.198.1, trying TCP connect fallback
-TCP connect to 162.159.198.1:443 succeeded in 7 ms
+TCP connect to 162.159.198.1:443 succeeded in 11 ms
 Testing 168.138.46.67 ...
 PING OUTPUT for 168.138.46.67:
 
 ICMP failed for 168.138.46.67, trying TCP connect fallback
-TCP connect to 168.138.46.67:443 succeeded in 118 ms
+TCP connect to 168.138.46.67:443 succeeded in 111 ms
 Testing 172.64.32.1 ...
 PING OUTPUT for 172.64.32.1:
 
 ICMP failed for 172.64.32.1, trying TCP connect fallback
-TCP connect to 172.64.32.1:443 succeeded in 6 ms
+TCP connect to 172.64.32.1:443 succeeded in 11 ms
+Testing 172.64.32.2 ...
+PING OUTPUT for 172.64.32.2:
+
+ICMP failed for 172.64.32.2, trying TCP connect fallback
+TCP connect to 172.64.32.2:443 succeeded in 10 ms
 Testing 172.64.32.5 ...
 PING OUTPUT for 172.64.32.5:
 
 ICMP failed for 172.64.32.5, trying TCP connect fallback
-TCP connect to 172.64.32.5:443 succeeded in 7 ms
-Testing 172.64.32.6 ...
-PING OUTPUT for 172.64.32.6:
+TCP connect to 172.64.32.5:443 succeeded in 11 ms
+Testing 172.64.32.8 ...
+PING OUTPUT for 172.64.32.8:
 
-ICMP failed for 172.64.32.6, trying TCP connect fallback
-TCP connect to 172.64.32.6:443 succeeded in 7 ms
-Testing 172.64.32.7 ...
-PING OUTPUT for 172.64.32.7:
-
-ICMP failed for 172.64.32.7, trying TCP connect fallback
-TCP connect to 172.64.32.7:443 succeeded in 6 ms
+ICMP failed for 172.64.32.8, trying TCP connect fallback
+TCP connect to 172.64.32.8:443 succeeded in 11 ms
 Testing 172.64.32.9 ...
 PING OUTPUT for 172.64.32.9:
 
 ICMP failed for 172.64.32.9, trying TCP connect fallback
-TCP connect to 172.64.32.9:443 succeeded in 7 ms
+TCP connect to 172.64.32.9:443 succeeded in 10 ms
 Testing 172.64.48.226 ...
 PING OUTPUT for 172.64.48.226:
 
 ICMP failed for 172.64.48.226, trying TCP connect fallback
-TCP connect to 172.64.48.226:443 succeeded in 6 ms
-Testing 172.64.52.27 ...
-PING OUTPUT for 172.64.52.27:
-
-ICMP failed for 172.64.52.27, trying TCP connect fallback
-TCP connect to 172.64.52.27:443 succeeded in 15 ms
+TCP connect to 172.64.48.226:443 succeeded in 10 ms
 Testing 172.64.52.127 ...
 PING OUTPUT for 172.64.52.127:
 
 ICMP failed for 172.64.52.127, trying TCP connect fallback
-TCP connect to 172.64.52.127:443 succeeded in 13 ms
+TCP connect to 172.64.52.127:443 succeeded in 10 ms
+Testing 172.64.53.63 ...
+PING OUTPUT for 172.64.53.63:
+
+ICMP failed for 172.64.53.63, trying TCP connect fallback
+TCP connect to 172.64.53.63:443 succeeded in 10 ms
 Testing 172.64.82.114 ...
 PING OUTPUT for 172.64.82.114:
 
 ICMP failed for 172.64.82.114, trying TCP connect fallback
-TCP connect to 172.64.82.114:443 succeeded in 7 ms
+TCP connect to 172.64.82.114:443 succeeded in 10 ms
 Testing 172.64.91.69 ...
 PING OUTPUT for 172.64.91.69:
 
 ICMP failed for 172.64.91.69, trying TCP connect fallback
-TCP connect to 172.64.91.69:443 succeeded in 7 ms
+TCP connect to 172.64.91.69:443 succeeded in 11 ms
 Testing 172.64.144.224 ...
 PING OUTPUT for 172.64.144.224:
 
 ICMP failed for 172.64.144.224, trying TCP connect fallback
-TCP connect to 172.64.144.224:443 succeeded in 6 ms
-Testing 172.64.154.217 ...
-PING OUTPUT for 172.64.154.217:
+TCP connect to 172.64.144.224:443 succeeded in 10 ms
+Testing 172.64.145.50 ...
+PING OUTPUT for 172.64.145.50:
 
-ICMP failed for 172.64.154.217, trying TCP connect fallback
-TCP connect to 172.64.154.217:443 succeeded in 7 ms
+ICMP failed for 172.64.145.50, trying TCP connect fallback
+TCP connect to 172.64.145.50:443 succeeded in 11 ms
+Testing 172.64.157.127 ...
+PING OUTPUT for 172.64.157.127:
+
+ICMP failed for 172.64.157.127, trying TCP connect fallback
+TCP connect to 172.64.157.127:443 succeeded in 11 ms
 Testing 172.64.229.7 ...
 PING OUTPUT for 172.64.229.7:
 
 ICMP failed for 172.64.229.7, trying TCP connect fallback
-TCP connect to 172.64.229.7:443 succeeded in 9 ms
-Testing 172.65.208.161 ...
-PING OUTPUT for 172.65.208.161:
-
-ICMP failed for 172.65.208.161, trying TCP connect fallback
-TCP connect to 172.65.208.161:443 succeeded in 7 ms
+TCP connect to 172.64.229.7:443 succeeded in 29 ms
 Testing 172.104.80.248 ...
 PING OUTPUT for 172.104.80.248:
 
 ICMP failed for 172.104.80.248, trying TCP connect fallback
-TCP connect to 172.104.80.248:443 succeeded in 110 ms
+TCP connect to 172.104.80.248:443 succeeded in 105 ms
 Testing 172.104.81.253 ...
 PING OUTPUT for 172.104.81.253:
 
 ICMP failed for 172.104.81.253, trying TCP connect fallback
-TCP connect to 172.104.81.253:443 succeeded in 110 ms
+TCP connect to 172.104.81.253:443 succeeded in 103 ms
 Testing 172.104.120.92 ...
 PING OUTPUT for 172.104.120.92:
 
 ICMP failed for 172.104.120.92, trying TCP connect fallback
-TCP connect to 172.104.120.92:443 succeeded in 111 ms
+TCP connect to 172.104.120.92:443 succeeded in 104 ms
 Testing 172.233.64.181 ...
 PING OUTPUT for 172.233.64.181:
 
 ICMP failed for 172.233.64.181, trying TCP connect fallback
-TCP connect to 172.233.64.181:443 succeeded in 119 ms
+TCP connect to 172.233.64.181:443 succeeded in 112 ms
 Testing 172.237.5.208 ...
 PING OUTPUT for 172.237.5.208:
 
@@ -1179,7 +1128,7 @@ Testing 173.245.49.194 ...
 PING OUTPUT for 173.245.49.194:
 
 ICMP failed for 173.245.49.194, trying TCP connect fallback
-TCP connect to 173.245.49.194:443 succeeded in 7 ms
+TCP connect to 173.245.49.194:443 succeeded in 10 ms
 Testing 174.137.61.42 ...
 PING OUTPUT for 174.137.61.42:
 
@@ -1190,7 +1139,7 @@ Testing 175.213.209.189 ...
 PING OUTPUT for 175.213.209.189:
 
 ICMP failed for 175.213.209.189, trying TCP connect fallback
-TCP connect to 175.213.209.189:443 succeeded in 401 ms
+TCP connect to 175.213.209.189:443 succeeded in 389 ms
 Testing 176.97.70.51 ...
 PING OUTPUT for 176.97.70.51:
 
@@ -1201,22 +1150,17 @@ Testing 198.41.194.162 ...
 PING OUTPUT for 198.41.194.162:
 
 ICMP failed for 198.41.194.162, trying TCP connect fallback
-TCP connect to 198.41.194.162:443 succeeded in 7 ms
+TCP connect to 198.41.194.162:443 succeeded in 11 ms
 Testing 198.41.208.15 ...
 PING OUTPUT for 198.41.208.15:
 
 ICMP failed for 198.41.208.15, trying TCP connect fallback
-TCP connect to 198.41.208.15:443 succeeded in 7 ms
+TCP connect to 198.41.208.15:443 succeeded in 11 ms
 Testing 198.41.208.224 ...
 PING OUTPUT for 198.41.208.224:
 
 ICMP failed for 198.41.208.224, trying TCP connect fallback
-TCP connect to 198.41.208.224:443 succeeded in 6 ms
-Testing 198.41.209.32 ...
-PING OUTPUT for 198.41.209.32:
-
-ICMP failed for 198.41.209.32, trying TCP connect fallback
-TCP connect to 198.41.209.32:443 succeeded in 6 ms
+TCP connect to 198.41.208.224:443 succeeded in 11 ms
 Testing 198.46.218.63 ...
 PING OUTPUT for 198.46.218.63:
 
@@ -1238,63 +1182,79 @@ Testing 203.69.11.79 ...
 PING OUTPUT for 203.69.11.79:
 
 ICMP failed for 203.69.11.79, trying TCP connect fallback
-TCP connect to 203.69.11.79:443 succeeded in 147 ms
+TCP connect to 203.69.11.79:443 succeeded in 137 ms
 Testing 203.69.11.80 ...
 PING OUTPUT for 203.69.11.80:
 
 ICMP failed for 203.69.11.80, trying TCP connect fallback
-TCP connect to 203.69.11.80:443 succeeded in 144 ms
+TCP connect to 203.69.11.80:443 succeeded in 137 ms
 Testing 203.69.11.81 ...
 PING OUTPUT for 203.69.11.81:
 
 ICMP failed for 203.69.11.81, trying TCP connect fallback
-TCP connect to 203.69.11.81:443 succeeded in 144 ms
+TCP connect to 203.69.11.81:443 succeeded in 137 ms
+Testing 206.251.53.91 ...
+PING OUTPUT for 206.251.53.91:
+
+ICMP failed for 206.251.53.91, trying TCP connect fallback
+TCP 206.251.53.91:443 failed or timed out
+All probes failed for 206.251.53.91, marking as 9999
 Testing 207.148.108.85 ...
 PING OUTPUT for 207.148.108.85:
 
 ICMP failed for 207.148.108.85, trying TCP connect fallback
-TCP connect to 207.148.108.85:443 succeeded in 111 ms
+TCP connect to 207.148.108.85:443 succeeded in 104 ms
 Testing 209.206.51.198 ...
 PING OUTPUT for 209.206.51.198:
 
 ICMP failed for 209.206.51.198, trying TCP connect fallback
-TCP connect to 209.206.51.198:443 succeeded in 7 ms
+TCP connect to 209.206.51.198:443 succeeded in 10 ms
 Testing 209.237.135.93 ...
 PING OUTPUT for 209.237.135.93:
 
 ICMP failed for 209.237.135.93, trying TCP connect fallback
-TCP connect to 209.237.135.93:443 succeeded in 62 ms
+TCP connect to 209.237.135.93:443 succeeded in 67 ms
 Testing 211.49.57.134 ...
 PING OUTPUT for 211.49.57.134:
 
 ICMP failed for 211.49.57.134, trying TCP connect fallback
-TCP connect to 211.49.57.134:443 succeeded in 134 ms
+TCP connect to 211.49.57.134:443 succeeded in 128 ms
 Testing 211.72.147.91 ...
 PING OUTPUT for 211.72.147.91:
 
 ICMP failed for 211.72.147.91, trying TCP connect fallback
-TCP connect to 211.72.147.91:443 succeeded in 144 ms
+TCP connect to 211.72.147.91:443 succeeded in 138 ms
 Testing 211.216.185.56 ...
 PING OUTPUT for 211.216.185.56:
 
 ICMP failed for 211.216.185.56, trying TCP connect fallback
-TCP connect to 211.216.185.56:443 succeeded in 408 ms
+TCP connect to 211.216.185.56:443 succeeded in 393 ms
+Testing 212.135.211.79 ...
+PING OUTPUT for 212.135.211.79:
+
+ICMP failed for 212.135.211.79, trying TCP connect fallback
+TCP connect to 212.135.211.79:443 succeeded in 103 ms
 Testing 213.35.100.31 ...
 PING OUTPUT for 213.35.100.31:
 
 ICMP failed for 213.35.100.31, trying TCP connect fallback
-TCP connect to 213.35.100.31:443 succeeded in 173 ms
+TCP connect to 213.35.100.31:443 succeeded in 168 ms
 Testing 213.35.110.208 ...
 PING OUTPUT for 213.35.110.208:
 
 ICMP failed for 213.35.110.208, trying TCP connect fallback
 TCP 213.35.110.208:443 failed or timed out
 All probes failed for 213.35.110.208, marking as 9999
+Testing 216.23.123.92 ...
+PING OUTPUT for 216.23.123.92:
+
+ICMP failed for 216.23.123.92, trying TCP connect fallback
+TCP connect to 216.23.123.92:443 succeeded in 104 ms
 Testing 217.142.227.105 ...
 PING OUTPUT for 217.142.227.105:
 
 ICMP failed for 217.142.227.105, trying TCP connect fallback
-TCP connect to 217.142.227.105:443 succeeded in 118 ms
+TCP connect to 217.142.227.105:443 succeeded in 111 ms
 Testing 220.77.188.107 ...
 PING OUTPUT for 220.77.188.107:
 
