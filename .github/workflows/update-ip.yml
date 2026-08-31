@@ -74,7 +74,7 @@ jobs:
             #   -W 3  : 每个包等待响应的最大秒数
             #   -q    : 安静模式，只输出统计信息
             # awk -F'/' 'END{print $2}' : 从 "rtt min/avg/max/mdev" 提取 avg
-            avg=$(timeout 30s ping -4 -c 10 -W 3 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}' || true)
+            avg=$(timeout 2s ping -4 -c 1 -W 1 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}' || true)
 
             # 如果 avg 为空（例如无 rtt 行），将其设为大值 999999
             if [ -z "$avg" ]; then
