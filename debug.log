@@ -1,0 +1,47 @@
+=== Debug: ping 8.8.8.8 ===
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+
+--- 8.8.8.8 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2079ms
+
+=== End debug ===
+Testing 108.162.192.0 ...
+PING OUTPUT for 108.162.192.0:
+PING 108.162.192.0 (108.162.192.0) 56(84) bytes of data.
+
+--- 108.162.192.0 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2027ms
+ICMP failed for 108.162.192.0, trying TCP connect fallback
+TCP connect to 108.162.192.0:443 succeeded in 12 ms
+Testing 104.24.0.0 ...
+PING OUTPUT for 104.24.0.0:
+PING 104.24.0.0 (104.24.0.0) 56(84) bytes of data.
+
+--- 104.24.0.0 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2072ms
+ICMP failed for 104.24.0.0, trying TCP connect fallback
+TCP connect to 104.24.0.0:443 succeeded in 19 ms
+Testing 104.16.0.0 ...
+PING OUTPUT for 104.16.0.0:
+PING 104.16.0.0 (104.16.0.0) 56(84) bytes of data.
+
+--- 104.16.0.0 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2065ms
+ICMP failed for 104.16.0.0, trying TCP connect fallback
+TCP connect to 104.16.0.0:443 succeeded in 10 ms
+Testing 188.114.96.0 ...
+PING OUTPUT for 188.114.96.0:
+PING 188.114.96.0 (188.114.96.0) 56(84) bytes of data.
+
+--- 188.114.96.0 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2074ms
+ICMP failed for 188.114.96.0, trying TCP connect fallback
+TCP connect to 188.114.96.0:443 succeeded in 25 ms
+Testing 103.31.4.0 ...
+PING OUTPUT for 103.31.4.0:
+PING 103.31.4.0 (103.31.4.0) 56(84) bytes of data.
+
+--- 103.31.4.0 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2056ms
+ICMP failed for 103.31.4.0, trying TCP connect fallback
+TCP connect to 103.31.4.0:443 succeeded in 21 ms
