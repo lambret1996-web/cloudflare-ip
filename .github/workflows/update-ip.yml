@@ -124,7 +124,7 @@ jobs:
           # 5) 排序并输出延迟最低的 10 个 IP 到 IPOUT
           # -------------------------
           sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
-          sort -k2 -n "$IPS" | head -n | awk '{print $1}' > "$IPOUT"
+          
           echo "Wrote results to $IPTEST and top-10 to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
