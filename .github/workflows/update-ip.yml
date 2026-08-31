@@ -17,7 +17,7 @@ jobs:
       - name: Ensure ping available
         run: |
           sudo apt-get update
-          sudo apt-get install -y iputils-ping
+          sudo apt-get install -y iputils-ping coreutils
 
       - name: Run IP latency checks
         run: |
@@ -32,7 +32,7 @@ jobs:
           # fetch list
           curl -fsS "$URL" -o "$RAWLIST"
 
-          # extract IPv4 addresses and dedupe
+          # extract IPv4 addresses, dedupe, write to file (FIXED: pipe + redirect)
           grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
           # prepare output file
@@ -55,6 +55,7 @@ jobs:
           sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
 
           echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+
       - name: Commit results back to repo (if changed)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
