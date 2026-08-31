@@ -22,15 +22,15 @@ jobs:
           persist-credentials: true
 
       - name: Ensure dependencies
-        # 安装必要工具：curl（下载）、iputils-ping（ping）、netcat-openbsd（可选的 TCP 探测）、bc/ipcalc（可选）
+        # 安装必要工具：curl、iputils-ping、netcat-openbsd、bc、ipcalc、coreutils
         run: |
           sudo apt-get update
           sudo apt-get install -y curl iputils-ping netcat-openbsd bc ipcalc coreutils
 
-      - name: Run IP latency checks
-        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 做 ping（若 ICMP 不通则尝试 TCP 回退），生成 IPtest.txt 和 IP.txt
+      - name: Run IP latency checks (ICMP then TCP fallback)
+        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 优先 ICMP，失败则 TCP 回退，生成 IPtest.txt 和 IP.txt，并写 debug.log
         run: |
-          # 开启严格模式：打印命令、失败则退出（注意在可能失败的命令后使用 "|| true" 以避免中断）
+          # 开启严格模式：打印命令、失败则退出（注意在预期失败的命令后使用 "|| true"）
           set -xeo pipefail
 
           # 目标 raw 文件地址（包含 IPv4 列表）
@@ -39,7 +39,7 @@ jobs:
           # 本地临时与输出文件名
           RAWLIST="iplist.raw"    # 下载的原始文件
           IPS="ips.txt"           # 解析并去重后的 IP 列表
-          IPTEST="IPtest.txt"     # 每行: "IP 平均延迟"
+          IPTEST="IPtest.txt"     # 每行: "IP 平均延迟(ms)"
           IPOUT="IP.txt"          # 延迟最低的 10 个 IP（每行一个 IP）
           DEBUG="debug.log"       # 调试日志，便于排查 ICMP/TCP 问题
 
@@ -55,8 +55,6 @@ jobs:
 
           # -------------------------
           # 2) 提取合法 IPv4 并去重
-          #    使用严格正则确保每段在 0-255 范围，避免非 IP 字符干扰
-          #    grep -Po 使用 Perl 风格正则（在 ubuntu runner 上可用）
           # -------------------------
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
@@ -64,7 +62,7 @@ jobs:
           # 调试：确认 runner 是否能 ping 出网（例如 8.8.8.8）
           # -------------------------
           echo "=== Debug: ping 8.8.8.8 ===" | tee -a "$DEBUG"
-          timeout 1s ping -4 -c 1 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
+          timeout 10s ping -4 -c 3 -W 2 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
           echo "=== End debug ===" | tee -a "$DEBUG"
 
           # -------------------------
@@ -74,12 +72,8 @@ jobs:
 
           # -------------------------
           # 4) 遍历每个 IP，执行 ping（优先 ICMP），若 ICMP 无响应则尝试 TCP 回退（443 -> 80）
-          #    - 使用 timeout 防止单 IP 阻塞
-          #    - 在命令替换后使用 "|| true" 避免 ping 返回非 0 导致 set -e 中断整个脚本
-          #    - 若所有探测都失败，使用一个很大的值 999999 作为惩罚，便于排序
           # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
-            # 跳过空行
             [ -z "$ip" ] && continue
 
             echo "Testing $ip ..." | tee -a "$DEBUG"
@@ -89,8 +83,7 @@ jobs:
             echo "PING OUTPUT for $ip:" >> "$DEBUG"
             echo "$ping_out" >> "$DEBUG"
 
-            # 从 ping 统计行提取 avg（ms）
-            # 兼容不同 ping 版本的输出格式
+            # 从 ping 统计行提取 avg（ms），兼容不同 ping 版本输出
             avg_ms=$(echo "$ping_out" | awk -F'/' '/rtt|round-trip/ {print $5; exit}')
             if [ -z "$avg_ms" ]; then
               avg_ms=$(echo "$ping_out" | awk -F'/' 'END{print $2}')
@@ -128,7 +121,6 @@ jobs:
 
           # -------------------------
           # 5) 排序并输出延迟最低的 10 个 IP 到 IPOUT
-          #    - sort -k2 -n : 按第 2 列（延迟）数值升序排序
           # -------------------------
           sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
 
@@ -136,24 +128,68 @@ jobs:
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
 
-      - name: Commit results back to repo (if changed)
-        # 使用 GITHUB_TOKEN 自动提交并推送结果（仅在文件有变化时）
+      - name: Commit results back to repo (debug + safe commit)
+        # 使用 GITHUB_TOKEN 自动提交并推送结果（带调试输出并强制 add）
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -xeo pipefail
-          # 配置提交者信息（Actions 推荐设置）
+
+          echo "工作目录列举："
+          pwd
+          ls -lah .
+
+          echo "查看结果文件（若存在）..."
+          echo "---- IPtest.txt ----"
+          if [ -f IPtest.txt ]; then cat IPtest.txt; else echo "IPtest.txt 不存在"; fi
+          echo "---- IP.txt ----"
+          if [ -f IP.txt ]; then cat IP.txt; else echo "IP.txt 不存在"; fi
+          echo "---- debug.log ----"
+          if [ -f debug.log ]; then sed -n '1,300p' debug.log || true; else echo "debug.log 不存在"; fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 添加结果文件到暂存区（若文件不存在则不会报错）
-          git add IPtest.txt IP.txt debug.log || true
+          # 显示 git 状态与差异，便于排查为什么没有被提交
+          echo "git status (before add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git status || true
+          echo "git diff (unstaged):"
+          git --no-pager diff --no-color || true
 
-          # 若无更改则跳过提交
+          # 强制添加文件以绕过 .gitignore（若不希望强制添加可移除 -f）
+          git add -f IPtest.txt IP.txt debug.log || true
+
+          echo "git status (after add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git --no-pager diff --staged --no-color || true
+
+          # 计算目标分支（优先使用 GITHUB_REF 的 head 部分，若异常则回退为 main）
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          if [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ]; then
+            BRANCH="main"
+          fi
+          echo "Target branch for push: $BRANCH"
+
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Update IP latency results"
-            # 推送到触发 workflow 的分支
-            git push origin "HEAD:${{ github.ref_name }}"
+            # 推送到目标分支（捕获并打印错误）
+            if ! git push origin "HEAD:${BRANCH}"; then
+              echo "git push 失败，打印远端和权限信息"
+              git remote -v || true
+              # 打印最后的错误代码并退出以让 Actions 标记失败
+              exit 1
+            fi
           fi
+
+      - name: Upload results as artifact
+        # 确保即使推送失败也能在 Actions UI 下载到结果
+        uses: actions/upload-artifact@v4
+        with:
+          name: ip-latency-results
+          path: |
+            IPtest.txt
+            IP.txt
+            debug.log
