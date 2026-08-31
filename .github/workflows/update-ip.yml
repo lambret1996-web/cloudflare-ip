@@ -2,7 +2,7 @@ name: IP Latency Check
 
 on:
   schedule:
-    - cron: "0 */6 * * *"  # 每 6 小时一次
+    - cron: "0 */6 * * *" # every 6 hours
   workflow_dispatch:
 
 jobs:
@@ -14,66 +14,52 @@ jobs:
         with:
           persist-credentials: true
 
-      - name: Ensure dependencies
+      - name: Ensure ping available
         run: |
           sudo apt-get update
-          sudo apt-get install -y iputils-ping timeout
+          sudo apt-get install -y iputils-ping
 
-      - name: Add script
+      - name: Run IP latency checks
         run: |
-          mkdir -p .github/scripts
-          cat > .github/scripts/ip_test.sh <<'EOF'
-#!/usr/bin/env bash
-set -eu
+          set -xeo pipefail
 
-URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
-WORKDIR="${GITHUB_WORKSPACE:-.}"
-cd "$WORKDIR"
+          URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
+          RAWLIST="iplist.raw"
+          IPS="ips.txt"
+          IPTEST="IPtest.txt"
+          IPOUT="IP.txt"
 
-# Files
-RAWLIST="iplist.raw"
-IPS="ips.txt"
-IPTEST="IPtest.txt"
-IPOUT="IP.txt"
+          # fetch list
+          curl -fsS "$URL" -o "$RAWLIST"
 
-# Fetch list
-curl -fsS "$URL" -o "$RAWLIST" || { echo "Failed to fetch $URL"; exit 1; }
+          # extract IPv4 addresses and dedupe
+          grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
-# Extract IPv4 addresses (simple robust regex) and dedupe
-grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
+          # prepare output file
+          : > "$IPTEST"
 
-# Prepare output
-: > "$IPTEST"
+          # for each IP do 10 pings and record average (ms)
+          while IFS= read -r ip; do
+            [ -z "$ip" ] && continue
+            echo "Testing $ip ..."
+            # timeout per-IP to avoid hangs (30s). Force IPv4.
+            avg=$(timeout 30s ping -4 -c 10 -W 3 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}')
+            if [ -z "$avg" ]; then
+              # unreachable or timeout -> very large value so it sorts to bottom
+              avg=999999
+            fi
+            printf "%s %s\n" "$ip" "$avg" >> "$IPTEST"
+          done < "$IPS"
 
-# For each IP do 10 pings and record average (ms)
-while IFS= read -r ip; do
-  [ -z "$ip" ] && continue
-  echo "Testing $ip ..."
-  # Run ping with timeout to avoid hang. Use -4 to force IPv4.
-  # timeout ensures the whole ping call does not exceed ~30s.
-  avg=$(timeout 30 ping -4 -c 10 -W 3 -q "$ip" 2>/dev/null | awk -F'/' 'END{print $2}')
-  if [ -z "$avg" ]; then
-    # unreachable or timeout -> treat as very large latency
-    avg=999999
-  fi
-  # Save IP and avg (as number)
-  printf "%s %s\n" "$ip" "$avg" >> "$IPTEST"
-done < "$IPS"
+          # sort numeric by latency and take lowest 10 IPs
+          sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
 
-# Sort by latency numeric and pick top 10 lowest
-sort -k2 -n "$IPTEST" | head -n 10 | awk '{print $1}' > "$IPOUT"
-
-echo "Done. Results written to $IPTEST and $IPOUT"
-EOF
-          chmod +x .github/scripts/ip_test.sh
-
-      - name: Run latency tests
-        run: .github/scripts/ip_test.sh
-
-      - name: Commit results back to repo
+          echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+      - name: Commit results back to repo (if changed)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -xeo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add IPtest.txt IP.txt || true
