@@ -22,7 +22,7 @@ jobs:
       - name: TCP测速，每个网段随机取1个IP，每个IP测试3次
         run: |
           set +e
-          curl -s https://www.cloudflare.com/ips-v4> iprange.txt
+          curl -s https://www.cloudflare.com/ips-v4 > iprange.txt
 
           # 判断网段文件是否下载成功
           if [ ! -s iprange.txt ];then
@@ -43,8 +43,7 @@ jobs:
             success_cnt=0
             for ((i=0;i<3;i++)); do
               start=$(date +%s.%N)
-              # curl探测，超时2秒
-              ret=$(curl -o /dev/null -s -w "%{http_code}\n" --connect-timeout 2 "https://${rand_ip}/favicon.ico?_t=$RANDOM")
+              curl -o /dev/null -s -w "%{http_code}" --connect-timeout 2 "https://${rand_ip}/favicon.ico?_t=$RANDOM"
               end=$(date +%s.%N)
               if [ $? -eq 0 ];then
                 delay=$(echo "scale=4; $end - $start" | bc -l)
