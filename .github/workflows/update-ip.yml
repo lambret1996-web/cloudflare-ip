@@ -111,13 +111,13 @@ jobs:
 
               if [ "$tcp_success" -eq 0 ]; then
                 # 全部探测失败 -> 标记为不可达（大值）
-                avg_ms="999999"
-                echo "All probes failed for $ip, marking as 999999" | tee -a "$DEBUG"
+                avg_ms="9999ms"
+                echo "All probes failed for $ip, marking as 9999ms" | tee -a "$DEBUG"
               fi
             fi
 
             # 写入结果文件，格式：IP 平均延迟(ms)
-            printf "%s %s\n" "$ip" "$avg_ms" >> "$IPTEST"
+            printf "%s %s ms\n" "$ip" "$avg_ms" >> "$IPTEST"
           done < "$IPS"
 
           # -------------------------
