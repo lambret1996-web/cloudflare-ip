@@ -94,7 +94,7 @@ jobs:
             if [ -z "$avg_ms" ]; then
               echo "ICMP failed for $ip, trying TCP connect fallback" | tee -a "$DEBUG"
               tcp_success=0
-              for port in 443 80; do
+              for port in 443; do
                 start=$(now_ms)
                 # 使用 bash 的 /dev/tcp 做快速连接测试（配合 timeout）
                 if timeout 5s bash -c "cat < /dev/null > /dev/tcp/${ip}/${port}" >/dev/null 2>&1; then
