@@ -35,7 +35,7 @@ jobs:
 
           # 目标 raw 文件地址（包含 IPv4 列表）
         
-            URL="https://raw.githubusercontent.com/lambret1996-web/cloudflare-ip/refs/heads/main/ip.txt"
+          URL="https://raw.githubusercontent.com/lambret1996-web/cloudflare-ip/refs/heads/main/ip.txt"
 
           # 本地临时与输出文件名
           RAWLIST="iplist.raw"    # 下载的原始文件
