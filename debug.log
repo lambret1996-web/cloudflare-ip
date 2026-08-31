@@ -2,7 +2,7 @@
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 
 --- 8.8.8.8 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2049ms
+1 packets transmitted, 0 received, 100% packet loss, time 0ms
 
 === End debug ===
 Testing 2.27.109.144 ...
@@ -10,90 +10,90 @@ PING OUTPUT for 2.27.109.144:
 PING 2.27.109.144 (2.27.109.144) 56(84) bytes of data.
 
 --- 2.27.109.144 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2025ms
+3 packets transmitted, 0 received, 100% packet loss, time 2033ms
 ICMP failed for 2.27.109.144, trying TCP connect fallback
 TCP 2.27.109.144:443 failed or timed out
 TCP 2.27.109.144:80 failed or timed out
-All probes failed for 2.27.109.144, marking as 9999ms
+All probes failed for 2.27.109.144, marking as 9999
 Testing 3.164.110.38 ...
 PING OUTPUT for 3.164.110.38:
 PING 3.164.110.38 (3.164.110.38) 56(84) bytes of data.
 
 --- 3.164.110.38 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2055ms
+3 packets transmitted, 0 received, 100% packet loss, time 2060ms
 ICMP failed for 3.164.110.38, trying TCP connect fallback
-TCP connect to 3.164.110.38:443 succeeded in 111 ms
+TCP connect to 3.164.110.38:443 succeeded in 211 ms
 Testing 3.171.203.101 ...
 PING OUTPUT for 3.171.203.101:
 PING 3.171.203.101 (3.171.203.101) 56(84) bytes of data.
 
 --- 3.171.203.101 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2033ms
+3 packets transmitted, 0 received, 100% packet loss, time 2064ms
 ICMP failed for 3.171.203.101, trying TCP connect fallback
-TCP connect to 3.171.203.101:443 succeeded in 173 ms
+TCP connect to 3.171.203.101:443 succeeded in 227 ms
 Testing 3.173.249.23 ...
 PING OUTPUT for 3.173.249.23:
 PING 3.173.249.23 (3.173.249.23) 56(84) bytes of data.
 
 --- 3.173.249.23 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2036ms
+3 packets transmitted, 0 received, 100% packet loss, time 2048ms
 ICMP failed for 3.173.249.23, trying TCP connect fallback
-TCP connect to 3.173.249.23:443 succeeded in 111 ms
+TCP connect to 3.173.249.23:443 succeeded in 166 ms
 Testing 8.218.36.133 ...
 PING OUTPUT for 8.218.36.133:
 PING 8.218.36.133 (8.218.36.133) 56(84) bytes of data.
 
 --- 8.218.36.133 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+3 packets transmitted, 0 received, 100% packet loss, time 2046ms
 ICMP failed for 8.218.36.133, trying TCP connect fallback
 TCP 8.218.36.133:443 failed or timed out
 TCP 8.218.36.133:80 failed or timed out
-All probes failed for 8.218.36.133, marking as 9999ms
+All probes failed for 8.218.36.133, marking as 9999
 Testing 13.225.164.110 ...
 PING OUTPUT for 13.225.164.110:
 PING 13.225.164.110 (13.225.164.110) 56(84) bytes of data.
 
 --- 13.225.164.110 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2030ms
+3 packets transmitted, 0 received, 100% packet loss, time 2052ms
 ICMP failed for 13.225.164.110, trying TCP connect fallback
-TCP connect to 13.225.164.110:443 succeeded in 111 ms
+TCP connect to 13.225.164.110:443 succeeded in 163 ms
 Testing 13.225.166.46 ...
 PING OUTPUT for 13.225.166.46:
 PING 13.225.166.46 (13.225.166.46) 56(84) bytes of data.
 
 --- 13.225.166.46 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+3 packets transmitted, 0 received, 100% packet loss, time 2049ms
 ICMP failed for 13.225.166.46, trying TCP connect fallback
-TCP connect to 13.225.166.46:443 succeeded in 111 ms
+TCP connect to 13.225.166.46:443 succeeded in 171 ms
 Testing 13.225.166.89 ...
 PING OUTPUT for 13.225.166.89:
 PING 13.225.166.89 (13.225.166.89) 56(84) bytes of data.
 
 --- 13.225.166.89 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+3 packets transmitted, 0 received, 100% packet loss, time 2041ms
 ICMP failed for 13.225.166.89, trying TCP connect fallback
-TCP connect to 13.225.166.89:443 succeeded in 110 ms
+TCP connect to 13.225.166.89:443 succeeded in 206 ms
 Testing 13.225.181.109 ...
 PING OUTPUT for 13.225.181.109:
 PING 13.225.181.109 (13.225.181.109) 56(84) bytes of data.
 
 --- 13.225.181.109 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+3 packets transmitted, 0 received, 100% packet loss, time 2069ms
 ICMP failed for 13.225.181.109, trying TCP connect fallback
-TCP connect to 13.225.181.109:443 succeeded in 112 ms
+TCP connect to 13.225.181.109:443 succeeded in 210 ms
 Testing 13.225.181.151 ...
 PING OUTPUT for 13.225.181.151:
 PING 13.225.181.151 (13.225.181.151) 56(84) bytes of data.
 
 --- 13.225.181.151 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2034ms
+3 packets transmitted, 0 received, 100% packet loss, time 2065ms
 ICMP failed for 13.225.181.151, trying TCP connect fallback
-TCP connect to 13.225.181.151:443 succeeded in 112 ms
+TCP connect to 13.225.181.151:443 succeeded in 247 ms
 Testing 18.65.217.9 ...
 PING OUTPUT for 18.65.217.9:
 PING 18.65.217.9 (18.65.217.9) 56(84) bytes of data.
 
 --- 18.65.217.9 ping statistics ---
-3 packets transmitted, 0 received, 100% packet loss, time 2033ms
+3 packets transmitted, 0 received, 100% packet loss, time 2028ms
 ICMP failed for 18.65.217.9, trying TCP connect fallback
-TCP connect to 18.65.217.9:443 succeeded in 110 ms
+TCP connect to 18.65.217.9:443 succeeded in 170 ms
