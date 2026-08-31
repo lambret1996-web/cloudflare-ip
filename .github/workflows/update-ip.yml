@@ -63,7 +63,7 @@ jobs:
           # 调试：确认 runner 是否能 ping 出网（例如 8.8.8.8）
           # -------------------------
           echo "=== Debug: ping 8.8.8.8 ===" | tee -a "$DEBUG"
-          timeout 10s ping -4 -c 3 -W 2 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
+          timeout 2s ping -4 -c 1 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
           echo "=== End debug ===" | tee -a "$DEBUG"
 
           # -------------------------
