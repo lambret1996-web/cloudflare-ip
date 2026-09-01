@@ -1,1 +1,172 @@
+# IP 延迟检测（每 6 小时运行，可手动触发）
+name: IP Latency Check
 
+# 允许 workflow 使用 GITHUB_TOKEN 写入仓库内容
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # 每 6 小时运行一次
+  workflow_dispatch:     # 支持在 Actions 页面手动触发
+
+jobs:
+  ip-test:
+    runs-on: ubuntu-latest
+    env:
+      # SNI/Host 配置
+      HOST: vpn-hk.pages.dev
+      # 请求路径（注意：不要用 PATH 以免覆盖系统 PATH；如需强制使用 PATH，请告知）
+      REQUEST_PATH: /Proxyip.us.CMLiussss.net
+      # 测试次数
+      ATTEMPTS: "3"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Ensure dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl bc coreutils
+
+      - name: Run IP latency checks (HTTP tests with Host/SNI)
+        run: |
+          set -xeo pipefail
+
+          URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
+
+          RAWLIST="iplist.raw"
+          IPS="ips.txt"
+          IPTEST="IPtest.txt"
+          IPOUT="IP.txt"
+          DEBUG="debug.log"
+
+          : > "$IPTEST"
+          : > "$IPOUT" || true
+          : > "$DEBUG"
+
+          curl -fsS "$URL" -o "$RAWLIST"
+
+          grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
+
+          echo "HOST=${HOST}, REQUEST_PATH=${REQUEST_PATH}, ATTEMPTS=${ATTEMPTS}" | tee -a "$DEBUG"
+
+          echo "=== Debug: basic connectivity check (curl to 1.1.1.1) ===" | tee -a "$DEBUG"
+          timeout 5s curl -sS --connect-timeout 5 --max-time 10 http://1.1.1.1/ -o /dev/null 2>&1 | tee -a "$DEBUG" || true
+          echo "=== End debug ===" | tee -a "$DEBUG"
+
+          now_ms() { date +%s%3N; }
+
+          attempts=${ATTEMPTS:-3}
+
+          while IFS= read -r ip || [ -n "$ip" ]; do
+            [ -z "$ip" ] && continue
+            echo "Testing $ip (Host=${HOST}, Path=${REQUEST_PATH}) ..." | tee -a "$DEBUG"
+
+            total_ms=0
+            success_count=0
+
+            for i in $(seq 1 $attempts); do
+              echo "Attempt $i for $ip" | tee -a "$DEBUG"
+
+              # 1) HTTP (port 80) 使用 Host 头
+              time_sec=$(curl -sS -o /dev/null -w "%{time_total}" --connect-timeout 5 --max-time 10 "http://${ip}${REQUEST_PATH}" -H "Host: ${HOST}" 2>/dev/null || true)
+              if [ -n "$time_sec" ] && [ "$time_sec" != "0" ]; then
+                ms=$(awk "BEGIN{printf \"%d\", $time_sec*1000}")
+                total_ms=$((total_ms + ms))
+                success_count=$((success_count + 1))
+                echo "HTTP http://${ip}${REQUEST_PATH} (Host: ${HOST}) succeeded: ${ms} ms" | tee -a "$DEBUG"
+                continue
+              fi
+
+              # 2) HTTPS (port 443) 使用 --resolve 来设置 SNI（curl 会使用 HOST 的 SNI，而连接到 ip）
+              # --resolve 格式: <host:port:address>
+              time_sec=$(curl -sS -k --resolve "${HOST}:443:${ip}" -o /dev/null -w "%{time_total}" --connect-timeout 5 --max-time 10 "https://${HOST}${REQUEST_PATH}" 2>/dev/null || true)
+              if [ -n "$time_sec" ] && [ "$time_sec" != "0" ]; then
+                ms=$(awk "BEGIN{printf \"%d\", $time_sec*1000}")
+                total_ms=$((total_ms + ms))
+                success_count=$((success_count + 1))
+                echo "HTTPS https://${HOST}${REQUEST_PATH} (resolve ${HOST}:443:${ip}) succeeded: ${ms} ms" | tee -a "$DEBUG"
+                continue
+              fi
+
+              echo "Both http and https failed for attempt $i on $ip" | tee -a "$DEBUG"
+            done
+
+            if [ "$success_count" -gt 0 ]; then
+              avg_ms=$(( total_ms / success_count ))
+            else
+              avg_ms=9999
+              echo "All HTTP/S probes failed for $ip, marking as 9999" | tee -a "$DEBUG"
+            fi
+
+            printf "%s %sms\n" "$ip" "$avg_ms" >> "$IPTEST"
+          done < "$IPS"
+
+          sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
+
+          echo "Wrote results to $IPTEST and top results to $IPOUT"
+          echo "Saved debug log to $DEBUG"
+          ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
+
+      - name: Commit results back to repo (debug + safe commit)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -xeo pipefail
+
+          echo "工作目录列举："
+          pwd
+          ls -lah .
+
+          echo "查看结果文件（若存在）..."
+          echo "---- IPtest.txt ----"
+          if [ -f IPtest.txt ]; then cat IPtest.txt; else echo "IPtest.txt 不存在"; fi
+          echo "---- IP.txt ----"
+          if [ -f IP.txt ]; then cat IP.txt; else echo "IP.txt 不存在"; fi
+          echo "---- debug.log ----"
+          if [ -f debug.log ]; then sed -n '1,300p' debug.log || true; else echo "debug.log 不存在"; fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          echo "git status (before add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git status || true
+          echo "git diff (unstaged):"
+          git --no-pager diff --no-color || true
+
+          git add -f IPtest.txt IP.txt debug.log || true
+
+          echo "git status (after add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git --no-pager diff --staged --no-color || true
+
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          if [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ]; then
+            BRANCH="main"
+          fi
+          echo "Target branch for push: $BRANCH"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update IP latency results (HTTP tests with SNI/Host)"
+            if ! git push origin "HEAD:${BRANCH}"; then
+              echo "git push 失败，打印远端和权限信息"
+              git remote -v || true
+              exit 1
+            fi
+          fi
+
+      - name: Upload results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ip-latency-results
+          path: |
+            IPtest.txt
+            IP.txt
+            debug.log
