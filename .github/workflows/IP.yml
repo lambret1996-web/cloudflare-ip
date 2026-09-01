@@ -15,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # SNI/Host 配置
-      HOST: vpn-hk.pages.dev
+      HOST: luomingliang.pages.dev
       # 请求路径（注意：不要用 PATH 以免覆盖系统 PATH；如需强制使用 PATH，请告知）
-      REQUEST_PATH: /Proxyip.us.CMLiussss.net
+      REQUEST_PATH: /
       # 测试次数
       ATTEMPTS: "3"
 
