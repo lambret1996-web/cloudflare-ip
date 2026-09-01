@@ -22,13 +22,13 @@ jobs:
           persist-credentials: true
 
       - name: Ensure dependencies
-        # 安装必要工具：curl、netcat-openbsd、bc、ipcalc、coreutils、openssl
+        # 安装必要工具：curl、coreutils、openssl
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl netcat-openbsd bc ipcalc coreutils openssl
+          sudo apt-get install -y curl coreutils openssl
 
-      - name: Run IP latency checks (TCP → HTTP/TLS-WS)
-        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 执行 TCP 和 HTTP/TLS-WS 测试，生成 IPtest.txt 和 IP.txt，并写 debug.log
+      - name: Run IP latency checks (HTTP/TLS-WS)
+        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 执行 HTTP/TLS-WS 测试，生成 IPtest.txt 和 IP.txt，并写 debug.log
         run: |
           # 开启严格模式：打印命令、失败则退出（注意在预期失败的命令后使用 "|| true"）
           set -xeo pipefail
@@ -41,8 +41,8 @@ jobs:
           IPS="ips.txt"           # 解析并去重后的 IP 列表
           IPTEST="IPtest.txt"     # 每行: "IP 平均延迟(ms)"
           IPOUT="IP.txt"          # 延迟最低的 15 个 IP（每行一个 IP）
-          DEBUG="debug.log"       # 调试日志，便于排查 TCP/HTTP 问题
-          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP tcp_ms http_ms）
+          DEBUG="debug.log"       # 调试日志，便于排查 HTTP 问题
+          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP http_ms）
 
           # 初始化输出文件（清空或创建）
           : > "$IPTEST"
@@ -147,30 +147,14 @@ jobs:
           }
 
           # -------------------------
-          # 4) 遍历每个 IP，执行 TCP/HTTP 两种测试，记录所有延迟
+          # 4) 遍历每个 IP，执行 HTTP 测试
           # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
 
             echo "Testing $ip ..." | tee -a "$DEBUG"
 
-            tcp_ms="9999"
             http_ms="9999"
-
-            # ===== TCP CONNECT =====
-            echo "  [TCP] Testing $ip ..." | tee -a "$DEBUG"
-            for port in 443 80; do
-              start=$(now_ms)
-              if timeout 1s bash -c "cat < /dev/null > /dev/tcp/${ip}/${port}" >/dev/null 2>&1; then
-                end=$(now_ms)
-                tcp_ms=$((end - start))
-                echo "TCP connect to ${ip}:${port} succeeded in ${tcp_ms} ms" | tee -a "$DEBUG"
-                break
-              else
-                echo "TCP ${ip}:${port} failed or timed out" | tee -a "$DEBUG"
-              fi
-            done
-            echo "TCP result: ${tcp_ms} ms" | tee -a "$DEBUG"
 
             # ===== HTTP/HTTPS REQUEST =====
             echo "  [HTTP] Testing $ip ..." | tee -a "$DEBUG"
@@ -195,32 +179,26 @@ jobs:
             echo "HTTP result: ${http_ms} ms" | tee -a "$DEBUG"
 
             # 保存中间结果
-            printf "%s %s %s\n" "$ip" "$tcp_ms" "$http_ms" >> "$RESULTS_TMP"
+            printf "%s %s\n" "$ip" "$http_ms" >> "$RESULTS_TMP"
           done < "$IPS"
 
           # -------------------------
-          # 5) 计算 TCP 和 HTTP 平均延迟并按从低到高排序
+          # 5) 按延迟从低到高排序
           # -------------------------
-          echo "=== Calculating average latency for each IP ===" | tee -a "$DEBUG"
+          echo "=== Sorting IPs by latency ===" | tee -a "$DEBUG"
           
           awk '{
             ip = $1
-            tcp = (($2 == "") ? 9999 : $2)
-            http = (($3 == "") ? 9999 : $3)
+            http = (($2 == "") ? 9999 : $2)
             
             # 转换为数字（使用一元加操作符强制数值转换）
-            tcp = tcp + 0
             http = http + 0
             
             # 如果转换后仍是非数字（NaN），设置为 9999
-            if (tcp != tcp) tcp = 9999
             if (http != http) http = 9999
             
-            # 计算平均延迟
-            avg = (tcp + http) / 2
-            
-            # 输出：IP 平均延迟 单个延迟值用于调试
-            printf "%s %.1f (TCP:%d HTTP:%d)\n", ip, avg, tcp, http
+            # 输出：IP 延迟 用于调试
+            printf "%s %dms\n", ip, http
           }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
 
           # -------------------------
@@ -232,7 +210,7 @@ jobs:
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
           
-          echo "=== Top 15 IPs by average latency ===" | tee -a "$DEBUG"
+          echo "=== Top 15 IPs by latency ===" | tee -a "$DEBUG"
           head -n 15 "$IPTEST" | tee -a "$DEBUG"
 
       - name: Commit results back to repo (debug + safe commit)
@@ -281,7 +259,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update IP latency results (average of TCP/HTTP)"
+            git commit -m "Update IP latency results (HTTP/TLS tests)"
             # 推送到目标分支（捕获并打印错误）
             if ! git push origin "HEAD:${BRANCH}"; then
               echo "git push 失败，打印远端和权限信息"
