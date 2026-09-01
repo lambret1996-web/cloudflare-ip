@@ -229,20 +229,25 @@ jobs:
           
           awk '{
             ip = $1
-            ping = $2
-            tcp = $3
-            http = $4
+            ping = (($2 == "") ? 9999 : $2)
+            tcp = (($3 == "") ? 9999 : $3)
+            http = (($4 == "") ? 9999 : $4)
             
-            # 将非数字转换为 9999
-            if (ping == "" || ping ~ /[^0-9]/) ping = 9999
-            if (tcp == "" || tcp ~ /[^0-9]/) tcp = 9999
-            if (http == "" || http ~ /[^0-9]/) http = 9999
+            # 转换为数字（使用一元加操作符强制数值转换）
+            ping = ping + 0
+            tcp = tcp + 0
+            http = http + 0
+            
+            # 如果转换后仍是非数字（NaN），设置为 9999
+            if (ping != ping) ping = 9999
+            if (tcp != tcp) tcp = 9999
+            if (http != http) http = 9999
             
             # 计算平均延迟
             avg = (ping + tcp + http) / 3
             
             # 输出：IP 平均延迟 单个延迟值用于调试
-            printf "%s %.1f (ICMP:%s TCP:%s HTTP:%s)\n", ip, avg, ping, tcp, http
+            printf "%s %.1f (ICMP:%d TCP:%d HTTP:%d)\n", ip, avg, ping, tcp, http
           }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
 
           # -------------------------
