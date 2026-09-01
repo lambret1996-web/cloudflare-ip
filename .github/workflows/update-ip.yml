@@ -100,7 +100,8 @@ jobs:
           done < "$IPS"
 
           sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
-
+          echo "$ip $avg_ms ms" | tee -a "$DEBUG"
+          printf "%s %d\n" "$ip" "$avg_ms" >> "$IPTEST"
           echo "Wrote results to $IPTEST and top-10 to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
