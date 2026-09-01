@@ -80,7 +80,7 @@ jobs:
             printf "%s %sms\n" "$ip" "$avg_ms" >> "$IPTEST"
           done < "$IPS"
           # 修改点：使用单个 awk 来过滤并在输出到达 15 条时退出，末尾加上 || true 以防止 SIGPIPE 在 set -o pipefail 下终止脚本
-          sort -k2 -n "$IPTEST" | awk '$2 >= 25 {print $1; c++; if (c==15) exit}' > "$IPOUT" || true
+          sort -k2 -n "$IPTEST" | awk '$2 >= 30 {print $1; c++; if (c==15) exit}' > "$IPOUT" || true
           # 测速全部结束后
         
           echo "Wrote results to $IPTEST and top results to $IPOUT"
