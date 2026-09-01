@@ -55,7 +55,7 @@ jobs:
           now_ms() { date +%s%3N; }
 
           # 对每个 IP 做 HTTP 测试（重复 N 次，取平均）
-          attempts=3
+          attempts=1
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
             echo "Testing $ip ..." | tee -a "$DEBUG"
