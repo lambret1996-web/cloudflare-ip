@@ -1,5 +1,5 @@
 # IP 延迟检测（每 6 小时运行，可手动触发）
-name: IP Latency Check
+name: IP Latency 测试
 
 # 允许 workflow 使用 GITHUB_TOKEN 写入仓库内容
 permissions:
