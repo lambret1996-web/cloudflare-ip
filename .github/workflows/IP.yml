@@ -72,15 +72,7 @@ jobs:
             for i in $(seq 1 $attempts); do
               echo "Attempt $i for $ip" | tee -a "$DEBUG"
 
-              # 1) HTTP (port 80) 使用 Host 头
-              time_sec=$(curl -sS -o /dev/null -w "%{time_total}" --connect-timeout 5 --max-time 10 "http://${ip}${REQUEST_PATH}" -H "Host: ${HOST}" 2>/dev/null || true)
-              if [ -n "$time_sec" ] && [ "$time_sec" != "0" ]; then
-                ms=$(awk "BEGIN{printf \"%d\", $time_sec*1000}")
-                total_ms=$((total_ms + ms))
-                success_count=$((success_count + 1))
-                echo "HTTP http://${ip}${REQUEST_PATH} (Host: ${HOST}) succeeded: ${ms} ms" | tee -a "$DEBUG"
-                continue
-              fi
+         
 
               # 2) HTTPS (port 443) 使用 --resolve 来设置 SNI（curl 会使用 HOST 的 SNI，而连接到 ip）
               # --resolve 格式: <host:port:address>
