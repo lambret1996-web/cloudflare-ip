@@ -22,13 +22,13 @@ jobs:
           persist-credentials: true
 
       - name: Ensure dependencies
-        # 安装必要工具：curl、iputils-ping、netcat-openbsd、bc、ipcalc、coreutils、openssl
+        # 安装必要工具：curl、netcat-openbsd、bc、ipcalc、coreutils、openssl
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl iputils-ping netcat-openbsd bc ipcalc coreutils openssl
+          sudo apt-get install -y curl netcat-openbsd bc ipcalc coreutils openssl
 
-      - name: Run IP latency checks (ICMP → TCP → HTTP/TLS-WS)
-        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 优先 ICMP，失败则 TCP 回退，最后尝试 HTTP/TLS-WS，生成 IPtest.txt 和 IP.txt，并写 debug.log
+      - name: Run IP latency checks (TCP → HTTP/TLS-WS)
+        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 执行 TCP 和 HTTP/TLS-WS 测试，生成 IPtest.txt 和 IP.txt，并写 debug.log
         run: |
           # 开启严格模式：打印命令、失败则退出（注意在预期失败的命令后使用 "|| true"）
           set -xeo pipefail
@@ -41,8 +41,8 @@ jobs:
           IPS="ips.txt"           # 解析并去重后的 IP 列表
           IPTEST="IPtest.txt"     # 每行: "IP 平均延迟(ms)"
           IPOUT="IP.txt"          # 延迟最低的 15 个 IP（每行一个 IP）
-          DEBUG="debug.log"       # 调试日志，便于排查 ICMP/TCP/HTTP 问题
-          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP ping_ms tcp_ms http_ms）
+          DEBUG="debug.log"       # 调试日志，便于排查 TCP/HTTP 问题
+          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP tcp_ms http_ms）
 
           # 初始化输出文件（清空或创建）
           : > "$IPTEST"
@@ -59,13 +59,6 @@ jobs:
           # 2) 提取合法 IPv4 并去重
           # -------------------------
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
-
-          # -------------------------
-          # 调试：确认 runner 是否能 ping 出网（例如 8.8.8.8）
-          # -------------------------
-          echo "=== Debug: ping 8.8.8.8 ===" | tee -a "$DEBUG"
-          timeout 1s ping -4 -c 1 -W 1 8.8.8.8 2>&1 | tee -a "$DEBUG" || true
-          echo "=== End debug ===" | tee -a "$DEBUG"
 
           # -------------------------
           # helper: ms 时间戳（用于探测耗时测量）
@@ -154,32 +147,15 @@ jobs:
           }
 
           # -------------------------
-          # 4) 遍历每个 IP，执行 ICMP/TCP/HTTP 三种测试，记录所有延迟
+          # 4) 遍历每个 IP，执行 TCP/HTTP 两种测试，记录所有延迟
           # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
 
             echo "Testing $ip ..." | tee -a "$DEBUG"
 
-            ping_ms="9999"
             tcp_ms="9999"
             http_ms="9999"
-
-            # ===== ICMP PING =====
-            echo "  [ICMP] Testing $ip ..." | tee -a "$DEBUG"
-            ping_out=$(timeout 1s ping -4 -c 1 -W 1 -q "$ip" 2>&1 || true)
-            echo "PING OUTPUT for $ip:" >> "$DEBUG"
-            echo "$ping_out" >> "$DEBUG"
-
-            # 从 ping 统计行提取 avg（ms），兼容不同 ping 版本输出
-            ping_ms=$(echo "$ping_out" | awk -F'/' '/rtt|round-trip/ {print $5; exit}')
-            if [ -z "$ping_ms" ]; then
-              ping_ms=$(echo "$ping_out" | awk -F'/' 'END{print $2}')
-            fi
-            if [ -z "$ping_ms" ] || [ "$ping_ms" = "0" ]; then
-              ping_ms="9999"
-            fi
-            echo "ICMP result: ${ping_ms} ms" | tee -a "$DEBUG"
 
             # ===== TCP CONNECT =====
             echo "  [TCP] Testing $ip ..." | tee -a "$DEBUG"
@@ -219,35 +195,32 @@ jobs:
             echo "HTTP result: ${http_ms} ms" | tee -a "$DEBUG"
 
             # 保存中间结果
-            printf "%s %s %s %s\n" "$ip" "$ping_ms" "$tcp_ms" "$http_ms" >> "$RESULTS_TMP"
+            printf "%s %s %s\n" "$ip" "$tcp_ms" "$http_ms" >> "$RESULTS_TMP"
           done < "$IPS"
 
           # -------------------------
-          # 5) 计算三者平均延迟并按从低到高排序
+          # 5) 计算 TCP 和 HTTP 平均延迟并按从低到高排序
           # -------------------------
           echo "=== Calculating average latency for each IP ===" | tee -a "$DEBUG"
           
           awk '{
             ip = $1
-            ping = (($2 == "") ? 9999 : $2)
-            tcp = (($3 == "") ? 9999 : $3)
-            http = (($4 == "") ? 9999 : $4)
+            tcp = (($2 == "") ? 9999 : $2)
+            http = (($3 == "") ? 9999 : $3)
             
             # 转换为数字（使用一元加操作符强制数值转换）
-            ping = ping + 0
             tcp = tcp + 0
             http = http + 0
             
             # 如果转换后仍是非数字（NaN），设置为 9999
-            if (ping != ping) ping = 9999
             if (tcp != tcp) tcp = 9999
             if (http != http) http = 9999
             
             # 计算平均延迟
-            avg = (ping + tcp + http) / 3
+            avg = (tcp + http) / 2
             
             # 输出：IP 平均延迟 单个延迟值用于调试
-            printf "%s %.1f (ICMP:%d TCP:%d HTTP:%d)\n", ip, avg, ping, tcp, http
+            printf "%s %.1f (TCP:%d HTTP:%d)\n", ip, avg, tcp, http
           }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
 
           # -------------------------
@@ -308,7 +281,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update IP latency results (average of ICMP/TCP/HTTP)"
+            git commit -m "Update IP latency results (average of TCP/HTTP)"
             # 推送到目标分支（捕获并打印错误）
             if ! git push origin "HEAD:${BRANCH}"; then
               echo "git push 失败，打印远端和权限信息"
