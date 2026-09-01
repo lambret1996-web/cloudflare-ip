@@ -107,19 +107,19 @@ jobs:
             http_result=$(test_http_request "$ip" 443 "true" || echo "9999")
             if [ "$http_result" != "9999" ]; then
               http_ms="$http_result"
-              echo "  HTTPS:443 → ${http_ms}ms" | tee -a "$DEBUG"
+              echo "  HTTPS:443 -> ${http_ms}ms" | tee -a "$DEBUG"
             else
               tls_result=$(test_tls_handshake "$ip" 443 || echo "9999")
               if [ "$tls_result" != "9999" ]; then
                 http_ms="$tls_result"
-                echo "  TLS:443 → ${http_ms}ms" | tee -a "$DEBUG"
+                echo "  TLS:443 -> ${http_ms}ms" | tee -a "$DEBUG"
               else
                 http_result=$(test_http_request "$ip" 80 "false" || echo "9999")
                 if [ "$http_result" != "9999" ]; then
                   http_ms="$http_result"
-                  echo "  HTTP:80 → ${http_ms}ms" | tee -a "$DEBUG"
+                  echo "  HTTP:80 -> ${http_ms}ms" | tee -a "$DEBUG"
                 else
-                  echo "  Failed → 9999ms" | tee -a "$DEBUG"
+                  echo "  Failed -> 9999ms" | tee -a "$DEBUG"
                 fi
               fi
             fi
@@ -127,11 +127,11 @@ jobs:
             printf "%s %s\n" "$ip" "$http_ms" >> "$RESULTS_TMP"
           done < "$IPS"
 
-          awk '{
+          awk 'BEGIN{OFS=" "} {
             ip = $1
             http = (($2 == "") ? 9999 : $2 + 0)
             if (http != http) http = 9999
-            printf "%s %d\n", ip, http
+            print ip, http
           }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
 
           awk '{print $1}' "$IPTEST" | head -n 15 > "$IPOUT"
