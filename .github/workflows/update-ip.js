@@ -5,7 +5,7 @@ name: IP Latency Check
 permissions:
   contents: write
 
-off:
+on:
   schedule:
     - cron: "0 */6 * * *" # 每 6 小时运行一次
   workflow_dispatch:     # 支持在 Actions 页面手动触发
