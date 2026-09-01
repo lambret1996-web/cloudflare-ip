@@ -10,8 +10,8 @@ HTTP http://2.27.109.144/ succeeded: 5002 ms
 2.27.109.144 5002 ms
 Testing 3.168.246.62 ...
 Attempt 1 for 3.168.246.62
-HTTP http://3.168.246.62/ succeeded: 211 ms
-3.168.246.62 211 ms
+HTTP http://3.168.246.62/ succeeded: 208 ms
+3.168.246.62 208 ms
 Testing 3.171.201.230 ...
 Attempt 1 for 3.171.201.230
 HTTP http://3.171.201.230/ succeeded: 334 ms
@@ -22,12 +22,12 @@ HTTP http://8.218.36.133/ succeeded: 5002 ms
 8.218.36.133 5002 ms
 Testing 18.65.203.150 ...
 Attempt 1 for 18.65.203.150
-HTTP http://18.65.203.150/ succeeded: 303 ms
-18.65.203.150 303 ms
+HTTP http://18.65.203.150/ succeeded: 208 ms
+18.65.203.150 208 ms
 Testing 18.172.35.54 ...
 Attempt 1 for 18.172.35.54
-HTTP http://18.172.35.54/ succeeded: 216 ms
-18.172.35.54 216 ms
+HTTP http://18.172.35.54/ succeeded: 210 ms
+18.172.35.54 210 ms
 Testing 23.27.52.166 ...
 Attempt 1 for 23.27.52.166
 HTTP http://23.27.52.166/ succeeded: 103 ms
@@ -46,36 +46,36 @@ HTTP http://27.50.48.50/ succeeded: 3 ms
 27.50.48.50 3 ms
 Testing 27.50.48.59 ...
 Attempt 1 for 27.50.48.59
-HTTP http://27.50.48.59/ succeeded: 4 ms
-27.50.48.59 4 ms
+HTTP http://27.50.48.59/ succeeded: 5 ms
+27.50.48.59 5 ms
 Testing 27.50.48.255 ...
 Attempt 1 for 27.50.48.255
 HTTP http://27.50.48.255/ succeeded: 4 ms
 27.50.48.255 4 ms
 Testing 27.102.134.233 ...
 Attempt 1 for 27.102.134.233
-HTTP http://27.102.134.233/ succeeded: 134 ms
-27.102.134.233 134 ms
+HTTP http://27.102.134.233/ succeeded: 130 ms
+27.102.134.233 130 ms
 Testing 31.58.226.196 ...
 Attempt 1 for 31.58.226.196
-HTTP http://31.58.226.196/ succeeded: 5 ms
-31.58.226.196 5 ms
+HTTP http://31.58.226.196/ succeeded: 2 ms
+31.58.226.196 2 ms
 Testing 34.212.240.129 ...
 Attempt 1 for 34.212.240.129
 HTTP http://34.212.240.129/ succeeded: 5002 ms
 34.212.240.129 5002 ms
 Testing 43.128.130.43 ...
 Attempt 1 for 43.128.130.43
-HTTP http://43.128.130.43/ succeeded: 127 ms
-43.128.130.43 127 ms
+HTTP http://43.128.130.43/ succeeded: 129 ms
+43.128.130.43 129 ms
 Testing 43.129.217.38 ...
 Attempt 1 for 43.129.217.38
 HTTP http://43.129.217.38/ succeeded: 5002 ms
 43.129.217.38 5002 ms
 Testing 43.131.247.123 ...
 Attempt 1 for 43.131.247.123
-HTTP http://43.131.247.123/ succeeded: 134 ms
-43.131.247.123 134 ms
+HTTP http://43.131.247.123/ succeeded: 128 ms
+43.131.247.123 128 ms
 Testing 43.132.231.159 ...
 Attempt 1 for 43.132.231.159
 HTTP http://43.132.231.159/ succeeded: 146 ms
@@ -86,12 +86,12 @@ HTTP http://43.161.236.173/ succeeded: 291 ms
 43.161.236.173 291 ms
 Testing 43.168.16.112 ...
 Attempt 1 for 43.168.16.112
-HTTP http://43.168.16.112/ succeeded: 306 ms
-43.168.16.112 306 ms
+HTTP http://43.168.16.112/ succeeded: 304 ms
+43.168.16.112 304 ms
 Testing 43.170.8.95 ...
 Attempt 1 for 43.170.8.95
-HTTP http://43.170.8.95/ succeeded: 212 ms
-43.170.8.95 212 ms
+HTTP http://43.170.8.95/ succeeded: 211 ms
+43.170.8.95 211 ms
 Testing 43.200.87.5 ...
 Attempt 1 for 43.200.87.5
 HTTP http://43.200.87.5/ succeeded: 5002 ms
@@ -106,44 +106,44 @@ HTTP http://45.32.35.100/ succeeded: 5002 ms
 45.32.35.100 5002 ms
 Testing 45.32.110.53 ...
 Attempt 1 for 45.32.110.53
-HTTP http://45.32.110.53/ succeeded: 168 ms
-45.32.110.53 168 ms
+HTTP http://45.32.110.53/ succeeded: 167 ms
+45.32.110.53 167 ms
 Testing 45.32.251.225 ...
 Attempt 1 for 45.32.251.225
-HTTP http://45.32.251.225/ succeeded: 556 ms
-45.32.251.225 556 ms
+HTTP http://45.32.251.225/ succeeded: 553 ms
+45.32.251.225 553 ms
 Testing 45.38.42.198 ...
 Attempt 1 for 45.38.42.198
 HTTP http://45.38.42.198/ succeeded: 155 ms
 45.38.42.198 155 ms
 Testing 45.77.21.148 ...
 Attempt 1 for 45.77.21.148
-HTTP http://45.77.21.148/ succeeded: 104 ms
-45.77.21.148 104 ms
+HTTP http://45.77.21.148/ succeeded: 105 ms
+45.77.21.148 105 ms
 Testing 45.77.134.44 ...
 Attempt 1 for 45.77.134.44
 HTTP http://45.77.134.44/ succeeded: 5002 ms
 45.77.134.44 5002 ms
 Testing 45.77.173.72 ...
 Attempt 1 for 45.77.173.72
-HTTP http://45.77.173.72/ succeeded: 167 ms
-45.77.173.72 167 ms
+HTTP http://45.77.173.72/ succeeded: 168 ms
+45.77.173.72 168 ms
 Testing 45.77.174.69 ...
 Attempt 1 for 45.77.174.69
 HTTP http://45.77.174.69/ succeeded: 167 ms
 45.77.174.69 167 ms
 Testing 45.77.254.160 ...
 Attempt 1 for 45.77.254.160
-HTTP http://45.77.254.160/ succeeded: 170 ms
-45.77.254.160 170 ms
+HTTP http://45.77.254.160/ succeeded: 167 ms
+45.77.254.160 167 ms
 Testing 45.153.245.221 ...
 Attempt 1 for 45.153.245.221
 HTTP http://45.153.245.221/ succeeded: 109 ms
 45.153.245.221 109 ms
 Testing 45.154.14.48 ...
 Attempt 1 for 45.154.14.48
-HTTP http://45.154.14.48/ succeeded: 128 ms
-45.154.14.48 128 ms
+HTTP http://45.154.14.48/ succeeded: 129 ms
+45.154.14.48 129 ms
 Testing 45.221.115.3 ...
 Attempt 1 for 45.221.115.3
 HTTP http://45.221.115.3/ succeeded: 302 ms
@@ -162,36 +162,36 @@ HTTP http://47.84.54.115/ succeeded: 168 ms
 47.84.54.115 168 ms
 Testing 47.130.35.116 ...
 Attempt 1 for 47.130.35.116
-HTTP http://47.130.35.116/ succeeded: 338 ms
-47.130.35.116 338 ms
+HTTP http://47.130.35.116/ succeeded: 337 ms
+47.130.35.116 337 ms
 Testing 47.243.54.45 ...
 Attempt 1 for 47.243.54.45
-HTTP http://47.243.54.45/ succeeded: 146 ms
-47.243.54.45 146 ms
+HTTP http://47.243.54.45/ succeeded: 281 ms
+47.243.54.45 281 ms
 Testing 52.84.150.5 ...
 Attempt 1 for 52.84.150.5
-HTTP http://52.84.150.5/ succeeded: 16 ms
-52.84.150.5 16 ms
+HTTP http://52.84.150.5/ succeeded: 18 ms
+52.84.150.5 18 ms
 Testing 52.84.150.150 ...
 Attempt 1 for 52.84.150.150
-HTTP http://52.84.150.150/ succeeded: 18 ms
-52.84.150.150 18 ms
+HTTP http://52.84.150.150/ succeeded: 16 ms
+52.84.150.150 16 ms
 Testing 52.84.150.161 ...
 Attempt 1 for 52.84.150.161
-HTTP http://52.84.150.161/ succeeded: 16 ms
-52.84.150.161 16 ms
+HTTP http://52.84.150.161/ succeeded: 19 ms
+52.84.150.161 19 ms
 Testing 52.84.150.239 ...
 Attempt 1 for 52.84.150.239
-HTTP http://52.84.150.239/ succeeded: 18 ms
-52.84.150.239 18 ms
+HTTP http://52.84.150.239/ succeeded: 17 ms
+52.84.150.239 17 ms
 Testing 54.239.163.32 ...
 Attempt 1 for 54.239.163.32
-HTTP http://54.239.163.32/ succeeded: 301 ms
-54.239.163.32 301 ms
+HTTP http://54.239.163.32/ succeeded: 208 ms
+54.239.163.32 208 ms
 Testing 54.239.163.157 ...
 Attempt 1 for 54.239.163.157
-HTTP http://54.239.163.157/ succeeded: 296 ms
-54.239.163.157 296 ms
+HTTP http://54.239.163.157/ succeeded: 209 ms
+54.239.163.157 209 ms
 Testing 61.85.1.77 ...
 Attempt 1 for 61.85.1.77
 HTTP http://61.85.1.77/ succeeded: 5002 ms
@@ -206,12 +206,12 @@ HTTP http://64.176.44.23/ succeeded: 5002 ms
 64.176.44.23 5002 ms
 Testing 66.42.51.60 ...
 Attempt 1 for 66.42.51.60
-HTTP http://66.42.51.60/ succeeded: 339 ms
-66.42.51.60 339 ms
+HTTP http://66.42.51.60/ succeeded: 336 ms
+66.42.51.60 336 ms
 Testing 82.40.32.67 ...
 Attempt 1 for 82.40.32.67
-HTTP http://82.40.32.67/ succeeded: 105 ms
-82.40.32.67 105 ms
+HTTP http://82.40.32.67/ succeeded: 106 ms
+82.40.32.67 106 ms
 Testing 85.121.51.114 ...
 Attempt 1 for 85.121.51.114
 HTTP http://85.121.51.114/ succeeded: 320 ms
@@ -230,12 +230,12 @@ HTTP http://85.237.207.126/ succeeded: 5002 ms
 85.237.207.126 5002 ms
 Testing 91.110.174.169 ...
 Attempt 1 for 91.110.174.169
-HTTP http://91.110.174.169/ succeeded: 157 ms
-91.110.174.169 157 ms
+HTTP http://91.110.174.169/ succeeded: 152 ms
+91.110.174.169 152 ms
 Testing 91.110.174.173 ...
 Attempt 1 for 91.110.174.173
-HTTP http://91.110.174.173/ succeeded: 152 ms
-91.110.174.173 152 ms
+HTTP http://91.110.174.173/ succeeded: 157 ms
+91.110.174.173 157 ms
 Testing 91.110.174.201 ...
 Attempt 1 for 91.110.174.201
 HTTP http://91.110.174.201/ succeeded: 148 ms
@@ -278,16 +278,16 @@ HTTP http://103.31.4.1/ succeeded: 101 ms
 103.31.4.1 101 ms
 Testing 103.31.4.2 ...
 Attempt 1 for 103.31.4.2
-HTTP http://103.31.4.2/ succeeded: 101 ms
-103.31.4.2 101 ms
+HTTP http://103.31.4.2/ succeeded: 100 ms
+103.31.4.2 100 ms
 Testing 103.31.4.3 ...
 Attempt 1 for 103.31.4.3
-HTTP http://103.31.4.3/ succeeded: 100 ms
-103.31.4.3 100 ms
+HTTP http://103.31.4.3/ succeeded: 101 ms
+103.31.4.3 101 ms
 Testing 103.31.4.6 ...
 Attempt 1 for 103.31.4.6
-HTTP http://103.31.4.6/ succeeded: 101 ms
-103.31.4.6 101 ms
+HTTP http://103.31.4.6/ succeeded: 100 ms
+103.31.4.6 100 ms
 Testing 103.31.4.7 ...
 Attempt 1 for 103.31.4.7
 HTTP http://103.31.4.7/ succeeded: 101 ms
@@ -298,16 +298,16 @@ HTTP http://103.31.4.8/ succeeded: 100 ms
 103.31.4.8 100 ms
 Testing 103.96.74.18 ...
 Attempt 1 for 103.96.74.18
-HTTP http://103.96.74.18/ succeeded: 603 ms
-103.96.74.18 603 ms
+HTTP http://103.96.74.18/ succeeded: 765 ms
+103.96.74.18 765 ms
 Testing 103.106.228.126 ...
 Attempt 1 for 103.106.228.126
-HTTP http://103.106.228.126/ succeeded: 105 ms
-103.106.228.126 105 ms
+HTTP http://103.106.228.126/ succeeded: 104 ms
+103.106.228.126 104 ms
 Testing 103.118.42.136 ...
 Attempt 1 for 103.118.42.136
-HTTP http://103.118.42.136/ succeeded: 293 ms
-103.118.42.136 293 ms
+HTTP http://103.118.42.136/ succeeded: 292 ms
+103.118.42.136 292 ms
 Testing 103.193.172.164 ...
 Attempt 1 for 103.193.172.164
 HTTP http://103.193.172.164/ succeeded: 145 ms
@@ -318,12 +318,12 @@ HTTP http://103.253.42.37/ succeeded: 5002 ms
 103.253.42.37 5002 ms
 Testing 104.16.0.1 ...
 Attempt 1 for 104.16.0.1
-HTTP http://104.16.0.1/ succeeded: 4 ms
-104.16.0.1 4 ms
+HTTP http://104.16.0.1/ succeeded: 3 ms
+104.16.0.1 3 ms
 Testing 104.16.0.3 ...
 Attempt 1 for 104.16.0.3
-HTTP http://104.16.0.3/ succeeded: 5 ms
-104.16.0.3 5 ms
+HTTP http://104.16.0.3/ succeeded: 4 ms
+104.16.0.3 4 ms
 Testing 104.16.0.5 ...
 Attempt 1 for 104.16.0.5
 HTTP http://104.16.0.5/ succeeded: 4 ms
@@ -334,20 +334,20 @@ HTTP http://104.16.0.6/ succeeded: 4 ms
 104.16.0.6 4 ms
 Testing 104.16.10.10 ...
 Attempt 1 for 104.16.10.10
-HTTP http://104.16.10.10/ succeeded: 4 ms
-104.16.10.10 4 ms
+HTTP http://104.16.10.10/ succeeded: 3 ms
+104.16.10.10 3 ms
 Testing 104.16.65.1 ...
 Attempt 1 for 104.16.65.1
-HTTP http://104.16.65.1/ succeeded: 3 ms
-104.16.65.1 3 ms
+HTTP http://104.16.65.1/ succeeded: 5 ms
+104.16.65.1 5 ms
 Testing 104.16.73.77 ...
 Attempt 1 for 104.16.73.77
-HTTP http://104.16.73.77/ succeeded: 5 ms
-104.16.73.77 5 ms
+HTTP http://104.16.73.77/ succeeded: 4 ms
+104.16.73.77 4 ms
 Testing 104.16.100.139 ...
 Attempt 1 for 104.16.100.139
-HTTP http://104.16.100.139/ succeeded: 6 ms
-104.16.100.139 6 ms
+HTTP http://104.16.100.139/ succeeded: 4 ms
+104.16.100.139 4 ms
 Testing 104.16.105.166 ...
 Attempt 1 for 104.16.105.166
 HTTP http://104.16.105.166/ succeeded: 4 ms
@@ -358,72 +358,72 @@ HTTP http://104.16.111.90/ succeeded: 4 ms
 104.16.111.90 4 ms
 Testing 104.16.111.220 ...
 Attempt 1 for 104.16.111.220
-HTTP http://104.16.111.220/ succeeded: 5 ms
-104.16.111.220 5 ms
+HTTP http://104.16.111.220/ succeeded: 4 ms
+104.16.111.220 4 ms
 Testing 104.16.120.53 ...
 Attempt 1 for 104.16.120.53
-HTTP http://104.16.120.53/ succeeded: 5 ms
-104.16.120.53 5 ms
+HTTP http://104.16.120.53/ succeeded: 4 ms
+104.16.120.53 4 ms
 Testing 104.16.157.13 ...
 Attempt 1 for 104.16.157.13
-HTTP http://104.16.157.13/ succeeded: 4 ms
-104.16.157.13 4 ms
+HTTP http://104.16.157.13/ succeeded: 3 ms
+104.16.157.13 3 ms
 Testing 104.16.159.35 ...
 Attempt 1 for 104.16.159.35
-HTTP http://104.16.159.35/ succeeded: 5 ms
-104.16.159.35 5 ms
+HTTP http://104.16.159.35/ succeeded: 4 ms
+104.16.159.35 4 ms
 Testing 104.16.185.120 ...
 Attempt 1 for 104.16.185.120
-HTTP http://104.16.185.120/ succeeded: 4 ms
-104.16.185.120 4 ms
+HTTP http://104.16.185.120/ succeeded: 3 ms
+104.16.185.120 3 ms
 Testing 104.16.231.177 ...
 Attempt 1 for 104.16.231.177
 HTTP http://104.16.231.177/ succeeded: 3 ms
 104.16.231.177 3 ms
 Testing 104.17.0.5 ...
 Attempt 1 for 104.17.0.5
-HTTP http://104.17.0.5/ succeeded: 4 ms
-104.17.0.5 4 ms
+HTTP http://104.17.0.5/ succeeded: 7 ms
+104.17.0.5 7 ms
 Testing 104.17.0.8 ...
 Attempt 1 for 104.17.0.8
-HTTP http://104.17.0.8/ succeeded: 5 ms
-104.17.0.8 5 ms
+HTTP http://104.17.0.8/ succeeded: 4 ms
+104.17.0.8 4 ms
 Testing 104.17.51.141 ...
 Attempt 1 for 104.17.51.141
 HTTP http://104.17.51.141/ succeeded: 4 ms
 104.17.51.141 4 ms
 Testing 104.17.54.125 ...
 Attempt 1 for 104.17.54.125
-HTTP http://104.17.54.125/ succeeded: 7 ms
-104.17.54.125 7 ms
+HTTP http://104.17.54.125/ succeeded: 4 ms
+104.17.54.125 4 ms
 Testing 104.17.58.141 ...
 Attempt 1 for 104.17.58.141
-HTTP http://104.17.58.141/ succeeded: 60 ms
-104.17.58.141 60 ms
+HTTP http://104.17.58.141/ succeeded: 3 ms
+104.17.58.141 3 ms
 Testing 104.17.59.88 ...
 Attempt 1 for 104.17.59.88
-HTTP http://104.17.59.88/ succeeded: 5 ms
-104.17.59.88 5 ms
+HTTP http://104.17.59.88/ succeeded: 3 ms
+104.17.59.88 3 ms
 Testing 104.17.61.92 ...
 Attempt 1 for 104.17.61.92
-HTTP http://104.17.61.92/ succeeded: 3 ms
-104.17.61.92 3 ms
+HTTP http://104.17.61.92/ succeeded: 4 ms
+104.17.61.92 4 ms
 Testing 104.17.69.244 ...
 Attempt 1 for 104.17.69.244
-HTTP http://104.17.69.244/ succeeded: 5 ms
-104.17.69.244 5 ms
+HTTP http://104.17.69.244/ succeeded: 4 ms
+104.17.69.244 4 ms
 Testing 104.17.114.74 ...
 Attempt 1 for 104.17.114.74
-HTTP http://104.17.114.74/ succeeded: 4 ms
-104.17.114.74 4 ms
+HTTP http://104.17.114.74/ succeeded: 3 ms
+104.17.114.74 3 ms
 Testing 104.17.125.56 ...
 Attempt 1 for 104.17.125.56
 HTTP http://104.17.125.56/ succeeded: 5 ms
 104.17.125.56 5 ms
 Testing 104.17.139.37 ...
 Attempt 1 for 104.17.139.37
-HTTP http://104.17.139.37/ succeeded: 5 ms
-104.17.139.37 5 ms
+HTTP http://104.17.139.37/ succeeded: 4 ms
+104.17.139.37 4 ms
 Testing 104.17.142.212 ...
 Attempt 1 for 104.17.142.212
 HTTP http://104.17.142.212/ succeeded: 4 ms
@@ -438,76 +438,76 @@ HTTP http://104.17.154.150/ succeeded: 4 ms
 104.17.154.150 4 ms
 Testing 104.17.156.13 ...
 Attempt 1 for 104.17.156.13
-HTTP http://104.17.156.13/ succeeded: 3 ms
-104.17.156.13 3 ms
+HTTP http://104.17.156.13/ succeeded: 4 ms
+104.17.156.13 4 ms
 Testing 104.17.162.3 ...
 Attempt 1 for 104.17.162.3
-HTTP http://104.17.162.3/ succeeded: 4 ms
-104.17.162.3 4 ms
+HTTP http://104.17.162.3/ succeeded: 3 ms
+104.17.162.3 3 ms
 Testing 104.17.167.134 ...
 Attempt 1 for 104.17.167.134
-HTTP http://104.17.167.134/ succeeded: 3 ms
-104.17.167.134 3 ms
+HTTP http://104.17.167.134/ succeeded: 4 ms
+104.17.167.134 4 ms
 Testing 104.17.234.145 ...
 Attempt 1 for 104.17.234.145
-HTTP http://104.17.234.145/ succeeded: 4 ms
-104.17.234.145 4 ms
+HTTP http://104.17.234.145/ succeeded: 3 ms
+104.17.234.145 3 ms
 Testing 104.17.244.148 ...
 Attempt 1 for 104.17.244.148
-HTTP http://104.17.244.148/ succeeded: 6 ms
-104.17.244.148 6 ms
+HTTP http://104.17.244.148/ succeeded: 4 ms
+104.17.244.148 4 ms
 Testing 104.18.0.3 ...
 Attempt 1 for 104.18.0.3
-HTTP http://104.18.0.3/ succeeded: 4 ms
-104.18.0.3 4 ms
+HTTP http://104.18.0.3/ succeeded: 5 ms
+104.18.0.3 5 ms
 Testing 104.18.0.6 ...
 Attempt 1 for 104.18.0.6
-HTTP http://104.18.0.6/ succeeded: 5 ms
-104.18.0.6 5 ms
+HTTP http://104.18.0.6/ succeeded: 4 ms
+104.18.0.6 4 ms
 Testing 104.18.81.19 ...
 Attempt 1 for 104.18.81.19
-HTTP http://104.18.81.19/ succeeded: 3 ms
-104.18.81.19 3 ms
+HTTP http://104.18.81.19/ succeeded: 4 ms
+104.18.81.19 4 ms
 Testing 104.18.89.52 ...
 Attempt 1 for 104.18.89.52
-HTTP http://104.18.89.52/ succeeded: 5 ms
-104.18.89.52 5 ms
+HTTP http://104.18.89.52/ succeeded: 3 ms
+104.18.89.52 3 ms
 Testing 104.18.145.62 ...
 Attempt 1 for 104.18.145.62
-HTTP http://104.18.145.62/ succeeded: 4 ms
-104.18.145.62 4 ms
+HTTP http://104.18.145.62/ succeeded: 5 ms
+104.18.145.62 5 ms
 Testing 104.18.151.172 ...
 Attempt 1 for 104.18.151.172
-HTTP http://104.18.151.172/ succeeded: 4 ms
-104.18.151.172 4 ms
+HTTP http://104.18.151.172/ succeeded: 3 ms
+104.18.151.172 3 ms
 Testing 104.18.166.129 ...
 Attempt 1 for 104.18.166.129
-HTTP http://104.18.166.129/ succeeded: 4 ms
-104.18.166.129 4 ms
+HTTP http://104.18.166.129/ succeeded: 3 ms
+104.18.166.129 3 ms
 Testing 104.18.189.153 ...
 Attempt 1 for 104.18.189.153
-HTTP http://104.18.189.153/ succeeded: 5 ms
-104.18.189.153 5 ms
+HTTP http://104.18.189.153/ succeeded: 4 ms
+104.18.189.153 4 ms
 Testing 104.18.223.253 ...
 Attempt 1 for 104.18.223.253
-HTTP http://104.18.223.253/ succeeded: 5 ms
-104.18.223.253 5 ms
+HTTP http://104.18.223.253/ succeeded: 4 ms
+104.18.223.253 4 ms
 Testing 104.18.255.167 ...
 Attempt 1 for 104.18.255.167
-HTTP http://104.18.255.167/ succeeded: 5 ms
-104.18.255.167 5 ms
+HTTP http://104.18.255.167/ succeeded: 3 ms
+104.18.255.167 3 ms
 Testing 104.19.0.1 ...
 Attempt 1 for 104.19.0.1
-HTTP http://104.19.0.1/ succeeded: 5 ms
-104.19.0.1 5 ms
+HTTP http://104.19.0.1/ succeeded: 4 ms
+104.19.0.1 4 ms
 Testing 104.19.0.3 ...
 Attempt 1 for 104.19.0.3
 HTTP http://104.19.0.3/ succeeded: 4 ms
 104.19.0.3 4 ms
 Testing 104.19.0.4 ...
 Attempt 1 for 104.19.0.4
-HTTP http://104.19.0.4/ succeeded: 5 ms
-104.19.0.4 5 ms
+HTTP http://104.19.0.4/ succeeded: 4 ms
+104.19.0.4 4 ms
 Testing 104.19.0.6 ...
 Attempt 1 for 104.19.0.6
 HTTP http://104.19.0.6/ succeeded: 4 ms
@@ -518,140 +518,140 @@ HTTP http://104.19.0.8/ succeeded: 4 ms
 104.19.0.8 4 ms
 Testing 104.19.0.9 ...
 Attempt 1 for 104.19.0.9
-HTTP http://104.19.0.9/ succeeded: 5 ms
-104.19.0.9 5 ms
+HTTP http://104.19.0.9/ succeeded: 4 ms
+104.19.0.9 4 ms
 Testing 104.19.60.61 ...
 Attempt 1 for 104.19.60.61
-HTTP http://104.19.60.61/ succeeded: 3 ms
-104.19.60.61 3 ms
+HTTP http://104.19.60.61/ succeeded: 5 ms
+104.19.60.61 5 ms
 Testing 104.19.148.88 ...
 Attempt 1 for 104.19.148.88
-HTTP http://104.19.148.88/ succeeded: 3 ms
-104.19.148.88 3 ms
+HTTP http://104.19.148.88/ succeeded: 5 ms
+104.19.148.88 5 ms
 Testing 104.19.148.121 ...
 Attempt 1 for 104.19.148.121
-HTTP http://104.19.148.121/ succeeded: 4 ms
-104.19.148.121 4 ms
+HTTP http://104.19.148.121/ succeeded: 5 ms
+104.19.148.121 5 ms
 Testing 104.19.151.130 ...
 Attempt 1 for 104.19.151.130
-HTTP http://104.19.151.130/ succeeded: 5 ms
-104.19.151.130 5 ms
+HTTP http://104.19.151.130/ succeeded: 4 ms
+104.19.151.130 4 ms
 Testing 104.19.154.200 ...
 Attempt 1 for 104.19.154.200
-HTTP http://104.19.154.200/ succeeded: 4 ms
-104.19.154.200 4 ms
+HTTP http://104.19.154.200/ succeeded: 6 ms
+104.19.154.200 6 ms
 Testing 104.19.212.207 ...
 Attempt 1 for 104.19.212.207
-HTTP http://104.19.212.207/ succeeded: 3 ms
-104.19.212.207 3 ms
+HTTP http://104.19.212.207/ succeeded: 4 ms
+104.19.212.207 4 ms
 Testing 104.19.220.22 ...
 Attempt 1 for 104.19.220.22
-HTTP http://104.19.220.22/ succeeded: 5 ms
-104.19.220.22 5 ms
+HTTP http://104.19.220.22/ succeeded: 3 ms
+104.19.220.22 3 ms
 Testing 104.20.7.16 ...
 Attempt 1 for 104.20.7.16
-HTTP http://104.20.7.16/ succeeded: 3 ms
-104.20.7.16 3 ms
+HTTP http://104.20.7.16/ succeeded: 4 ms
+104.20.7.16 4 ms
 Testing 104.20.9.83 ...
 Attempt 1 for 104.20.9.83
 HTTP http://104.20.9.83/ succeeded: 5 ms
 104.20.9.83 5 ms
 Testing 104.20.25.58 ...
 Attempt 1 for 104.20.25.58
-HTTP http://104.20.25.58/ succeeded: 6 ms
-104.20.25.58 6 ms
+HTTP http://104.20.25.58/ succeeded: 3 ms
+104.20.25.58 3 ms
 Testing 104.20.25.128 ...
 Attempt 1 for 104.20.25.128
 HTTP http://104.20.25.128/ succeeded: 4 ms
 104.20.25.128 4 ms
 Testing 104.21.26.37 ...
 Attempt 1 for 104.21.26.37
-HTTP http://104.21.26.37/ succeeded: 5 ms
-104.21.26.37 5 ms
+HTTP http://104.21.26.37/ succeeded: 3 ms
+104.21.26.37 3 ms
 Testing 104.21.93.223 ...
 Attempt 1 for 104.21.93.223
 HTTP http://104.21.93.223/ succeeded: 5 ms
 104.21.93.223 5 ms
 Testing 104.21.121.85 ...
 Attempt 1 for 104.21.121.85
-HTTP http://104.21.121.85/ succeeded: 4 ms
-104.21.121.85 4 ms
+HTTP http://104.21.121.85/ succeeded: 3 ms
+104.21.121.85 3 ms
 Testing 104.21.200.172 ...
 Attempt 1 for 104.21.200.172
-HTTP http://104.21.200.172/ succeeded: 7 ms
-104.21.200.172 7 ms
+HTTP http://104.21.200.172/ succeeded: 5 ms
+104.21.200.172 5 ms
 Testing 104.25.245.92 ...
 Attempt 1 for 104.25.245.92
 HTTP http://104.25.245.92/ succeeded: 4 ms
 104.25.245.92 4 ms
 Testing 104.25.245.223 ...
 Attempt 1 for 104.25.245.223
-HTTP http://104.25.245.223/ succeeded: 6 ms
-104.25.245.223 6 ms
+HTTP http://104.25.245.223/ succeeded: 3 ms
+104.25.245.223 3 ms
 Testing 104.26.3.162 ...
 Attempt 1 for 104.26.3.162
-HTTP http://104.26.3.162/ succeeded: 5 ms
-104.26.3.162 5 ms
+HTTP http://104.26.3.162/ succeeded: 4 ms
+104.26.3.162 4 ms
 Testing 104.26.4.90 ...
 Attempt 1 for 104.26.4.90
-HTTP http://104.26.4.90/ succeeded: 37 ms
-104.26.4.90 37 ms
+HTTP http://104.26.4.90/ succeeded: 4 ms
+104.26.4.90 4 ms
 Testing 104.26.5.134 ...
 Attempt 1 for 104.26.5.134
-HTTP http://104.26.5.134/ succeeded: 9 ms
-104.26.5.134 9 ms
+HTTP http://104.26.5.134/ succeeded: 3 ms
+104.26.5.134 3 ms
 Testing 104.26.8.117 ...
 Attempt 1 for 104.26.8.117
-HTTP http://104.26.8.117/ succeeded: 8 ms
-104.26.8.117 8 ms
+HTTP http://104.26.8.117/ succeeded: 4 ms
+104.26.8.117 4 ms
 Testing 104.31.16.158 ...
 Attempt 1 for 104.31.16.158
-HTTP http://104.31.16.158/ succeeded: 5 ms
-104.31.16.158 5 ms
+HTTP http://104.31.16.158/ succeeded: 3 ms
+104.31.16.158 3 ms
 Testing 104.168.87.41 ...
 Attempt 1 for 104.168.87.41
-HTTP http://104.168.87.41/ succeeded: 213 ms
-104.168.87.41 213 ms
+HTTP http://104.168.87.41/ succeeded: 306 ms
+104.168.87.41 306 ms
 Testing 107.148.239.178 ...
 Attempt 1 for 107.148.239.178
-HTTP http://107.148.239.178/ succeeded: 397 ms
-107.148.239.178 397 ms
+HTTP http://107.148.239.178/ succeeded: 391 ms
+107.148.239.178 391 ms
 Testing 108.158.251.14 ...
 Attempt 1 for 108.158.251.14
-HTTP http://108.158.251.14/ succeeded: 470 ms
-108.158.251.14 470 ms
+HTTP http://108.158.251.14/ succeeded: 396 ms
+108.158.251.14 396 ms
 Testing 108.158.251.35 ...
 Attempt 1 for 108.158.251.35
-HTTP http://108.158.251.35/ succeeded: 397 ms
-108.158.251.35 397 ms
+HTTP http://108.158.251.35/ succeeded: 399 ms
+108.158.251.35 399 ms
 Testing 108.159.0.8 ...
 Attempt 1 for 108.159.0.8
-HTTP http://108.159.0.8/ succeeded: 396 ms
-108.159.0.8 396 ms
+HTTP http://108.159.0.8/ succeeded: 397 ms
+108.159.0.8 397 ms
 Testing 108.159.0.102 ...
 Attempt 1 for 108.159.0.102
-HTTP http://108.159.0.102/ succeeded: 397 ms
-108.159.0.102 397 ms
+HTTP http://108.159.0.102/ succeeded: 400 ms
+108.159.0.102 400 ms
 Testing 108.159.0.145 ...
 Attempt 1 for 108.159.0.145
-HTTP http://108.159.0.145/ succeeded: 396 ms
-108.159.0.145 396 ms
+HTTP http://108.159.0.145/ succeeded: 404 ms
+108.159.0.145 404 ms
 Testing 108.162.192.1 ...
 Attempt 1 for 108.162.192.1
-HTTP http://108.162.192.1/ succeeded: 4 ms
-108.162.192.1 4 ms
+HTTP http://108.162.192.1/ succeeded: 5 ms
+108.162.192.1 5 ms
 Testing 108.162.192.3 ...
 Attempt 1 for 108.162.192.3
-HTTP http://108.162.192.3/ succeeded: 5 ms
-108.162.192.3 5 ms
+HTTP http://108.162.192.3/ succeeded: 3 ms
+108.162.192.3 3 ms
 Testing 108.162.192.4 ...
 Attempt 1 for 108.162.192.4
-HTTP http://108.162.192.4/ succeeded: 6 ms
-108.162.192.4 6 ms
+HTTP http://108.162.192.4/ succeeded: 4 ms
+108.162.192.4 4 ms
 Testing 108.162.192.5 ...
 Attempt 1 for 108.162.192.5
-HTTP http://108.162.192.5/ succeeded: 4 ms
-108.162.192.5 4 ms
+HTTP http://108.162.192.5/ succeeded: 3 ms
+108.162.192.5 3 ms
 Testing 108.162.192.7 ...
 Attempt 1 for 108.162.192.7
 HTTP http://108.162.192.7/ succeeded: 4 ms
@@ -662,12 +662,12 @@ HTTP http://108.162.192.9/ succeeded: 4 ms
 108.162.192.9 4 ms
 Testing 108.165.65.157 ...
 Attempt 1 for 108.165.65.157
-HTTP http://108.165.65.157/ succeeded: 229 ms
-108.165.65.157 229 ms
+HTTP http://108.165.65.157/ succeeded: 230 ms
+108.165.65.157 230 ms
 Testing 114.32.9.249 ...
 Attempt 1 for 114.32.9.249
-HTTP http://114.32.9.249/ succeeded: 166 ms
-114.32.9.249 166 ms
+HTTP http://114.32.9.249/ succeeded: 171 ms
+114.32.9.249 171 ms
 Testing 121.166.39.76 ...
 Attempt 1 for 121.166.39.76
 HTTP http://121.166.39.76/ succeeded: 5002 ms
@@ -678,16 +678,16 @@ HTTP http://121.173.93.124/ succeeded: 5002 ms
 121.173.93.124 5002 ms
 Testing 123.111.169.70 ...
 Attempt 1 for 123.111.169.70
-HTTP http://123.111.169.70/ succeeded: 295 ms
-123.111.169.70 295 ms
+HTTP http://123.111.169.70/ succeeded: 708 ms
+123.111.169.70 708 ms
 Testing 125.139.184.199 ...
 Attempt 1 for 125.139.184.199
 HTTP http://125.139.184.199/ succeeded: 5002 ms
 125.139.184.199 5002 ms
 Testing 129.154.50.72 ...
 Attempt 1 for 129.154.50.72
-HTTP http://129.154.50.72/ succeeded: 266 ms
-129.154.50.72 266 ms
+HTTP http://129.154.50.72/ succeeded: 265 ms
+129.154.50.72 265 ms
 Testing 138.3.212.160 ...
 Attempt 1 for 138.3.212.160
 HTTP http://138.3.212.160/ succeeded: 105 ms
@@ -706,32 +706,32 @@ HTTP http://140.235.38.47/ succeeded: 5002 ms
 140.235.38.47 5002 ms
 Testing 141.11.43.124 ...
 Attempt 1 for 141.11.43.124
-HTTP http://141.11.43.124/ succeeded: 339 ms
-141.11.43.124 339 ms
+HTTP http://141.11.43.124/ succeeded: 342 ms
+141.11.43.124 342 ms
 Testing 141.11.91.67 ...
 Attempt 1 for 141.11.91.67
 HTTP http://141.11.91.67/ succeeded: 145 ms
 141.11.91.67 145 ms
 Testing 141.147.174.243 ...
 Attempt 1 for 141.147.174.243
-HTTP http://141.147.174.243/ succeeded: 210 ms
-141.147.174.243 210 ms
+HTTP http://141.147.174.243/ succeeded: 209 ms
+141.147.174.243 209 ms
 Testing 141.147.185.63 ...
 Attempt 1 for 141.147.185.63
-HTTP http://141.147.185.63/ succeeded: 117 ms
-141.147.185.63 117 ms
+HTTP http://141.147.185.63/ succeeded: 105 ms
+141.147.185.63 105 ms
 Testing 144.202.126.54 ...
 Attempt 1 for 144.202.126.54
-HTTP http://144.202.126.54/ succeeded: 18 ms
-144.202.126.54 18 ms
+HTTP http://144.202.126.54/ succeeded: 16 ms
+144.202.126.54 16 ms
 Testing 149.28.18.65 ...
 Attempt 1 for 149.28.18.65
 HTTP http://149.28.18.65/ succeeded: 5002 ms
 149.28.18.65 5002 ms
 Testing 149.118.158.90 ...
 Attempt 1 for 149.118.158.90
-HTTP http://149.118.158.90/ succeeded: 339 ms
-149.118.158.90 339 ms
+HTTP http://149.118.158.90/ succeeded: 340 ms
+149.118.158.90 340 ms
 Testing 154.3.32.164 ...
 Attempt 1 for 154.3.32.164
 HTTP http://154.3.32.164/ succeeded: 145 ms
@@ -742,16 +742,16 @@ HTTP http://154.16.183.190/ succeeded: 290 ms
 154.16.183.190 290 ms
 Testing 154.17.22.207 ...
 Attempt 1 for 154.17.22.207
-HTTP http://154.17.22.207/ succeeded: 5002 ms
-154.17.22.207 5002 ms
+HTTP http://154.17.22.207/ succeeded: 5001 ms
+154.17.22.207 5001 ms
 Testing 154.83.98.90 ...
 Attempt 1 for 154.83.98.90
-HTTP http://154.83.98.90/ succeeded: 145 ms
-154.83.98.90 145 ms
+HTTP http://154.83.98.90/ succeeded: 398 ms
+154.83.98.90 398 ms
 Testing 155.248.181.189 ...
 Attempt 1 for 155.248.181.189
-HTTP http://155.248.181.189/ succeeded: 115 ms
-155.248.181.189 115 ms
+HTTP http://155.248.181.189/ succeeded: 113 ms
+155.248.181.189 113 ms
 Testing 158.101.131.94 ...
 Attempt 1 for 158.101.131.94
 HTTP http://158.101.131.94/ succeeded: 105 ms
@@ -762,68 +762,68 @@ HTTP http://158.101.132.216/ succeeded: 105 ms
 158.101.132.216 105 ms
 Testing 162.159.0.1 ...
 Attempt 1 for 162.159.0.1
-HTTP http://162.159.0.1/ succeeded: 4 ms
-162.159.0.1 4 ms
+HTTP http://162.159.0.1/ succeeded: 5 ms
+162.159.0.1 5 ms
 Testing 162.159.0.2 ...
 Attempt 1 for 162.159.0.2
-HTTP http://162.159.0.2/ succeeded: 5 ms
-162.159.0.2 5 ms
+HTTP http://162.159.0.2/ succeeded: 3 ms
+162.159.0.2 3 ms
 Testing 162.159.0.3 ...
 Attempt 1 for 162.159.0.3
-HTTP http://162.159.0.3/ succeeded: 5 ms
-162.159.0.3 5 ms
+HTTP http://162.159.0.3/ succeeded: 7 ms
+162.159.0.3 7 ms
 Testing 162.159.0.4 ...
 Attempt 1 for 162.159.0.4
 HTTP http://162.159.0.4/ succeeded: 4 ms
 162.159.0.4 4 ms
 Testing 162.159.0.5 ...
 Attempt 1 for 162.159.0.5
-HTTP http://162.159.0.5/ succeeded: 5 ms
-162.159.0.5 5 ms
+HTTP http://162.159.0.5/ succeeded: 3 ms
+162.159.0.5 3 ms
 Testing 162.159.0.6 ...
 Attempt 1 for 162.159.0.6
-HTTP http://162.159.0.6/ succeeded: 7 ms
-162.159.0.6 7 ms
+HTTP http://162.159.0.6/ succeeded: 5 ms
+162.159.0.6 5 ms
 Testing 162.159.0.7 ...
 Attempt 1 for 162.159.0.7
 HTTP http://162.159.0.7/ succeeded: 4 ms
 162.159.0.7 4 ms
 Testing 162.159.0.9 ...
 Attempt 1 for 162.159.0.9
-HTTP http://162.159.0.9/ succeeded: 4 ms
-162.159.0.9 4 ms
+HTTP http://162.159.0.9/ succeeded: 5 ms
+162.159.0.9 5 ms
 Testing 162.159.24.131 ...
 Attempt 1 for 162.159.24.131
-HTTP http://162.159.24.131/ succeeded: 4 ms
-162.159.24.131 4 ms
+HTTP http://162.159.24.131/ succeeded: 6 ms
+162.159.24.131 6 ms
 Testing 162.159.58.65 ...
 Attempt 1 for 162.159.58.65
 HTTP http://162.159.58.65/ succeeded: 4 ms
 162.159.58.65 4 ms
 Testing 162.159.61.183 ...
 Attempt 1 for 162.159.61.183
-HTTP http://162.159.61.183/ succeeded: 4 ms
-162.159.61.183 4 ms
+HTTP http://162.159.61.183/ succeeded: 5 ms
+162.159.61.183 5 ms
 Testing 162.159.128.253 ...
 Attempt 1 for 162.159.128.253
-HTTP http://162.159.128.253/ succeeded: 5 ms
-162.159.128.253 5 ms
+HTTP http://162.159.128.253/ succeeded: 7 ms
+162.159.128.253 7 ms
 Testing 162.159.136.89 ...
 Attempt 1 for 162.159.136.89
 HTTP http://162.159.136.89/ succeeded: 4 ms
 162.159.136.89 4 ms
 Testing 162.159.137.204 ...
 Attempt 1 for 162.159.137.204
-HTTP http://162.159.137.204/ succeeded: 5 ms
-162.159.137.204 5 ms
+HTTP http://162.159.137.204/ succeeded: 3 ms
+162.159.137.204 3 ms
 Testing 162.159.140.85 ...
 Attempt 1 for 162.159.140.85
-HTTP http://162.159.140.85/ succeeded: 6 ms
-162.159.140.85 6 ms
+HTTP http://162.159.140.85/ succeeded: 4 ms
+162.159.140.85 4 ms
 Testing 162.159.140.116 ...
 Attempt 1 for 162.159.140.116
-HTTP http://162.159.140.116/ succeeded: 4 ms
-162.159.140.116 4 ms
+HTTP http://162.159.140.116/ succeeded: 3 ms
+162.159.140.116 3 ms
 Testing 162.159.197.1 ...
 Attempt 1 for 162.159.197.1
 HTTP http://162.159.197.1/ succeeded: 5002 ms
@@ -838,108 +838,108 @@ HTTP http://168.107.0.210/ succeeded: 5002 ms
 168.107.0.210 5002 ms
 Testing 168.138.46.67 ...
 Attempt 1 for 168.138.46.67
-HTTP http://168.138.46.67/ succeeded: 111 ms
-168.138.46.67 111 ms
+HTTP http://168.138.46.67/ succeeded: 119 ms
+168.138.46.67 119 ms
 Testing 172.64.32.1 ...
 Attempt 1 for 172.64.32.1
-HTTP http://172.64.32.1/ succeeded: 3 ms
-172.64.32.1 3 ms
+HTTP http://172.64.32.1/ succeeded: 4 ms
+172.64.32.1 4 ms
 Testing 172.64.32.3 ...
 Attempt 1 for 172.64.32.3
-HTTP http://172.64.32.3/ succeeded: 8 ms
-172.64.32.3 8 ms
+HTTP http://172.64.32.3/ succeeded: 3 ms
+172.64.32.3 3 ms
 Testing 172.64.32.4 ...
 Attempt 1 for 172.64.32.4
 HTTP http://172.64.32.4/ succeeded: 5 ms
 172.64.32.4 5 ms
 Testing 172.64.32.6 ...
 Attempt 1 for 172.64.32.6
-HTTP http://172.64.32.6/ succeeded: 3 ms
-172.64.32.6 3 ms
+HTTP http://172.64.32.6/ succeeded: 5 ms
+172.64.32.6 5 ms
 Testing 172.64.32.7 ...
 Attempt 1 for 172.64.32.7
-HTTP http://172.64.32.7/ succeeded: 9 ms
-172.64.32.7 9 ms
+HTTP http://172.64.32.7/ succeeded: 4 ms
+172.64.32.7 4 ms
 Testing 172.64.32.9 ...
 Attempt 1 for 172.64.32.9
 HTTP http://172.64.32.9/ succeeded: 4 ms
 172.64.32.9 4 ms
 Testing 172.64.48.226 ...
 Attempt 1 for 172.64.48.226
-HTTP http://172.64.48.226/ succeeded: 5 ms
-172.64.48.226 5 ms
+HTTP http://172.64.48.226/ succeeded: 4 ms
+172.64.48.226 4 ms
 Testing 172.64.52.127 ...
 Attempt 1 for 172.64.52.127
-HTTP http://172.64.52.127/ succeeded: 20 ms
-172.64.52.127 20 ms
+HTTP http://172.64.52.127/ succeeded: 19 ms
+172.64.52.127 19 ms
 Testing 172.64.52.234 ...
 Attempt 1 for 172.64.52.234
-HTTP http://172.64.52.234/ succeeded: 18 ms
-172.64.52.234 18 ms
+HTTP http://172.64.52.234/ succeeded: 21 ms
+172.64.52.234 21 ms
 Testing 172.64.53.63 ...
 Attempt 1 for 172.64.53.63
-HTTP http://172.64.53.63/ succeeded: 21 ms
-172.64.53.63 21 ms
+HTTP http://172.64.53.63/ succeeded: 17 ms
+172.64.53.63 17 ms
 Testing 172.64.82.114 ...
 Attempt 1 for 172.64.82.114
-HTTP http://172.64.82.114/ succeeded: 4 ms
-172.64.82.114 4 ms
+HTTP http://172.64.82.114/ succeeded: 5 ms
+172.64.82.114 5 ms
 Testing 172.64.91.69 ...
 Attempt 1 for 172.64.91.69
-HTTP http://172.64.91.69/ succeeded: 4 ms
-172.64.91.69 4 ms
+HTTP http://172.64.91.69/ succeeded: 3 ms
+172.64.91.69 3 ms
 Testing 172.64.144.224 ...
 Attempt 1 for 172.64.144.224
-HTTP http://172.64.144.224/ succeeded: 4 ms
-172.64.144.224 4 ms
+HTTP http://172.64.144.224/ succeeded: 5 ms
+172.64.144.224 5 ms
 Testing 172.64.145.70 ...
 Attempt 1 for 172.64.145.70
-HTTP http://172.64.145.70/ succeeded: 4 ms
-172.64.145.70 4 ms
+HTTP http://172.64.145.70/ succeeded: 3 ms
+172.64.145.70 3 ms
 Testing 172.64.158.149 ...
 Attempt 1 for 172.64.158.149
-HTTP http://172.64.158.149/ succeeded: 5 ms
-172.64.158.149 5 ms
+HTTP http://172.64.158.149/ succeeded: 4 ms
+172.64.158.149 4 ms
 Testing 172.64.159.79 ...
 Attempt 1 for 172.64.159.79
 HTTP http://172.64.159.79/ succeeded: 4 ms
 172.64.159.79 4 ms
 Testing 172.64.229.7 ...
 Attempt 1 for 172.64.229.7
-HTTP http://172.64.229.7/ succeeded: 3 ms
-172.64.229.7 3 ms
+HTTP http://172.64.229.7/ succeeded: 4 ms
+172.64.229.7 4 ms
 Testing 172.65.184.39 ...
 Attempt 1 for 172.65.184.39
 HTTP http://172.65.184.39/ succeeded: 4 ms
 172.65.184.39 4 ms
 Testing 172.67.225.194 ...
 Attempt 1 for 172.67.225.194
-HTTP http://172.67.225.194/ succeeded: 3 ms
-172.67.225.194 3 ms
+HTTP http://172.67.225.194/ succeeded: 4 ms
+172.67.225.194 4 ms
 Testing 172.104.80.248 ...
 Attempt 1 for 172.104.80.248
-HTTP http://172.104.80.248/ succeeded: 105 ms
-172.104.80.248 105 ms
+HTTP http://172.104.80.248/ succeeded: 104 ms
+172.104.80.248 104 ms
 Testing 172.104.81.253 ...
 Attempt 1 for 172.104.81.253
 HTTP http://172.104.81.253/ succeeded: 105 ms
 172.104.81.253 105 ms
 Testing 172.104.120.92 ...
 Attempt 1 for 172.104.120.92
-HTTP http://172.104.120.92/ succeeded: 5002 ms
-172.104.120.92 5002 ms
+HTTP http://172.104.120.92/ succeeded: 105 ms
+172.104.120.92 105 ms
 Testing 172.233.64.181 ...
 Attempt 1 for 172.233.64.181
-HTTP http://172.233.64.181/ succeeded: 297 ms
-172.233.64.181 297 ms
+HTTP http://172.233.64.181/ succeeded: 225 ms
+172.233.64.181 225 ms
 Testing 172.237.5.208 ...
 Attempt 1 for 172.237.5.208
-HTTP http://172.237.5.208/ succeeded: 104 ms
-172.237.5.208 104 ms
+HTTP http://172.237.5.208/ succeeded: 105 ms
+172.237.5.208 105 ms
 Testing 173.245.49.194 ...
 Attempt 1 for 173.245.49.194
-HTTP http://173.245.49.194/ succeeded: 5 ms
-173.245.49.194 5 ms
+HTTP http://173.245.49.194/ succeeded: 3 ms
+173.245.49.194 3 ms
 Testing 174.137.61.42 ...
 Attempt 1 for 174.137.61.42
 HTTP http://174.137.61.42/ succeeded: 5002 ms
@@ -950,8 +950,8 @@ HTTP http://175.213.209.189/ succeeded: 5002 ms
 175.213.209.189 5002 ms
 Testing 176.97.70.51 ...
 Attempt 1 for 176.97.70.51
-HTTP http://176.97.70.51/ succeeded: 105 ms
-176.97.70.51 105 ms
+HTTP http://176.97.70.51/ succeeded: 108 ms
+176.97.70.51 108 ms
 Testing 198.41.194.162 ...
 Attempt 1 for 198.41.194.162
 HTTP http://198.41.194.162/ succeeded: 5 ms
@@ -962,12 +962,12 @@ HTTP http://198.41.208.15/ succeeded: 4 ms
 198.41.208.15 4 ms
 Testing 198.41.208.224 ...
 Attempt 1 for 198.41.208.224
-HTTP http://198.41.208.224/ succeeded: 3 ms
-198.41.208.224 3 ms
+HTTP http://198.41.208.224/ succeeded: 6 ms
+198.41.208.224 6 ms
 Testing 198.46.218.63 ...
 Attempt 1 for 198.46.218.63
-HTTP http://198.46.218.63/ succeeded: 106 ms
-198.46.218.63 106 ms
+HTTP http://198.46.218.63/ succeeded: 110 ms
+198.46.218.63 110 ms
 Testing 199.19.111.56 ...
 Attempt 1 for 199.19.111.56
 HTTP http://199.19.111.56/ succeeded: 5002 ms
@@ -978,12 +978,12 @@ HTTP http://202.144.194.170/ succeeded: 5002 ms
 202.144.194.170 5002 ms
 Testing 203.69.11.79 ...
 Attempt 1 for 203.69.11.79
-HTTP http://203.69.11.79/ succeeded: 141 ms
-203.69.11.79 141 ms
+HTTP http://203.69.11.79/ succeeded: 138 ms
+203.69.11.79 138 ms
 Testing 203.69.11.80 ...
 Attempt 1 for 203.69.11.80
-HTTP http://203.69.11.80/ succeeded: 138 ms
-203.69.11.80 138 ms
+HTTP http://203.69.11.80/ succeeded: 139 ms
+203.69.11.80 139 ms
 Testing 203.69.11.81 ...
 Attempt 1 for 203.69.11.81
 HTTP http://203.69.11.81/ succeeded: 138 ms
@@ -1006,8 +1006,8 @@ HTTP http://207.148.120.55/ succeeded: 5002 ms
 207.148.120.55 5002 ms
 Testing 209.206.51.198 ...
 Attempt 1 for 209.206.51.198
-HTTP http://209.206.51.198/ succeeded: 4 ms
-209.206.51.198 4 ms
+HTTP http://209.206.51.198/ succeeded: 3 ms
+209.206.51.198 3 ms
 Testing 209.237.135.93 ...
 Attempt 1 for 209.237.135.93
 HTTP http://209.237.135.93/ succeeded: 5002 ms
@@ -1018,24 +1018,24 @@ HTTP http://211.49.57.134/ succeeded: 128 ms
 211.49.57.134 128 ms
 Testing 211.72.147.91 ...
 Attempt 1 for 211.72.147.91
-HTTP http://211.72.147.91/ succeeded: 138 ms
-211.72.147.91 138 ms
+HTTP http://211.72.147.91/ succeeded: 139 ms
+211.72.147.91 139 ms
 Testing 211.216.185.56 ...
 Attempt 1 for 211.216.185.56
 HTTP http://211.216.185.56/ succeeded: 5002 ms
 211.216.185.56 5002 ms
 Testing 213.35.100.31 ...
 Attempt 1 for 213.35.100.31
-HTTP http://213.35.100.31/ succeeded: 335 ms
-213.35.100.31 335 ms
+HTTP http://213.35.100.31/ succeeded: 336 ms
+213.35.100.31 336 ms
 Testing 213.35.110.208 ...
 Attempt 1 for 213.35.110.208
-HTTP http://213.35.110.208/ succeeded: 169 ms
-213.35.110.208 169 ms
+HTTP http://213.35.110.208/ succeeded: 168 ms
+213.35.110.208 168 ms
 Testing 217.142.227.105 ...
 Attempt 1 for 217.142.227.105
-HTTP http://217.142.227.105/ succeeded: 112 ms
-217.142.227.105 112 ms
+HTTP http://217.142.227.105/ succeeded: 115 ms
+217.142.227.105 115 ms
 Testing 220.77.188.107 ...
 Attempt 1 for 220.77.188.107
 HTTP http://220.77.188.107/ succeeded: 5002 ms
