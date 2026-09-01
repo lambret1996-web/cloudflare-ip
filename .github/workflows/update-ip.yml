@@ -96,13 +96,15 @@ jobs:
               echo "All HTTP probes failed for $ip, marking as 9999" | tee -a "$DEBUG"
             fi
 
-            printf "%s %sms\n" "$ip" "$avg_ms" >> "$IPTEST"
-          done < "$IPS"
+            # 打印到日志（带ms方便看）
+            echo "$ip $avg_ms ms" | tee -a "$DEBUG"
+            # 写入测速文件【纯数字，不要ms，保证排序正常】
+            printf "%s %d\n" "$ip" "$avg_ms" >> "$IPTEST"
+
+           done < "$IPS"
 
           sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
-          echo "$ip $avg_ms ms" | tee -a "$DEBUG"
-          printf "%s %d\n" "$ip" "$avg_ms" >> "$IPTEST"
-          echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+            echo "Wrote results to $IPTEST and top-10 to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
 
