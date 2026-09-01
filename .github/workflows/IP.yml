@@ -107,7 +107,8 @@ jobs:
           done < "$IPS"
 
           sort -k2 -n "$IPTEST" | awk '$2 >= 15' | head -n 15 | awk '{print $1}' > "$IPOUT"
-
+          # 测速全部结束后
+          awk '{printf "%s %dms\n",$1,$2}' "$IPTEST" > IPtest_show.txt
           echo "Wrote results to $IPTEST and top results to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
