@@ -16,16 +16,19 @@ jobs:
 
     steps:
       - name: Checkout repository
+        # 把仓库检出到 runner，保留凭证以便后续推送
         uses: actions/checkout@v4
         with:
           persist-credentials: true
 
       - name: Ensure dependencies
+        # 安装必要工具：curl、bc、coreutils
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl coreutils openssl
+          sudo apt-get install -y curl bc coreutils
 
-      - name: Run IP latency checks (HTTP/TLS-WS)
+      - name: Run IP latency checks (HTTP tests)
+        # 脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 做多次 HTTP 请求（优先 http 然后 https），生成 IPtest.txt 和 IP.txt，并写 debug.log
         run: |
           set -xeo pipefail
 
@@ -36,128 +39,120 @@ jobs:
           IPTEST="IPtest.txt"
           IPOUT="IP.txt"
           DEBUG="debug.log"
-          RESULTS_TMP="results.tmp"
 
           : > "$IPTEST"
           : > "$IPOUT" || true
           : > "$DEBUG"
-          : > "$RESULTS_TMP"
 
           curl -fsS "$URL" -o "$RAWLIST"
+
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
+
+          echo "=== Debug: basic connectivity check (curl to 1.1.1.1) ===" | tee -a "$DEBUG"
+          timeout 5s curl -sS --connect-timeout 5 --max-time 10 http://1.1.1.1/ -o /dev/null 2>&1 | tee -a "$DEBUG" || true
+          echo "=== End debug ===" | tee -a "$DEBUG"
 
           now_ms() { date +%s%3N; }
 
-          test_http_request() {
-            local ip="$1"
-            local port="${2:-443}"
-            local use_https="${3:-true}"
-            
-            local protocol="http"
-            [ "$use_https" = "true" ] && protocol="https"
-
-            local start=$(now_ms)
-            local response=$(timeout 1s curl -fsS \
-              --resolve "example.com:${port}:${ip}" \
-              --cacert /dev/null \
-              --insecure \
-              --max-time 1 \
-              --connect-timeout 1 \
-              --write-out "%{http_code}" \
-              -o /dev/null \
-              "${protocol}://example.com:${port}/favicon.ico" 2>&1 || echo "000")
-
-            local end=$(now_ms)
-            local elapsed_ms=$((end - start))
-
-            if [[ "$response" =~ ^[23][0-9]{2}$ ]]; then
-              echo "$elapsed_ms"
-              return 0
-            else
-              echo "9999"
-              return 1
-            fi
-          }
-
-          test_tls_handshake() {
-            local ip="$1"
-            local port="${2:-443}"
-
-            local start=$(now_ms)
-            local tls_out=$(timeout 1s bash -c "echo | openssl s_client -connect ${ip}:${port} -servername example.com -brief 2>&1" || echo "FAILED")
-            local end=$(now_ms)
-            local elapsed_ms=$((end - start))
-
-            if echo "$tls_out" | grep -qi "verify return code: 0\|connected to\|depth=0"; then
-              echo "$elapsed_ms"
-              return 0
-            else
-              echo "9999"
-              return 1
-            fi
-          }
-
+          # 对每个 IP 做 HTTP 测试（重复 N 次，取平均）
+          attempts=3
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
+            echo "Testing $ip ..." | tee -a "$DEBUG"
 
-            echo "Testing: $ip" | tee -a "$DEBUG"
+            total_ms=0
+            success_count=0
 
-            http_ms="9999"
+            for i in $(seq 1 $attempts); do
+              echo "Attempt $i for $ip" | tee -a "$DEBUG"
 
-            http_result=$(test_http_request "$ip" 443 "true" || echo "9999")
-            if [ "$http_result" != "9999" ]; then
-              http_ms="$http_result"
-              echo "  HTTPS:443 -> ${http_ms}ms" | tee -a "$DEBUG"
-            else
-              tls_result=$(test_tls_handshake "$ip" 443 || echo "9999")
-              if [ "$tls_result" != "9999" ]; then
-                http_ms="$tls_result"
-                echo "  TLS:443 -> ${http_ms}ms" | tee -a "$DEBUG"
-              else
-                http_result=$(test_http_request "$ip" 80 "false" || echo "9999")
-                if [ "$http_result" != "9999" ]; then
-                  http_ms="$http_result"
-                  echo "  HTTP:80 -> ${http_ms}ms" | tee -a "$DEBUG"
-                else
-                  echo "  Failed -> 9999ms" | tee -a "$DEBUG"
-                fi
+              # 1) 先尝试 http (端口 80)
+              time_sec=$(curl -sS -o /dev/null -w "%{time_total}" --connect-timeout 5 --max-time 10 "http://$ip/" 2>/dev/null || true)
+              if [ -n "$time_sec" ] && [ "$time_sec" != "0" ]; then
+                ms=$(awk "BEGIN{printf \"%d\", $time_sec*1000}")
+                total_ms=$((total_ms + ms))
+                success_count=$((success_count + 1))
+                echo "HTTP http://$ip/ succeeded: ${ms} ms" | tee -a "$DEBUG"
+                continue
               fi
+
+              # 2) 若 http 失败，尝试 https (忽略证书)
+              time_sec=$(curl -sS -k -o /dev/null -w "%{time_total}" --connect-timeout 5 --max-time 10 "https://$ip/" 2>/dev/null || true)
+              if [ -n "$time_sec" ] && [ "$time_sec" != "0" ]; then
+                ms=$(awk "BEGIN{printf \"%d\", $time_sec*1000}")
+                total_ms=$((total_ms + ms))
+                success_count=$((success_count + 1))
+                echo "HTTP https://$ip/ succeeded (insecure): ${ms} ms" | tee -a "$DEBUG"
+                continue
+              fi
+
+              echo "Both http and https failed for attempt $i on $ip" | tee -a "$DEBUG"
+            done
+
+            if [ "$success_count" -gt 0 ]; then
+              avg_ms=$(( total_ms / success_count ))
+            else
+              avg_ms=9999
+              echo "All HTTP probes failed for $ip, marking as 9999" | tee -a "$DEBUG"
             fi
 
-            printf "%s %s\n" "$ip" "$http_ms" >> "$RESULTS_TMP"
+            printf "%s %sms\n" "$ip" "$avg_ms" >> "$IPTEST"
           done < "$IPS"
 
-          awk 'BEGIN{OFS=" "} {
-            ip = $1
-            http = (($2 == "") ? 9999 : $2 + 0)
-            if (http != http) http = 9999
-            print ip, http
-          }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
+          sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
 
-          awk '{print $1}' "$IPTEST" | head -n 15 > "$IPOUT"
-          
-          echo "=== Results ===" | tee -a "$DEBUG"
-          head -n 15 "$IPTEST" | tee -a "$DEBUG"
+          echo "Wrote results to $IPTEST and top-10 to $IPOUT"
+          echo "Saved debug log to $DEBUG"
+          ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
 
-      - name: Commit results back to repo
+      - name: Commit results back to repo (debug + safe commit)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -xeo pipefail
 
+          echo "工作目录列举："
+          pwd
+          ls -lah .
+
+          echo "查看结果文件（若存在）..."
+          echo "---- IPtest.txt ----"
+          if [ -f IPtest.txt ]; then cat IPtest.txt; else echo "IPtest.txt 不存在"; fi
+          echo "---- IP.txt ----"
+          if [ -f IP.txt ]; then cat IP.txt; else echo "IP.txt 不存在"; fi
+          echo "---- debug.log ----"
+          if [ -f debug.log ]; then sed -n '1,300p' debug.log || true; else echo "debug.log 不存在"; fi
+
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          echo "git status (before add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git status || true
+          echo "git diff (unstaged):"
+          git --no-pager diff --no-color || true
+
           git add -f IPtest.txt IP.txt debug.log || true
 
+          echo "git status (after add):"
+          git status --porcelain=1 --untracked-files=all || true
+          git --no-pager diff --staged --no-color || true
+
           BRANCH="${GITHUB_REF#refs/heads/}"
-          [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ] && BRANCH="main"
+          if [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ]; then
+            BRANCH="main"
+          fi
+          echo "Target branch for push: $BRANCH"
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update IP latency results (HTTP/TLS tests)"
-            git push origin "HEAD:${BRANCH}"
+            git commit -m "Update IP latency results (HTTP tests)"
+            if ! git push origin "HEAD:${BRANCH}"; then
+              echo "git push 失败，打印远端和权限信息"
+              git remote -v || true
+              exit 1
+            fi
           fi
 
       - name: Upload results as artifact
