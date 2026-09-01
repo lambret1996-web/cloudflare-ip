@@ -40,13 +40,15 @@ jobs:
           RAWLIST="iplist.raw"    # 下载的原始文件
           IPS="ips.txt"           # 解析并去重后的 IP 列表
           IPTEST="IPtest.txt"     # 每行: "IP 平均延迟(ms)"
-          IPOUT="IP.txt"          # 延迟最低的 10 个 IP（每行一个 IP）
+          IPOUT="IP.txt"          # 延迟最低的 15 个 IP（每行一个 IP）
           DEBUG="debug.log"       # 调试日志，便于排查 ICMP/TCP/HTTP 问题
+          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP ping_ms tcp_ms http_ms）
 
           # 初始化输出文件（清空或创建）
           : > "$IPTEST"
           : > "$IPOUT" || true
           : > "$DEBUG"
+          : > "$RESULTS_TMP"
 
           # -------------------------
           # 1) 下载远端 raw 文件
@@ -152,88 +154,108 @@ jobs:
           }
 
           # -------------------------
-          # 4) 遍历每个 IP，执行 ping（优先 ICMP），若 ICMP 无响应则尝试 TCP/HTTP/TLS 回退
+          # 4) 遍历每个 IP，执行 ICMP/TCP/HTTP 三种测试，记录所有延迟
           # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
 
             echo "Testing $ip ..." | tee -a "$DEBUG"
 
-            # 尝试 ICMP ping（1 次，超时 1 秒）
+            ping_ms="9999"
+            tcp_ms="9999"
+            http_ms="9999"
+
+            # ===== ICMP PING =====
+            echo "  [ICMP] Testing $ip ..." | tee -a "$DEBUG"
             ping_out=$(timeout 1s ping -4 -c 1 -W 1 -q "$ip" 2>&1 || true)
             echo "PING OUTPUT for $ip:" >> "$DEBUG"
             echo "$ping_out" >> "$DEBUG"
 
             # 从 ping 统计行提取 avg（ms），兼容不同 ping 版本输出
-            avg_ms=$(echo "$ping_out" | awk -F'/' '/rtt|round-trip/ {print $5; exit}')
-            if [ -z "$avg_ms" ]; then
-              avg_ms=$(echo "$ping_out" | awk -F'/' 'END{print $2}')
+            ping_ms=$(echo "$ping_out" | awk -F'/' '/rtt|round-trip/ {print $5; exit}')
+            if [ -z "$ping_ms" ]; then
+              ping_ms=$(echo "$ping_out" | awk -F'/' 'END{print $2}')
             fi
+            if [ -z "$ping_ms" ] || [ "$ping_ms" = "0" ]; then
+              ping_ms="9999"
+            fi
+            echo "ICMP result: ${ping_ms} ms" | tee -a "$DEBUG"
 
-            # 如果 ICMP 失败，尝试 TCP 连接回退
-            if [ -z "$avg_ms" ]; then
-              echo "ICMP failed for $ip, trying TCP connect fallback" | tee -a "$DEBUG"
-              tcp_success=0
-              for port in 443 80; do
-                start=$(now_ms)
-                # 使用 bash 的 /dev/tcp 做快速连接测试（配合 timeout 1秒）
-                if timeout 1s bash -c "cat < /dev/null > /dev/tcp/${ip}/${port}" >/dev/null 2>&1; then
-                  end=$(now_ms)
-                  elapsed_ms=$((end - start))
-                  avg_ms="$elapsed_ms"
-                  tcp_success=1
-                  echo "TCP connect to ${ip}:${port} succeeded in ${avg_ms} ms" | tee -a "$DEBUG"
-                  break
-                else
-                  echo "TCP ${ip}:${port} failed or timed out" | tee -a "$DEBUG"
-                fi
-              done
+            # ===== TCP CONNECT =====
+            echo "  [TCP] Testing $ip ..." | tee -a "$DEBUG"
+            for port in 443 80; do
+              start=$(now_ms)
+              if timeout 1s bash -c "cat < /dev/null > /dev/tcp/${ip}/${port}" >/dev/null 2>&1; then
+                end=$(now_ms)
+                tcp_ms=$((end - start))
+                echo "TCP connect to ${ip}:${port} succeeded in ${tcp_ms} ms" | tee -a "$DEBUG"
+                break
+              else
+                echo "TCP ${ip}:${port} failed or timed out" | tee -a "$DEBUG"
+              fi
+            done
+            echo "TCP result: ${tcp_ms} ms" | tee -a "$DEBUG"
 
-              # 如果 TCP 也失败，尝试 HTTP/HTTPS 请求（模拟真实 VLESS TLS-WS 握手）
-              if [ "$tcp_success" -eq 0 ]; then
-                echo "TCP failed for $ip, trying HTTP/HTTPS request (VLESS TLS-WS simulation)" | tee -a "$DEBUG"
-                
-                # 优先尝试 HTTPS (443)
-                http_result=$(test_http_request "$ip" 443 "true" || echo "9999")
+            # ===== HTTP/HTTPS REQUEST =====
+            echo "  [HTTP] Testing $ip ..." | tee -a "$DEBUG"
+            http_result=$(test_http_request "$ip" 443 "true" || echo "9999")
+            if [ "$http_result" != "9999" ]; then
+              http_ms="$http_result"
+            else
+              # HTTPS 失败，尝试 TLS 握手测试
+              echo "HTTPS request failed for $ip:443, trying TLS handshake" | tee -a "$DEBUG"
+              tls_result=$(test_tls_handshake "$ip" 443 || echo "9999")
+              if [ "$tls_result" != "9999" ]; then
+                http_ms="$tls_result"
+              else
+                # TLS 握手也失败，尝试 HTTP (80)
+                echo "TLS handshake failed for $ip:443, trying HTTP on port 80" | tee -a "$DEBUG"
+                http_result=$(test_http_request "$ip" 80 "false" || echo "9999")
                 if [ "$http_result" != "9999" ]; then
-                  avg_ms="$http_result"
-                  echo "HTTPS request succeeded with ${avg_ms} ms" | tee -a "$DEBUG"
-                else
-                  # HTTPS 失败，尝试 TLS 握手测试
-                  echo "HTTPS request failed for $ip:443, trying TLS handshake" | tee -a "$DEBUG"
-                  tls_result=$(test_tls_handshake "$ip" 443 || echo "9999")
-                  if [ "$tls_result" != "9999" ]; then
-                    avg_ms="$tls_result"
-                    echo "TLS handshake succeeded with ${avg_ms} ms" | tee -a "$DEBUG"
-                  else
-                    # TLS 握手也失败，尝试 HTTP (80)
-                    echo "TLS handshake failed for $ip:443, trying HTTP on port 80" | tee -a "$DEBUG"
-                    http_result=$(test_http_request "$ip" 80 "false" || echo "9999")
-                    if [ "$http_result" != "9999" ]; then
-                      avg_ms="$http_result"
-                      echo "HTTP request on 80 succeeded with ${avg_ms} ms" | tee -a "$DEBUG"
-                    else
-                      # 全部探测失败
-                      avg_ms="9999"
-                      echo "All probes failed for $ip, marking as 9999" | tee -a "$DEBUG"
-                    fi
-                  fi
+                  http_ms="$http_result"
                 fi
               fi
             fi
+            echo "HTTP result: ${http_ms} ms" | tee -a "$DEBUG"
 
-            # 写入结果文件，格式：IP 平均延迟(ms)
-            printf "%s %sms\n" "$ip" "$avg_ms" >> "$IPTEST"
+            # 保存中间结果
+            printf "%s %s %s %s\n" "$ip" "$ping_ms" "$tcp_ms" "$http_ms" >> "$RESULTS_TMP"
           done < "$IPS"
 
           # -------------------------
-          # 5) 排序并输出延迟最低的 15 个 IP 到 IPOUT
+          # 5) 计算三者平均延迟并按从低到高排序
           # -------------------------
-          sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
+          echo "=== Calculating average latency for each IP ===" | tee -a "$DEBUG"
+          
+          awk '{
+            ip = $1
+            ping = $2
+            tcp = $3
+            http = $4
+            
+            # 将非数字转换为 9999
+            if (ping == "" || ping ~ /[^0-9]/) ping = 9999
+            if (tcp == "" || tcp ~ /[^0-9]/) tcp = 9999
+            if (http == "" || http ~ /[^0-9]/) http = 9999
+            
+            # 计算平均延迟
+            avg = (ping + tcp + http) / 3
+            
+            # 输出：IP 平均延迟 单个延迟值用于调试
+            printf "%s %.1f (ICMP:%s TCP:%s HTTP:%s)\n", ip, avg, ping, tcp, http
+          }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
+
+          # -------------------------
+          # 6) 输出延迟最低的 15 个 IP 到 IPOUT（只显示 IP）
+          # -------------------------
+          awk '{print $1}' "$IPTEST" | head -n 15 > "$IPOUT"
           
           echo "Wrote results to $IPTEST and top-15 to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
+          
+          echo "=== Top 15 IPs by average latency ===" | tee -a "$DEBUG"
+          head -n 15 "$IPTEST" | tee -a "$DEBUG"
 
       - name: Commit results back to repo (debug + safe commit)
         # 使用 GITHUB_TOKEN 自动提交并推送结果（带调试输出并强制 add）
@@ -281,7 +303,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Update IP latency results (ICMP→TCP→HTTP/TLS-WS)"
+            git commit -m "Update IP latency results (average of ICMP/TCP/HTTP)"
             # 推送到目标分支（捕获并打印错误）
             if ! git push origin "HEAD:${BRANCH}"; then
               echo "git push 失败，打印远端和权限信息"
