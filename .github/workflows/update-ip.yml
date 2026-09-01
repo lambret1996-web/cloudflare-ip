@@ -16,77 +16,47 @@ jobs:
 
     steps:
       - name: Checkout repository
-        # 把仓库检出到 runner，保留凭证以便后续推送
         uses: actions/checkout@v4
         with:
           persist-credentials: true
 
       - name: Ensure dependencies
-        # 安装必要工具：curl、coreutils、openssl
         run: |
           sudo apt-get update
           sudo apt-get install -y curl coreutils openssl
 
       - name: Run IP latency checks (HTTP/TLS-WS)
-        # 主要脚本：下载 IP 列表、提取合法 IPv4、对每个 IP 执行 HTTP/TLS-WS 测试，生成 IPtest.txt 和 IP.txt，并写 debug.log
         run: |
-          # 开启严格模式：打印命令、失败则退出（注意在预期失败的命令后使用 "|| true"）
           set -xeo pipefail
 
-          # 目标 raw 文件地址（包含 IPv4 列表）
           URL="https://raw.githubusercontent.com/LancelotRar/best-cf-ips/refs/heads/main/best-cf-ipv4.txt"
 
-          # 本地临时与输出文件名
-          RAWLIST="iplist.raw"    # 下载的原始文件
-          IPS="ips.txt"           # 解析并去重后的 IP 列表
-          IPTEST="IPtest.txt"     # 每行: "IP 平均延迟(ms)"
-          IPOUT="IP.txt"          # 延迟最低的 15 个 IP（每行一个 IP）
-          DEBUG="debug.log"       # 调试日志，便于排查 HTTP 问题
-          RESULTS_TMP="results.tmp" # 临时结果文件（格式：IP http_ms）
+          RAWLIST="iplist.raw"
+          IPS="ips.txt"
+          IPTEST="IPtest.txt"
+          IPOUT="IP.txt"
+          DEBUG="debug.log"
+          RESULTS_TMP="results.tmp"
 
-          # 初始化输出文件（清空或创建）
           : > "$IPTEST"
           : > "$IPOUT" || true
           : > "$DEBUG"
           : > "$RESULTS_TMP"
 
-          # -------------------------
-          # 1) 下载远端 raw 文件
-          # -------------------------
           curl -fsS "$URL" -o "$RAWLIST"
-
-          # -------------------------
-          # 2) 提取合法 IPv4 并去重
-          # -------------------------
           grep -Po '((25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])' "$RAWLIST" | awk '!seen[$0]++' > "$IPS"
 
-          # -------------------------
-          # helper: ms 时间戳（用于探测耗时测量）
-          # -------------------------
           now_ms() { date +%s%3N; }
 
-          # -------------------------
-          # helper: HTTP 请求测试（获取 favicon，模拟真实 VLESS TLS-WS 握手）
-          # -------------------------
           test_http_request() {
             local ip="$1"
             local port="${2:-443}"
             local use_https="${3:-true}"
             
             local protocol="http"
-            if [ "$use_https" = "true" ]; then
-              protocol="https"
-            fi
-
-            echo "HTTP Request test for ${protocol}://${ip}:${port}" >> "$DEBUG"
+            [ "$use_https" = "true" ] && protocol="https"
 
             local start=$(now_ms)
-            
-            # 使用 curl 请求 favicon.ico，模拟浏览器行为
-            # --resolve: 绑定 DNS 到 IP（避免真实 DNS 查询）
-            # --cacert: 接受自签名证书（VLESS 可能使用）
-            # --max-time: 总超时 1 秒
-            # --connect-timeout: 连接超时 1 秒
             local response=$(timeout 1s curl -fsS \
               --resolve "example.com:${port}:${ip}" \
               --cacert /dev/null \
@@ -100,177 +70,97 @@ jobs:
             local end=$(now_ms)
             local elapsed_ms=$((end - start))
 
-            # 检查响应码是否为 2xx 或 3xx（成功或重定向）
             if [[ "$response" =~ ^[23][0-9]{2}$ ]]; then
-              echo "HTTP ${response} for ${protocol}://${ip}:${port} in ${elapsed_ms} ms" | tee -a "$DEBUG"
               echo "$elapsed_ms"
               return 0
             else
-              echo "HTTP request to ${protocol}://${ip}:${port} failed (${response}) in ${elapsed_ms} ms" | tee -a "$DEBUG"
               echo "9999"
               return 1
             fi
           }
 
-          # -------------------------
-          # helper: TLS 握手测试（模拟 VLESS over TLS）
-          # -------------------------
           test_tls_handshake() {
             local ip="$1"
             local port="${2:-443}"
 
-            echo "TLS Handshake test for ${ip}:${port}" >> "$DEBUG"
-
             local start=$(now_ms)
-
-            # 使用 openssl s_client 执行 TLS 握手（不发送实际数据）
-            # -connect: 指定 IP:PORT
-            # -servertlsext: 服务器名称指示 (SNI)
-            # -brief: 简化输出
-            # 使用 echo | 立即关闭连接
             local tls_out=$(timeout 1s bash -c "echo | openssl s_client -connect ${ip}:${port} -servername example.com -brief 2>&1" || echo "FAILED")
-
             local end=$(now_ms)
             local elapsed_ms=$((end - start))
 
-            # 检查 TLS 握手是否成功（通常会包含 "verify return code" 或 "connected to"）
             if echo "$tls_out" | grep -qi "verify return code: 0\|connected to\|depth=0"; then
-              echo "TLS handshake to ${ip}:${port} succeeded in ${elapsed_ms} ms" | tee -a "$DEBUG"
               echo "$elapsed_ms"
               return 0
             else
-              echo "TLS handshake to ${ip}:${port} failed in ${elapsed_ms} ms" | tee -a "$DEBUG"
-              echo "$tls_out" >> "$DEBUG"
               echo "9999"
               return 1
             fi
           }
 
-          # -------------------------
-          # 4) 遍历每个 IP，执行 HTTP 测试
-          # -------------------------
           while IFS= read -r ip || [ -n "$ip" ]; do
             [ -z "$ip" ] && continue
 
-            echo "Testing $ip ..." | tee -a "$DEBUG"
+            echo "Testing: $ip" | tee -a "$DEBUG"
 
             http_ms="9999"
 
-            # ===== HTTP/HTTPS REQUEST =====
-            echo "  [HTTP] Testing $ip ..." | tee -a "$DEBUG"
             http_result=$(test_http_request "$ip" 443 "true" || echo "9999")
             if [ "$http_result" != "9999" ]; then
               http_ms="$http_result"
+              echo "  HTTPS:443 → ${http_ms}ms" | tee -a "$DEBUG"
             else
-              # HTTPS 失败，尝试 TLS 握手测试
-              echo "HTTPS request failed for $ip:443, trying TLS handshake" | tee -a "$DEBUG"
               tls_result=$(test_tls_handshake "$ip" 443 || echo "9999")
               if [ "$tls_result" != "9999" ]; then
                 http_ms="$tls_result"
+                echo "  TLS:443 → ${http_ms}ms" | tee -a "$DEBUG"
               else
-                # TLS 握手也失败，尝试 HTTP (80)
-                echo "TLS handshake failed for $ip:443, trying HTTP on port 80" | tee -a "$DEBUG"
                 http_result=$(test_http_request "$ip" 80 "false" || echo "9999")
                 if [ "$http_result" != "9999" ]; then
                   http_ms="$http_result"
+                  echo "  HTTP:80 → ${http_ms}ms" | tee -a "$DEBUG"
+                else
+                  echo "  Failed → 9999ms" | tee -a "$DEBUG"
                 fi
               fi
             fi
-            echo "HTTP result: ${http_ms} ms" | tee -a "$DEBUG"
 
-            # 保存中间结果
             printf "%s %s\n" "$ip" "$http_ms" >> "$RESULTS_TMP"
           done < "$IPS"
 
-          # -------------------------
-          # 5) 按延迟从低到高排序
-          # -------------------------
-          echo "=== Sorting IPs by latency ===" | tee -a "$DEBUG"
-          
           awk '{
             ip = $1
-            http = (($2 == "") ? 9999 : $2)
-            
-            # 转换为数字（使用一元加操作符强制数值转换）
-            http = http + 0
-            
-            # 如果转换后仍是非数字（NaN），设置为 9999
+            http = (($2 == "") ? 9999 : $2 + 0)
             if (http != http) http = 9999
-            
-            # 输出：IP 延迟 用于调试
-            printf "%s %dms\n", ip, http
+            printf "%s %d\n", ip, http
           }' "$RESULTS_TMP" | sort -k2 -n > "$IPTEST"
 
-          # -------------------------
-          # 6) 输出延迟最低的 15 个 IP 到 IPOUT（只显示 IP）
-          # -------------------------
           awk '{print $1}' "$IPTEST" | head -n 15 > "$IPOUT"
           
-          echo "Wrote results to $IPTEST and top-15 to $IPOUT"
-          echo "Saved debug log to $DEBUG"
-          ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
-          
-          echo "=== Top 15 IPs by latency ===" | tee -a "$DEBUG"
+          echo "=== Results ===" | tee -a "$DEBUG"
           head -n 15 "$IPTEST" | tee -a "$DEBUG"
 
-      - name: Commit results back to repo (debug + safe commit)
-        # 使用 GITHUB_TOKEN 自动提交并推送结果（带调试输出并强制 add）
+      - name: Commit results back to repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -xeo pipefail
 
-          echo "工作目录列举："
-          pwd
-          ls -lah .
-
-          echo "查看结果文件（若存在）..."
-          echo "---- IPtest.txt ----"
-          if [ -f IPtest.txt ]; then cat IPtest.txt; else echo "IPtest.txt 不存在"; fi
-          echo "---- IP.txt ----"
-          if [ -f IP.txt ]; then cat IP.txt; else echo "IP.txt 不存在"; fi
-          echo "---- debug.log ----"
-          if [ -f debug.log ]; then sed -n '1,500p' debug.log || true; else echo "debug.log 不存在"; fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 显示 git 状态与差异，便于排查为什么没有被提交
-          echo "git status (before add):"
-          git status --porcelain=1 --untracked-files=all || true
-          git status || true
-          echo "git diff (unstaged):"
-          git --no-pager diff --no-color || true
-
-          # 强制添加文件以绕过 .gitignore（若不希望强制添加可移除 -f）
           git add -f IPtest.txt IP.txt debug.log || true
 
-          echo "git status (after add):"
-          git status --porcelain=1 --untracked-files=all || true
-          git --no-pager diff --staged --no-color || true
-
-          # 计算目标分支（优先使用 GITHUB_REF 的 head 部分，若异常则回退为 main）
           BRANCH="${GITHUB_REF#refs/heads/}"
-          if [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ]; then
-            BRANCH="main"
-          fi
-          echo "Target branch for push: $BRANCH"
+          [ -z "$BRANCH" ] || [ "$BRANCH" = "$GITHUB_REF" ] && BRANCH="main"
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "Update IP latency results (HTTP/TLS tests)"
-            # 推送到目标分支（捕获并打印错误）
-            if ! git push origin "HEAD:${BRANCH}"; then
-              echo "git push 失败，打印远端和权限信息"
-              git remote -v || true
-              # 打印最后的错误代码并退出以让 Actions 标记失败
-              exit 1
-            fi
+            git push origin "HEAD:${BRANCH}"
           fi
 
       - name: Upload results as artifact
-        # 确保即使推送失败也能在 Actions UI 下载到结果
         uses: actions/upload-artifact@v4
         with:
           name: ip-latency-results
