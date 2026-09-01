@@ -99,11 +99,11 @@ jobs:
             # 打印到日志（带ms方便看）
             echo "$ip $avg_ms ms" | tee -a "$DEBUG"
             # 写入测速文件【纯数字，不要ms，保证排序正常】
-            sort -k2 -n "%s %d\n" "$ip" "$avg_ms" >> "$IPTEST"
+            printf "%s %d\n" "$ip" "$avg_ms" >> "$IPTEST"
 
            done < "$IPS"
 
-           sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
+          sort -k2 -n "$IPTEST" | head -n 15 | awk '{print $1}' > "$IPOUT"
             echo "Wrote results to $IPTEST and top-10 to $IPOUT"
           echo "Saved debug log to $DEBUG"
           ls -lah "$IPTEST" "$IPOUT" "$DEBUG" || true
